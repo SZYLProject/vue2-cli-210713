@@ -194,7 +194,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .right-nav {
   display: flex;
   flex: 1;

@@ -85,7 +85,7 @@ html,body{
 
 
 // 公共的color
-@left-bgColor:#2a3542;  // 左侧菜单背景颜色;
+$left-bgColor:#2a3542;  // 左侧菜单背景颜色;
 
 
 
@@ -142,34 +142,34 @@ html,body{
   }
 
   .saleColor{
-    color:@saleColor;
+    color:$saleColor;
   }
   .taxColor{
-    color:@taxColor;
+    color:$taxColor;
   }
   .extenedColor{
-    color: @extenedColor;
+    color: $extenedColor;
   }
   .likeColor{
-    color: @likeColor;
+    color: $likeColor;
   }
   .saleBgcolor{
-    background:@saleColor;
+    background:$saleColor;
   }
   .taxBgcolor{
-    background: @taxColor;
+    background: $taxColor;
   }
   .extenedBgcolor{
-    background: @extenedColor;
+    background: $extenedColor;
   }
   .likeBgcolor{
-    background: @likeColor;
+    background: $likeColor;
   }
   .linkBgColor{
-    background: @linkColor;
+    background: $linkColor;
   }
   .keleBgColor{
-    background: @keleColor;
+    background: $keleColor;
   }
 
 

@@ -110,9 +110,9 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-@left-bgColor: #fff; // 左侧菜单背景颜色;
-@icon-link: #ff6c60;
+<style lang="scss" scoped>
+$left-bgColor: #fff; // 左侧菜单背景颜色;
+$icon-link: #ff6c60;
 .menu_left {
   position: absolute;
   top: 0;

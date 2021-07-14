@@ -50,7 +50,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
      .backTop{
          position: fixed;
          right: 50px;

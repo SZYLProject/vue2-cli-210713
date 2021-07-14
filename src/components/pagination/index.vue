@@ -50,7 +50,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .pagination{
         text-align: right;
         padding: 10px 18px;

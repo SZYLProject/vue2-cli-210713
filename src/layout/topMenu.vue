@@ -65,7 +65,7 @@
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .menu_top{
         // width:calc(100% - 350px);
         .el-menu-demo{

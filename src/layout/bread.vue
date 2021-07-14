@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .bread_container {
   // background-color: #eaebec;
   width: 100%;

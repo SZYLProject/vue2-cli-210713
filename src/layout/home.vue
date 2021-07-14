@@ -46,7 +46,7 @@ export default {
   watch: {}
 };
 </script>
-<style scoped lang="less">
+<style scoped lang="scss">
 .home {
   .menu_right {
     overflow: auto;

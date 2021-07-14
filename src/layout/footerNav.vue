@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .footer {
   width: 100%;
   padding: 10px 0;

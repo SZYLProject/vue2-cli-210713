@@ -66,7 +66,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .search_container{
         margin-bottom: 20px;
     }

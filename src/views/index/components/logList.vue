@@ -42,7 +42,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .logContainer{
     padding: 10px;
     background: #fff;

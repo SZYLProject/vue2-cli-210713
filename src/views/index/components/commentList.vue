@@ -40,7 +40,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
  .commentContainer{
    background: #fff;
    padding: 10px;
