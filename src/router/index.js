@@ -111,6 +111,15 @@ export const asyncRouterMap = [
     component: Layout,
     children: [
       {
+        path: "tableCom",
+        name: "tableCom",
+        meta: {
+          title: "表格组件",
+          routerType: "leftmenu"
+        },
+        component: () => import("@/views/fundList/tableComs")
+      },
+      {
         path: "fundList",
         name: "fundList",
         meta: {
