@@ -93,11 +93,12 @@
         </el-table-column>
       </template>
     </YzlElTable>
-    <!-- <YzlPagination
-            Postion="right"
-            v-bind="pageInfo"
-            @change="pageChange"
-        ></YzlPagination> -->
+    <!-- 分页 -->
+    <YzlPagination
+      Postion="right"
+      v-bind="pageInfo"
+      @change="pageChange"
+    ></YzlPagination>
     <!-- <pre>
             <code>{{sourceCode}}</code>
         </pre> -->
@@ -107,15 +108,15 @@
 <script>
 import setSourceCode from "./data/setSourceCode.js";
 import YzlElTable from "../../components/tableCom/tableCom.vue";
-// import YzlPagination from '@/components/YzlPagination.vue';
+import YzlPagination from "../../components/PaginationCom/index.vue";
 // import { Message } from "element-plus";
 import { Message } from "element-ui";
 
 export default {
   name: "tableComs",
   components: {
-    YzlElTable
-    // YzlPagination
+    YzlElTable,
+    YzlPagination
   },
   data() {
     return {
