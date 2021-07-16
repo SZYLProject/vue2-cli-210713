@@ -1,13 +1,10 @@
 <template>
   <div class="bread_container" id="bread_container">
     <span @click="handleLefeMenu" class="bars">
-      <i v-if="changeBarDirection" class="el-icon-s-fold"></i>
-      <i v-if="!changeBarDirection" class="el-icon-s-unfold"></i>
-
-      <!-- <icon-svg
+      <icon-svg
         icon-class="iconmenu-fold"
         :class="{ isactive: changeBarDirection }"
-      /> -->
+      />
     </span>
     <el-breadcrumb class="breadcrumb" separator="/">
       <el-breadcrumb-item v-for="(name, index) in matchedArr" :key="index">
@@ -21,7 +18,7 @@
 export default {
   data() {
     return {
-      changeBarDirection: true
+      changeBarDirection: false
     };
   },
   created() {},
@@ -61,15 +58,14 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="less">
 .bread_container {
-  // background-color: #eaebec;
+  background-color: #eaebec;
   width: 100%;
   .bars {
     float: left;
-    margin: 0px 5px;
+    margin: 4px 10px;
     cursor: pointer;
-    font-size: 23px;
     .isactive {
       -webkit-transform: rotate(90deg);
       transform: rotate(90deg);

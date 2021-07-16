@@ -1,7 +1,6 @@
 const TerserPlugin = require("terser-webpack-plugin"); // 用于在生成环境剔除debuger和console
 const CompressionPlugin = require("compression-webpack-plugin"); // gzip压缩,优化http请求,提高加载速度
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin; // 代码分析工具
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin; // 代码分析工具
 const path = require("path");
 const resolve = dir => {
   return path.join(__dirname, dir);
@@ -48,7 +47,7 @@ module.exports = {
   devServer: {
     open: true,
     host: "0.0.0.0",
-    port: 8888
+    port: 8899
     // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
     // proxy: {
     //   '/v2': {

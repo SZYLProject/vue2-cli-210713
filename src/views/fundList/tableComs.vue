@@ -107,7 +107,9 @@
 
 <script>
 import setSourceCode from "./data/setSourceCode.js";
-import YzlElTable from "../../components/tableCom/tableCom.vue";
+// import YzlElTable from "../../components/tableCom/tableCom.vue";
+import YzlElTable from "@/components/tableCom/tableCom.vue";
+
 import YzlPagination from "../../components/PaginationCom/index.vue";
 // import { Message } from "element-plus";
 import { Message } from "element-ui";
