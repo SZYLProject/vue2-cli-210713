@@ -1,6 +1,7 @@
 const TerserPlugin = require("terser-webpack-plugin"); // 用于在生成环境剔除debuger和console
 const CompressionPlugin = require("compression-webpack-plugin"); // gzip压缩,优化http请求,提高加载速度
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin; // 代码分析工具
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin; // 代码分析工具
 const path = require("path");
 const resolve = dir => {
   return path.join(__dirname, dir);
@@ -37,7 +38,8 @@ const cdn = {
 };
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/permission/" : "/",
+  // publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
+  publicPath: process.env.NODE_ENV === "prodection" ? "./" : "./",
   outputDir: "./dist",
   assetsDir: "static",
   filenameHashing: true, // false 来关闭文件名哈希
@@ -46,7 +48,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     open: true,
-    host: "0.0.0.0",
+    // host: "0.0.0.0",
     port: 8899
     // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
     // proxy: {
@@ -96,7 +98,7 @@ module.exports = {
     config.plugin("webpack-bundle-analyzer").use(
       new BundleAnalyzerPlugin({
         openAnalyzer: false, // 是否打开默认浏览器
-        analyzerPort: 8779
+        // analyzerPort: 9000 // 项目相同时候修改此端口
       })
     );
 
@@ -145,13 +147,14 @@ module.exports = {
       // 开启gzip压缩
       config.plugins.push(
         new CompressionPlugin({
+          filename: "[path].gz[query]",
           algorithm: "gzip",
           test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"), // 匹配文件扩展名
           // threshold: 10240, // 对超过10k的数据进行压缩
           threshold: 5120, // 对超过5k的数据进行压缩
-          minRatio: 0.8,
-          cache: true, // 是否需要缓存
-          deleteOriginalAssets: false // true删除源文件(不建议);false不删除源文件
+          minRatio: 0.8
+          // cache: true, // 是否需要缓存
+          // deleteOriginalAssets: false // true删除源文件(不建议);false不删除源文件
         })
       );
     } else {
