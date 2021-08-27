@@ -49,7 +49,7 @@ module.exports = {
   devServer: {
     open: true,
     // host: "0.0.0.0",
-    port: 8899
+    port: 9900
     // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
     // proxy: {
     //   '/v2': {
@@ -98,7 +98,7 @@ module.exports = {
     config.plugin("webpack-bundle-analyzer").use(
       new BundleAnalyzerPlugin({
         openAnalyzer: false, // 是否打开默认浏览器
-        // analyzerPort: 9000 // 项目相同时候修改此端口
+        analyzerPort: 9800 // 项目相同时候修改此端口
       })
     );
 
