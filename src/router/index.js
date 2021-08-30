@@ -81,6 +81,26 @@ export default new Router({
 //异步路由（需要权限的页面）
 export const asyncRouterMap = [
   {
+    path: "/projectManagement",
+    name: "projectManagement",
+    meta: {
+      title: "项目管理",
+      icon: "iconpay3"
+    },
+    component: Layout,
+    children: [
+      {
+        path: "statisticalAnalysis",
+        name: "statisticalAnalysis",
+        meta: {
+          title: "统计分析",
+          routerType: "leftmenu"
+        },
+        component: () => import("@/views/ProjectManagement/StatisticalAnalysis")
+      }
+    ]
+  },
+  {
     path: "/userManager",
     name: "userManage",
     component: Layout,

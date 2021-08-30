@@ -7,6 +7,8 @@ const zh = {
     quit: "退出",
     hi: "您好",
     index: "首页",
+    projectManagement:'项目管理',
+    statisticalAnalysis:'统计分析',
     userManage: "表格数据",
     share: "分享功能",
     infoManage: "信息管理",
