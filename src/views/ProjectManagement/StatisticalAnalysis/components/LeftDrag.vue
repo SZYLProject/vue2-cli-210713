@@ -49,65 +49,7 @@ export default {
   components: { draggable },
   data() {
     return {
-      searchVariableValue: "",
-      // leftDraggableList: [
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   },
-      //   {
-      //     name: "Gendersds",
-      //     value: "100.0"
-      //   }
-      // ]
+      searchVariableValue: ""
     };
   },
   computed: {
@@ -117,10 +59,12 @@ export default {
   },
   methods: {
     start() {
+      // 修改调用此方法
       this.$store.dispatch("setLeftDraggableList");
     },
+    // 拖拽可修改元素：重置对象属性
     cloneElement(clone) {
-      console.log(clone);
+      console.log(clone,'clone');
       return {
         name: clone.name,
         itemName: clone.value

@@ -8,7 +8,7 @@ const resolve = dir => {
 };
 
 // const env = process.env.NODE_ENV
-// let target = process.env.VUE_APP_URL  // development和production环境是不同的
+let target = process.env.BASE_API  // development和production环境是不同的
 
 const cdn = {
   // 开发环境
@@ -49,14 +49,14 @@ module.exports = {
   devServer: {
     open: true,
     // host: "0.0.0.0",
-    port: 9900
+    port: 9900,
     // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
-    // proxy: {
-    //   '/v2': {
-    //       target: target,
-    //       changeOrigin: true
-    //   }
-    // }
+    proxy: {
+      "": {
+        target: 'http://172.16.117.174:5689',
+        changeOrigin: true
+      }
+    }
   },
   css: {
     loaderOptions: {
