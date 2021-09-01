@@ -24,24 +24,24 @@
 <script>
 // 导入draggable组件
 import LeftDrag from "./components/LeftDrag"; //
-import DescriptiveStatistics from "./components/DescriptiveStatistics";
 import { FenLeiBianLiangMiaoShuTongJi } from "@/api/statisticalAnalysis";
 import tabDescriptiveStatistics from "./components/tabDescriptiveStatistics"; // 统计性描述
 import tabUnivariateAnalysis from "./components/tabUnivariateAnalysis"; // 单因素分析
 import tabRelatedAnalysis from "./components/tabRelatedAnalysis"; // 相关分析
 import tabMultivariateRegression from "./components/tabMultivariateRegression"; // 多因素回归
 import tabSubsistenceAnalysis from "./components/tabSubsistenceAnalysis"; // 生存分析
+import DescriptiveStatistics from "./components/DescriptiveStatistics";
 
 export default {
   name: "StatisticAnalysisCom",
   components: {
     LeftDrag,
-    DescriptiveStatistics,
     tabDescriptiveStatistics,
     tabUnivariateAnalysis,
     tabRelatedAnalysis,
     tabMultivariateRegression,
-    tabSubsistenceAnalysis
+    tabSubsistenceAnalysis,
+    DescriptiveStatistics
   },
   data() {
     return {
@@ -86,7 +86,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .statisticAnalysis-com {
-  margin-top: 20px;
+  margin-top: 10px;
   height: 30%;
   .left {
     width: 200px;
@@ -99,6 +99,7 @@ export default {
     vertical-align: top;
     width: calc(100% - 255px);
     .tab {
+      margin-bottom: 15px;
       background: #ffffff;
     }
   }

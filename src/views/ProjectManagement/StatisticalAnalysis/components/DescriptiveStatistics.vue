@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-scrollbar style="height: 450px" ref="scroll">
+    <el-scrollbar style="height: 440px" ref="scroll">
       <div class="describe-block">
         <h1 style="margin-bottom:15px;font-size:15px">Age的描述性统计</h1>
         <el-table :data="tableData" header-cell-class-name="tableTH">
@@ -145,7 +145,7 @@ export default {
 <style scoped lang="scss">
 .describe-block {
   background: #ffffff;
-  margin-top: 15px;
+  // margin-top: 15px;
   padding: 15px 20px;
   h1 {
     font-size: 15px;

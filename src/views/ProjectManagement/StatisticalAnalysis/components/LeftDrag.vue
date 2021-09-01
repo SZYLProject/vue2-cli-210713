@@ -14,7 +14,7 @@
     <div class="variable-lists">
       <p style="font-size:12px">共<span class="totle">200</span>个样本</p>
       <div class="list-title"><span>变量列表</span><span>填充率(%)</span></div>
-      <el-scrollbar style="height: 570px" ref="scroll">
+      <el-scrollbar style="height: 590px" ref="scroll">
         <div class="lists">
           <draggable
             :group="{ name: 'variable', pull: 'clone', put: false }"
