@@ -32,6 +32,7 @@ import tabMultivariateRegression from "./components/tabMultivariateRegression"; 
 import tabSubsistenceAnalysis from "./components/tabSubsistenceAnalysis"; // 生存分析
 import DescriptiveStatistics from "./components/DescriptiveStatistics";
 import UnivariateAnalysis from "./components/UnivariateAnalysis";
+import leftDraggableListData from "./Mock/leftDraggableListData";
 export default {
   name: "StatisticAnalysisCom",
   components: {
@@ -69,6 +70,8 @@ export default {
   },
   mounted() {
     this.FenLeiBianLiangMiaoShuTongJiFun();
+    const data = leftDraggableListData;
+    this.$store.dispatch("setLeftDraggableList", data);
   },
   methods: {
     FenLeiBianLiangMiaoShuTongJiFun() {

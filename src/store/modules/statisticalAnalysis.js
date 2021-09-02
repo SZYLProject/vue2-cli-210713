@@ -5,64 +5,7 @@ const types = {
 };
 const statisticalAnalysis = {
   state: {
-    leftDraggableList: [
-      {
-        name: "年龄",
-        value: "100.0"
-      },
-      {
-        name: "性别",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      },
-      {
-        name: "Gendersds",
-        value: "100.0"
-      }
-    ],
+    leftDraggableList: [],
     descriptiveStatisticsData: [],
     univariateAnalysisData: []
   },
@@ -83,8 +26,8 @@ const statisticalAnalysis = {
     }
   },
   actions: {
-    setLeftDraggableList: ({ commit }) => {
-      commit(types.LEFT_DRAGGABLE_LIST);
+    setLeftDraggableList: ({ commit }, data) => {
+      commit("LEFT_DRAGGABLE_LIST", data);
     },
     setDescriptiveStatisticsData: ({ commit }, data) => {
       commit("DESCRIPTIVESTATISTICS_DATA", data);
