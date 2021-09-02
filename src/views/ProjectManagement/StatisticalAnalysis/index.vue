@@ -69,9 +69,9 @@ export default {
     };
   },
   mounted() {
-    this.FenLeiBianLiangMiaoShuTongJiFun();
-    const data = leftDraggableListData;
-    this.$store.dispatch("setLeftDraggableList", data);
+    // this.FenLeiBianLiangMiaoShuTongJiFun();
+    // const data = leftDraggableListData;
+    this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
   methods: {
     FenLeiBianLiangMiaoShuTongJiFun() {
