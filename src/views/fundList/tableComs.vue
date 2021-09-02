@@ -148,14 +148,14 @@ export default {
           id: 4,
           date: "2016-05-02",
           name: "王小虎",
-          address: "御芝林御芝林御芝林",
+          address: "神州医疗神州医疗神州医疗",
           age: "62"
         },
         {
           id: 5,
           date: "2016-05-02",
           name: "王小虎",
-          address: "御芝林御芝林御芝林",
+          address: "神州医疗神州医疗神州医疗",
           age: "42"
         },
         {
@@ -183,14 +183,14 @@ export default {
           id: 4,
           date: "2016-05-02",
           name: "王小虎",
-          address: "御芝林御芝林御芝林",
+          address: "神州医疗神州医疗神州医疗",
           age: "62"
         },
         {
           id: 5,
           date: "2016-05-02",
           name: "王小虎",
-          address: "御芝林御芝林御芝林",
+          address: "神州医疗神州医疗神州医疗",
           age: "42"
         }
       ],
@@ -218,7 +218,7 @@ export default {
           sort: false,
           "show-overflow-tooltip": false,
           formatter: function(item) {
-            return item + "御芝林";
+            return item + "神州医疗";
           }
         },
         {
@@ -269,7 +269,7 @@ export default {
           sort: false,
           "show-overflow-tooltip": false,
           formatter: function(item) {
-            return item + "御芝林";
+            return item + "神州医疗";
           }
         },
         {

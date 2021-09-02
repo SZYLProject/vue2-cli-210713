@@ -26,7 +26,7 @@
           </p>
         </div>
         <div class="describe-chart">
-          <div class="chartsBar" style="display:none">
+          <div class="chartsBar">
             <VerticalAxisBar
               height="400px"
               width="100%"
@@ -36,7 +36,7 @@
               :data="data1"
             />
           </div>
-          <el-row>
+          <el-row style="display:none">
             <el-col :span="12">
               <div class="chartsBar">
                 <Bar
@@ -67,7 +67,6 @@
         </div>
       </div>
     </el-scrollbar>
-    <el-empty description="点击开始分析后，统计结果会呈现在此处"></el-empty>
   </div>
 </template>
 <script>
@@ -140,16 +139,7 @@ export default {
         ]
       }
     };
-  },
-  watch:{
-    
-  },
-  mounted () {
-    
-  },
-  methods:{
-
-  },
+  }
 };
 </script>
 <style scoped lang="scss">

@@ -84,7 +84,7 @@ export default defineComponent({
                 id: 4,
                 date: '2016-05-03',
                 name: '王小虎',
-                address: '御芝林御芝林御芝林',
+                address: '神州医疗神州医疗神州医疗',
             },
         ]);
         const state = reactive({
@@ -112,7 +112,7 @@ export default defineComponent({
                     sort: false,
                     'show-overflow-tooltip': false,
                     formatter: function (item) {
-                        return item + '御芝林';
+                        return item + '神州医疗';
                     },
                 },
                 {

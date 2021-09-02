@@ -17,7 +17,7 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-      <DescriptiveStatistics></DescriptiveStatistics>
+      <component :is="activeNameInfo"></component>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ import tabRelatedAnalysis from "./components/tabRelatedAnalysis"; // 相关分�
 import tabMultivariateRegression from "./components/tabMultivariateRegression"; // 多因素回归
 import tabSubsistenceAnalysis from "./components/tabSubsistenceAnalysis"; // 生存分析
 import DescriptiveStatistics from "./components/DescriptiveStatistics";
-
+import UnivariateAnalysis from "./components/UnivariateAnalysis";
 export default {
   name: "StatisticAnalysisCom",
   components: {
@@ -41,16 +41,26 @@ export default {
     tabRelatedAnalysis,
     tabMultivariateRegression,
     tabSubsistenceAnalysis,
-    DescriptiveStatistics
+    DescriptiveStatistics,
+    UnivariateAnalysis
   },
   data() {
     return {
       activeName: "tabDescriptiveStatistics", // 切换组件
+      activeNameInfo: "DescriptiveStatistics",
       activeValue: "描述性统计", // 显示名字
       // 切换tab数据
       tabList: [
-        { name: "tabDescriptiveStatistics", value: "描述性统计" },
-        { name: "tabUnivariateAnalysis", value: "单因素分析" },
+        {
+          name: "tabDescriptiveStatistics",
+          info: "DescriptiveStatistics",
+          value: "描述性统计"
+        },
+        {
+          name: "tabUnivariateAnalysis",
+          info: "UnivariateAnalysis",
+          value: "单因素分析"
+        },
         { name: "tabRelatedAnalysis", value: "相关分析" },
         { name: "tabMultivariateRegression", value: "多因素回归" },
         { name: "tabSubsistenceAnalysis", value: "生存分析" }
@@ -73,6 +83,7 @@ export default {
     handleClick(tab, event) {
       this.activeName = tab.name;
       this.activeValue = tab.label;
+      this.activeNameInfo = tab.name.slice(3);
       console.log(tab, "tab");
       console.log(event);
     },
