@@ -35,7 +35,9 @@
         <el-button @click="clearVariables" type="text" icon="el-icon-delete"
           >清空变量</el-button
         >
-        <el-button type="primary" size="mini">开始分析</el-button>
+        <el-button type="primary" size="mini" @click="startAnalysis"
+          >开始分析</el-button
+        >
       </div>
     </div>
   </div>
@@ -51,7 +53,7 @@ export default {
     return {
       draggableDisabled: false, // 是否可拖拽到當前區域
       variableList: [], // 拖拽存储數據
-      draggableLimitNum: 1 // 拖拽限时数量
+      draggableLimitNum: 2 // 拖拽限时数量
     };
   },
   methods: {
@@ -86,10 +88,14 @@ export default {
         this.draggableDisabled = false;
       }
     },
+    // 开始分析
+    startAnalysis() {
+      this.$emit("startAnalysis", this.variableList);
+    },
     // 清空变量
     clearVariables() {
       this.variableList = [];
-      this.draggableDisabled = false
+      this.draggableDisabled = false;
     }
   }
 };

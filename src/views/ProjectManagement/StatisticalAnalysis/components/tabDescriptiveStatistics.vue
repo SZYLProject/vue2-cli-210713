@@ -2,11 +2,12 @@
   <div>
     <div class="tab-con">
       <h1>{{ activeValue }}<span>描述数据特征</span></h1>
-      <drag-area></drag-area>
+      <drag-area @startAnalysis="startAnalysis"></drag-area>
     </div>
   </div>
 </template>
 <script>
+import descriptiveStatisticsData from "../Mock/descriptiveStatisticsData.js";
 import dragArea from "./dragArea.vue";
 export default {
   components: {
@@ -21,7 +22,21 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    // 开始分析
+    startAnalysis(startAnalysis) {
+      console.log(startAnalysis, "startAnalysis");
+      let data = [];
+      startAnalysis.forEach((element, i) => {
+        data.push({
+          id: i,
+          name: element.name + descriptiveStatisticsData[0].name,
+          data: descriptiveStatisticsData[0].data
+        });
+      });
+      this.$store.dispatch("setDescriptiveStatisticsData", data);
+    }
+  }
 };
 </script>
 <style scoped lang="scss">

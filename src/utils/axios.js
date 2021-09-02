@@ -15,8 +15,8 @@ service.interceptors.request.use(
     if (store.getters.token) {
       config.headers = {
         //请求接口返回中文都是？，需要在请求头设置即可
-        // "X-Requested-With": "XMLHttpRequest",
-        Accept: "application/x-www-form-urlencoded",
+        "X-Requested-With": "XMLHttpRequest",
+        // Accept: "application/x-www-form-urlencoded",
         // Accept: 'application/x-www-form-urlencoded',
         // Accept: 'application/x-www-form-urlencoded；charset=UTF-8',
         Authorization: "Token " + getToken("Token") //携带权限参数

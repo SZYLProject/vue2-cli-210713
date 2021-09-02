@@ -68,7 +68,7 @@ export default {
     };
   },
   mounted() {
-    // this.FenLeiBianLiangMiaoShuTongJiFun();
+    this.FenLeiBianLiangMiaoShuTongJiFun();
   },
   methods: {
     FenLeiBianLiangMiaoShuTongJiFun() {
