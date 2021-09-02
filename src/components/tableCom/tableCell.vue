@@ -6,7 +6,7 @@
 // }
 
 export default {
-  name: "YzlTableCell",
+  name: "SzylTableCell",
   props: {
     renderer: { type: Function,
      default:function(){

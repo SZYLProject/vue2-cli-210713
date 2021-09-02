@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "yzl-pagination",
+  name: "szyl-pagination",
   props: {
     PageCount: null, // 总页数
     TotalCount: null, // 总条数

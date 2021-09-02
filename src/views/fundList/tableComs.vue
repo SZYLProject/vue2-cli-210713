@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="searchArea">el-table使用：二次封装table</div>
 
-    <YzlElTable
+    <SzylElTable
       :colConfigs="colConfigs"
       :tableList="tableData"
       :height="450"
@@ -31,10 +31,10 @@
           <el-button type="primary" size="mini">删除</el-button>
         </el-table-column>
       </template>
-    </YzlElTable>
+    </SzylElTable>
     <!-- 表头合并 -->
     <div class="searchArea">el-table使用：二次封装table-表头合并</div>
-    <YzlElTable
+    <SzylElTable
       :colConfigs="colConfigs1"
       :tableList="tableData"
       :height="450"
@@ -60,10 +60,10 @@
           <el-button type="primary" size="mini">删除</el-button>
         </el-table-column>
       </template>
-    </YzlElTable>
+    </SzylElTable>
     <!-- 单元格列合并 -->
     <div class="searchArea">el-table使用：二次封装table-单元格列合并</div>
-    <YzlElTable
+    <SzylElTable
       :colConfigs="colConfigs2"
       :tableList="tableData"
       :height="450"
@@ -76,10 +76,10 @@
           <el-button type="primary" size="mini">删除</el-button>
         </el-table-column>
       </template>
-    </YzlElTable>
+    </SzylElTable>
     <!-- 单元格行合并 -->
     <div class="searchArea">el-table使用：二次封装table-单元格行合并</div>
-    <YzlElTable
+    <SzylElTable
       :colConfigs="colConfigs2"
       :tableList="tableData"
       :height="450"
@@ -92,13 +92,13 @@
           <el-button type="primary" size="mini">删除</el-button>
         </el-table-column>
       </template>
-    </YzlElTable>
+    </SzylElTable>
     <!-- 分页 -->
-    <YzlPagination
+    <SzylPagination
       Postion="right"
       v-bind="pageInfo"
       @change="pageChange"
-    ></YzlPagination>
+    ></SzylPagination>
     <!-- <pre>
             <code>{{sourceCode}}</code>
         </pre> -->
@@ -107,18 +107,18 @@
 
 <script>
 import setSourceCode from "./data/setSourceCode.js";
-// import YzlElTable from "../../components/tableCom/tableCom.vue";
-import YzlElTable from "@/components/tableCom/tableCom.vue";
+// import SzylElTable from "../../components/tableCom/tableCom.vue";
+import SzylElTable from "@/components/tableCom/tableCom.vue";
 
-import YzlPagination from "../../components/PaginationCom/index.vue";
+import SzylPagination from "../../components/PaginationCom/index.vue";
 // import { Message } from "element-plus";
 import { Message } from "element-ui";
 
 export default {
   name: "tableComs",
   components: {
-    YzlElTable,
-    YzlPagination
+    SzylElTable,
+    SzylPagination
   },
   data() {
     return {

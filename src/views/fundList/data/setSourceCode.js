@@ -3,7 +3,7 @@ const code = `
     <div class="11table">
         <h1>el-table使用：二次封装table</h1>
         <h1>el-pagination使用：二次封装pagination</h1>
-        <YzlElTable
+        <SzylElTable
             :colConfigs="colConfigs"
             :tableList="tableData"
             :height="450"
@@ -35,12 +35,12 @@ const code = `
                     <el-button type="primary" size="mini">删除</el-button>
                 </el-table-column>
             </template>
-        </YzlElTable>
-        <YzlPagination
+        </SzylElTable>
+        <SzylPagination
             Postion="right"
             v-bind="pageInfo"
             @change="pageChange"
-        ></YzlPagination>
+        ></SzylPagination>
         <pre>
             <code>{{sourceCode}}</code>
         </pre>
@@ -51,13 +51,13 @@ const code = `
 import { defineComponent, reactive, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import setSourceCode from './setSourceCode.js';
-import YzlElTable from '@/components/YzlTable.vue';
-import YzlPagination from '@/components/YzlPagination.vue';
+import SzylElTable from '@/components/SzylTable.vue';
+import SzylPagination from '@/components/SzylPagination.vue';
 export default defineComponent({
     name: '11table',
     components: {
-        YzlElTable,
-        YzlPagination,
+        SzylElTable,
+        SzylPagination,
     },
     setup(props, context) {
         const sourceCode = setSourceCode.code;

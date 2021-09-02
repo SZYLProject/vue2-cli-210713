@@ -1,5 +1,5 @@
 <template>
-  <div class="yzl-el-table">
+  <div class="szyl-el-table">
     <el-table
       v-if="isRefresh"
       ref="refTable"
@@ -25,19 +25,19 @@
           :key="colConfig.prop"
         >
           <template #header>
-            <YzlTableCell
+            <SzylTableCell
               v-if="colConfig.headerRenderer"
               :renderer="h => colConfig.headerRenderer(h)"
-            ></YzlTableCell>
+            ></SzylTableCell>
             <span
               v-else-if="colConfig.headerFormatter"
               v-html="colConfig.headerFormatter()"
             ></span>
             <span v-else>{{ colConfig.label }}</span>
-            <span class="yzl-el-table__sortBox" v-if="colConfig.sort">
+            <span class="szyl-el-table__sortBox" v-if="colConfig.sort">
               <i
                 @click="setSort(colConfig.prop, 0)"
-                class="yzl-el-table__sort yzl-el-table__asc"
+                class="szyl-el-table__sort szyl-el-table__asc"
                 :style="{
                   borderBottomColor:
                     tempObj[colConfig.prop].sort === 0 ? '#1F9B83' : '#c0c4cc'
@@ -45,7 +45,7 @@
               ></i>
               <i
                 @click="setSort(colConfig.prop, 1)"
-                class="yzl-el-table__sort yzl-el-table__desc"
+                class="szyl-el-table__sort szyl-el-table__desc"
                 :style="{
                   borderTopColor:
                     tempObj[colConfig.prop].sort === 1 ? '#1F9B83' : '#c0c4cc'
@@ -72,10 +72,10 @@
                 "
               ></span>
             </template>
-            <YzlTableCell
+            <SzylTableCell
               v-else-if="colConfig.renderer"
               :renderer="h => colConfig.renderer(h, scope)"
-            ></YzlTableCell>
+            ></SzylTableCell>
             <template v-else-if="colConfig.rowSlot">
               <div>
                 <slot :scope="scope"></slot>
@@ -105,11 +105,11 @@
   </div>
 </template>
 <script>
-import YzlTableCell from "./tableCell.vue";
+import SzylTableCell from "./tableCell.vue";
 
 export default {
   components: {
-    YzlTableCell
+    SzylTableCell
   },
   props: {
     stripe: {
@@ -237,18 +237,18 @@ export default {
 </script>
 
 <style lang="scss">
-.yzl-el-table .el-table__row a {
+.szyl-el-table .el-table__row a {
   color: $main-color;
   cursor: pointer;
 }
 
-.yzl-el-table .el-table__row a.yzl-el-table__btn {
+.szyl-el-table .el-table__row a.szyl-el-table__btn {
   text-decoration: none;
   padding: 0 5px;
 }
 
-.yzl-el-table .el-table th,
-.yzl-el-table .el-table thead.is-group th {
+.szyl-el-table .el-table th,
+.szyl-el-table .el-table thead.is-group th {
   background: $thead-bg;
   font-size: $thead-fs;
   font-weight: $thead-fw;
@@ -256,22 +256,22 @@ export default {
   height: $thead-h;
 }
 
-.yzl-el-table .el-table--small th {
+.szyl-el-table .el-table--small th {
   padding: 0;
 }
 
-.yzl-el-table .el-table td {
+.szyl-el-table .el-table td {
   font-size: 12px;
   padding: 7px 0;
   font-weight: normal;
   color: #666;
 }
 
-.yzl-el-table .el-table .cell {
+.szyl-el-table .el-table .cell {
   line-height: 24px;
 }
 
-.yzl-el-table__sortBox {
+.szyl-el-table__sortBox {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -290,7 +290,7 @@ export default {
   position: relative;
 }
 
-.yzl-el-table__sort {
+.szyl-el-table__sort {
   width: 0;
   height: 0;
   border: 6px solid transparent;
@@ -298,24 +298,24 @@ export default {
   left: 7px;
 }
 
-.yzl-el-table__sort.yzl-el-table__asc {
+.szyl-el-table__sort.szyl-el-table__asc {
   border-bottom-color: #c0c4cc;
   top: -3px;
 }
 
-.yzl-el-table__sort.yzl-el-table__desc {
+.szyl-el-table__sort.szyl-el-table__desc {
   border-top-color: #c0c4cc;
   bottom: -1px;
 }
 
-.yzl-el-table .el-table .yzl-el-table__history td {
+.szyl-el-table .el-table .szyl-el-table__history td {
   color: #999;
 }
 
-.yzl-el-table .el-table .yzl-el-table__pre__cancel td {
+.szyl-el-table .el-table .szyl-el-table__pre__cancel td {
   color: #999;
 }
-.yzl-el-table .el-table__empty-block {
+.szyl-el-table .el-table__empty-block {
   width: 100%;
   min-width: 100%;
   max-width: 100%;
