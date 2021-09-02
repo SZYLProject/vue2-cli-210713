@@ -100,12 +100,7 @@ export default {
     })
   },
   watch: {},
-  mounted() {
-    console.log(
-      this.descriptiveStatisticsData <= 0 ? true : false,
-      "this.descriptiveStatisticsData"
-    );
-  },
+  mounted() {},
   methods: {}
 };
 </script>
