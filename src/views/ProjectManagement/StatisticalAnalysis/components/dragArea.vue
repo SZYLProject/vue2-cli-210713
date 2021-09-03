@@ -1,18 +1,22 @@
 <template>
   <div>
     <div id="variable" class="drag">
-      <div class="logArea el-scrollbar">
+      <div
+        class="logArea el-scrollbar"
+        v-for="(item, i) in draggableList"
+        :key="i"
+      >
         <draggable
           class="draggableClass"
           :move="onMove"
-          :disabled="draggableDisabled"
+          :disabled="item.draggableDisabled"
           animation="1000"
           touchStartThreshold="10px"
-          :list="variableList"
+          :list="item.variableList"
           group="variable"
           ghostClass="ghost"
           chosenClass="ghost"
-          @change="toChange"
+          @change="toChange(i)"
         >
           <div style="display:flex;margin-bottom:10px">
             <p style="font-size:13px;margin-right:5px">任意变量</p>
@@ -21,7 +25,7 @@
           <el-button
             style="margin:10px"
             size="small"
-            v-for="(item, index) in variableList"
+            v-for="(item, index) in item.variableList"
             :key="index"
             >{{ item.name }}</el-button
           >
@@ -30,8 +34,10 @@
     </div>
     <div class="tab-foot">
       <div style="font-size:13px">
-        您可拖入<span class="blue">{{ draggableLimitNum }}</span
-        >个变量
+        <span v-for="(itemNum, i) in draggableList" :key="i">
+          您可拖入<span class="blue">{{ itemNum.draggableLimitNum }}</span
+          >个变量,
+        </span>
       </div>
       <div>
         <el-button @click="clearVariables" type="text" icon="el-icon-delete"
@@ -53,9 +59,14 @@ export default {
   },
   data() {
     return {
-      draggableDisabled: false, // 是否可拖拽到當前區域
-      variableList: [], // 拖拽存储數據
-      draggableLimitNum: 200 // 拖拽限时数量
+      // draggableDisabled: false, // 是否可拖拽到当前区域
+      // variableList: [], // 拖拽存储数据
+      // draggableLimitNum: 2, // 拖拽限时数量
+      draggableList: [
+        { draggableDisabled: false, variableList: [], draggableLimitNum: 1 },
+        { draggableDisabled: false, variableList: [], draggableLimitNum: 2 },
+        { draggableDisabled: false, variableList: [], draggableLimitNum: 3 }
+      ]
     };
   },
   methods: {
@@ -63,47 +74,68 @@ export default {
     onMove(e, originalEvent) {
       console.log(originalEvent, "originalEvent");
       //不允许停靠
-      if (this.variableList.length >= this.draggableLimitNum) return false;
-      //不允许拖拽
-      if (this.variableList.length < this.draggableLimitNum) return false;
+      // if (this.variableList.length >= this.draggableLimitNum) return false;
+      // //不允许拖拽
+      // if (this.variableList.length < this.draggableLimitNum) return false;
       return true;
     },
     // 拖拽
-    toChange(v) {
-      console.log(v);
+    toChange(i) {
       // if (this.draggableDisabled === true) {
       //   this.$message({
       //     message: "您最多可拖入" + this.draggableLimitNum + "个变量",
       //     type: "error"
       //   });
       // }
-      if (this.variableList.length >= this.draggableLimitNum) {
-        this.draggableDisabled = true; // 不可拖入
+
+      if (
+        this.draggableList[i].variableList.length >=
+        this.draggableList[i].draggableLimitNum
+      ) {
+        this.draggableList[i].draggableDisabled = true; // 不可拖入
       } else {
-        this.draggableDisabled = false;
+        this.draggableList[i].draggableDisabled = false;
       }
     },
     // 开始分析
     startAnalysis() {
-      this.$emit("startAnalysis", this.variableList);
+      const data = [];
+      this.draggableList.forEach(el => {
+        data.push(...el.variableList);
+      });
+      this.$emit("startAnalysis", data);
     },
     // 清空变量
     clearVariables() {
-      this.variableList = [];
-      this.draggableDisabled = false;
+      this.draggableList.forEach(el => {
+        el.variableList = [];
+        el.draggableDisabled = false;
+      });
     }
   }
 };
 </script>
 <style scoped lang="scss">
 .drag {
+  display: flex;
+  justify-content: space-between;
   border: 1px solid #e6e6e6;
   margin: 15px 0 5px;
-  padding: 10px 15px;
+  // padding: 10px 15px;
   color: #999999;
-  .draggableClass {
-    height: 80px;
-    // overflow: scroll;
+  .logArea {
+    flex: 1;
+    overflow: auto;
+    height: 100%;
+    border-right: 1px solid;
+    &:last-of-type {
+      border-right: none;
+    }
+    margin: 10px 15px;
+    .draggableClass {
+      height: 80px;
+      // overflow: scroll;
+    }
   }
 }
 .tab-foot {
@@ -115,9 +147,5 @@ export default {
     margin: 0 5px;
     color: #0070f4;
   }
-}
-.logArea {
-  overflow: auto;
-  height: 100%;
 }
 </style>
