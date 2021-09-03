@@ -68,20 +68,13 @@ export default {
     },
     // 拖拽
     toChange(v) {
-      console.log(v, "v");
-      if (v.added) {
-        console.log(v);
-        // this.variableList.push({
-        //   name: '1'
-        // })
-      }
-      console.log(this.variableList, "this.variableList");
-      if (this.draggableDisabled === true) {
-        this.$message({
-          message: "您最多可拖入" + this.draggableLimitNum + "个变量",
-          type: "error"
-        });
-      }
+      console.log(v);
+      // if (this.draggableDisabled === true) {
+      //   this.$message({
+      //     message: "您最多可拖入" + this.draggableLimitNum + "个变量",
+      //     type: "error"
+      //   });
+      // }
       if (this.variableList.length >= this.draggableLimitNum) {
         this.draggableDisabled = true; // 不可拖入
       } else {
