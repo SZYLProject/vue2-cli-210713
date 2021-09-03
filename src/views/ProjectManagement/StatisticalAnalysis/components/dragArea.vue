@@ -62,14 +62,25 @@ export default {
       // draggableDisabled: false, // 是否可拖拽到当前区域
       // variableList: [], // 拖拽存储数据
       // draggableLimitNum: 2, // 拖拽限时数量
-      draggableList: [
-        { draggableDisabled: false, variableList: [], draggableLimitNum: 1 },
-        { draggableDisabled: false, variableList: [], draggableLimitNum: 2 },
-        { draggableDisabled: false, variableList: [], draggableLimitNum: 3 }
-      ]
+      draggableList: []
     };
   },
+  props: {
+    draggableNum: { type: Number, default: 1 }
+  },
+  mounted() {
+    this.start();
+  },
   methods: {
+    start() {
+      for (let index = 0; index < this.draggableNum; index++) {
+        this.draggableList.push({
+          draggableDisabled: false,
+          variableList: [],
+          draggableLimitNum: 1
+        });
+      }
+    },
     //move回调方法
     onMove(e, originalEvent) {
       console.log(originalEvent, "originalEvent");

@@ -2,7 +2,7 @@
   <div>
     <div class="tab-con">
       <h1>{{ activeValue }}<span>描述数据特征</span></h1>
-      <drag-area @startAnalysis="startAnalysis"></drag-area>
+      <drag-area :draggableNum="draggableNum" @startAnalysis="startAnalysis"></drag-area>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { draggableNum: 1 };
   },
   methods: {
     // 开始分析
