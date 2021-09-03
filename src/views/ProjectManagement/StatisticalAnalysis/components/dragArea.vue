@@ -1,12 +1,9 @@
 <template>
   <div>
     <div id="variable" class="drag">
-      <div style="display:flex">
-        <p style="font-size:13px;margin-right:5px">任意变量</p>
-        <i style="cursor:pointer" class="el-icon-info"></i>
-      </div>
-      <div style="margin-top:10px;height:25px">
+      <div class="logArea el-scrollbar">
         <draggable
+          class="draggableClass"
           :move="onMove"
           :disabled="draggableDisabled"
           animation="1000"
@@ -17,7 +14,12 @@
           chosenClass="ghost"
           @change="toChange"
         >
+          <div style="display:flex;margin-bottom:10px">
+            <p style="font-size:13px;margin-right:5px">任意变量</p>
+            <i style="cursor:pointer" class="el-icon-info"></i>
+          </div>
           <el-button
+            style="margin:10px"
             size="small"
             v-for="(item, index) in variableList"
             :key="index"
@@ -53,7 +55,7 @@ export default {
     return {
       draggableDisabled: false, // 是否可拖拽到當前區域
       variableList: [], // 拖拽存储數據
-      draggableLimitNum: 2 // 拖拽限时数量
+      draggableLimitNum: 200 // 拖拽限时数量
     };
   },
   methods: {
@@ -99,6 +101,10 @@ export default {
   margin: 15px 0 5px;
   padding: 10px 15px;
   color: #999999;
+  .draggableClass {
+    height: 80px;
+    // overflow: scroll;
+  }
 }
 .tab-foot {
   display: flex;
@@ -109,5 +115,9 @@ export default {
     margin: 0 5px;
     color: #0070f4;
   }
+}
+.logArea {
+  overflow: auto;
+  height: 100%;
 }
 </style>

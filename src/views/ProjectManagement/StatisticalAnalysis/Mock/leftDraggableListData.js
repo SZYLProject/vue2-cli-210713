@@ -54,6 +54,26 @@ const leftDraggableListData = [
   {
     name: "Gendersds",
     value: "100.0"
+  },
+  {
+    name: "Gendersds",
+    value: "100.0"
+  },
+  {
+    name: "Gendersds",
+    value: "100.0"
+  },
+  {
+    name: "Gendersds",
+    value: "100.0"
+  },
+  {
+    name: "Gendersds",
+    value: "100.0"
+  },
+  {
+    name: "Gendersds",
+    value: "100.0"
   }
 ];
 export default leftDraggableListData;
