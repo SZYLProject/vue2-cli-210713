@@ -1,18 +1,33 @@
 <template>
   <div class="left-drag">
     <div class="search">
-      <el-input
+      <!-- <el-input
         size="small"
         v-model="searchVariableValue"
         placeholder="搜索变量"
       >
         <i class="el-input__icon el-icon-search" slot="suffix">
+        </i>
+      </el-input> -->
+      <el-autocomplete
+        class="inline-input"
+        v-model="searchVariableValue"
+        :fetch-suggestions="querySearch"
+        placeholder="搜索变量"
+        :trigger-on-focus="false"
+        @select="handleSelect"
+        clearable
+      >
+        <i class="el-input__icon el-icon-search" slot="suffix">
           <!-- @click="handleIconClick(index)" -->
         </i>
-      </el-input>
+      </el-autocomplete>
     </div>
     <div class="variable-lists">
-      <p style="font-size:12px">共<span class="totle">{{leftDraggableList.length}}</span>个样本</p>
+      <p style="font-size:12px">
+        共<span class="totle">{{ leftDraggableList.length }}</span
+        >个样本
+      </p>
       <div class="list-title"><span>变量列表</span><span>填充率(%)</span></div>
       <el-scrollbar style="height: 620px" ref="scroll">
         <div class="lists">
@@ -23,15 +38,19 @@
           >
             <transition-group type="transition">
               <div
-                class="item"
+                class="leftDraggableListItem"
                 v-for="(item, index) in leftDraggableList"
                 :key="index"
               >
-                <div class="button pointer">
-                  <i class="iconfont icon-tuodong"></i
-                  ><span>{{ item.name }}</span>
+                <div class="leftDraggableListButton">
+                  <div style="display:flex;margin-right:10px">
+                    <img class="variable" :src="variable" alt="111" />
+                  </div>
+                  <div>{{ item.value }}</div>
                 </div>
-                <span>{{ item.value }}</span>
+                <div>
+                  {{ item.fillRate }}
+                </div>
               </div>
             </transition-group>
           </draggable>
@@ -44,12 +63,14 @@
 // 导入draggable组件
 import draggable from "vuedraggable";
 import { mapState } from "vuex";
+import variable from "@/assets/StatisticalAnalysis/variable.png";
 export default {
   name: "LeftDrag",
   components: { draggable },
   data() {
     return {
-      searchVariableValue: ""
+      searchVariableValue: "",
+      variable: variable
     };
   },
   computed: {
@@ -64,11 +85,35 @@ export default {
     },
     // 拖拽可修改元素：重置对象属性
     cloneElement(clone) {
-      console.log(clone,'clone');
+      console.log(clone, "clone");
       return {
-        name: clone.name,
-        itemName: clone.value
+        ...clone,
       };
+    },
+    querySearch(queryString, callback) {
+      if (queryString === "") {
+        return;
+      }
+      //  const params = {
+      //   keyword: queryString,
+      //   disease_name: localStorage.getItem("disease_name"),
+      //   // disease_name: 'HC',
+      //   pageNum: 1,
+      //   pageSize: 40
+      // };
+      // diease360.literature(params).then(res => {
+      //   const data = res.data.data.list.map(item => {
+      //     return {
+      //       value: item.title
+      //     };
+      //   });
+      //   callback(data);
+      // });
+      callback(this.leftDraggableList);
+    },
+    handleSelect(item) {
+      console.log(item);
+      this.searchVariableValue = item.value;
     }
   }
 };
@@ -88,29 +133,37 @@ export default {
       color: #0070f4;
     }
     .list-title {
-      font-size: 14px;
+      font-size: 13px;
       display: flex;
       justify-content: space-between;
       color: #999999;
       margin: 10px 0 0;
     }
     .lists {
-      .item {
+      .leftDraggableListItem {
         cursor: pointer;
         font-size: 12px;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         line-height: 35px;
         margin: 10px 0;
-        .button {
+        .leftDraggableListButton {
+          display: flex;
+          align-items: center;
+          text-align: center;
           border: 1px dashed #e6e6e6;
-          width: 155px;
+          width: 100px;
           overflow: hidden;
           padding: 0 5px;
           margin-right: 10px;
           .iconfont {
             color: #0070f4;
             margin-right: 5px;
+          }
+          .variable {
+            width: 18px;
+            height: auto;
+            // height: 20px;
           }
         }
       }
@@ -120,6 +173,9 @@ export default {
 .ghost {
   opacity: 0;
   height: 0;
+}
+.el-icon-search:before {
+  color: #0070f4;
 }
 // }
 </style>

@@ -1,79 +1,88 @@
 const leftDraggableListData = [
   {
-    name: "年龄",
-    value: "100.0"
+    name: "Age",
+    value: "年龄",
+    fillRate: "1.0"
   },
   {
-    name: "性别",
-    value: "100.0"
+    name: "Gender",
+    value: "性别",
+    fillRate: "80.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.00"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "测试1",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   },
   {
-    name: "Gendersds",
-    value: "100.0"
-  },
-  {
-    name: "Gendersds",
-    value: "100.0"
-  },
-  {
-    name: "Gendersds",
-    value: "100.0"
+    name: "Hobby",
+    value: "爱好",
+    fillRate: "100.0"
   }
 ];
 export default leftDraggableListData;

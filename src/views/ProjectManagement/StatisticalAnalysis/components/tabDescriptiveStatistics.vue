@@ -2,7 +2,10 @@
   <div>
     <div class="tab-con">
       <h1>{{ activeValue }}<span>描述数据特征</span></h1>
-      <drag-area :draggableNum="draggableNum" @startAnalysis="startAnalysis"></drag-area>
+      <drag-area
+        :draggableObj="draggableObj"
+        @startAnalysis="startAnalysis"
+      ></drag-area>
     </div>
   </div>
 </template>
@@ -20,7 +23,13 @@ export default {
     }
   },
   data() {
-    return { draggableNum: 1 };
+    return {
+      draggableObj: {
+        draggableNum: 1,
+        prompt: "您可拖入5个变量",
+        draggableList: [{ explanation: "任意变量", draggableNum: 5 }]
+      }
+    };
   },
   methods: {
     // 开始分析

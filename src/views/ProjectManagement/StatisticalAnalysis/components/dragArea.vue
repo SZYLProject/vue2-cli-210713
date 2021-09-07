@@ -19,7 +19,9 @@
           @change="toChange(i)"
         >
           <div style="display:flex;margin-bottom:10px">
-            <p style="font-size:13px;margin-right:5px">任意变量</p>
+            <p style="font-size:13px;margin-right:5px">
+              {{ item.explanation }}
+            </p>
             <i style="cursor:pointer" class="el-icon-info"></i>
           </div>
           <el-button
@@ -27,22 +29,26 @@
             size="small"
             v-for="(item, index) in item.variableList"
             :key="index"
-            >{{ item.name }}</el-button
+            >{{ item.value }}</el-button
           >
         </draggable>
       </div>
     </div>
     <div class="tab-foot">
       <div style="font-size:13px">
-        <span v-for="(itemNum, i) in draggableList" :key="i">
+        <!-- <span v-for="(itemNum, i) in draggableList" :key="i">
           您可拖入<span class="blue">{{ itemNum.draggableLimitNum }}</span
           >个变量,
-        </span>
+        </span> -->
+        <span>{{ draggablePrompt }}</span>
       </div>
       <div>
         <el-button @click="clearVariables" type="text" icon="el-icon-delete"
           >清空变量</el-button
         >
+        <!-- <el-button @click="clearVariables" type="text" icon="el-icon-delete"
+          >清空内容</el-button
+        > -->
         <el-button type="primary" size="mini" @click="startAnalysis"
           >开始分析</el-button
         >
@@ -59,26 +65,57 @@ export default {
   },
   data() {
     return {
-      // draggableDisabled: false, // 是否可拖拽到当前区域
-      // variableList: [], // 拖拽存储数据
-      // draggableLimitNum: 2, // 拖拽限时数量
-      draggableList: []
+      draggableList: [],
+      draggablePrompt: ""
     };
   },
   props: {
-    draggableNum: { type: Number, default: 1 }
+    draggableObj: {
+      type: Object,
+      default: () => {
+        return {
+          draggableNum: 2,
+          prompt: "您可拖入1个变量，您可拖入2个变量",
+          draggableList: [
+            { explanation: "任意变量1", draggableNum: 1 },
+            { explanation: "任意变量2", draggableNum: 2 }
+          ]
+        };
+      }
+    }
   },
   mounted() {
     this.start();
   },
   methods: {
     start() {
-      for (let index = 0; index < this.draggableNum; index++) {
+      // for (let index = 0; index < this.draggableNum; index++) {
+      //   this.draggableList.push({
+      //     draggableDisabled: false, // 是否可拖拽到当前区域,默认false可以拖拽
+      //     variableList: [], // 拖拽存储数据
+      //     draggableLimitNum: 1 // 拖拽限时数量
+      //   });
+      // }
+      for (let index = 0; index < this.draggableObj.draggableNum; index++) {
         this.draggableList.push({
-          draggableDisabled: false,
-          variableList: [],
-          draggableLimitNum: 1
+          draggableDisabled:
+            this.draggableObj.draggableList[index].draggableNum <= 0
+              ? true
+              : false, // 是否可拖拽到当前区域,默认false可以拖拽
+          variableList: [], // 拖拽存储数据
+          draggableLimitNum:
+            this.draggableObj.draggableList[index].draggableNum > 0
+              ? this.draggableObj.draggableList[index].draggableNum
+              : 0, // 拖拽限时数量
+          explanation: this.draggableObj.draggableList[index].explanation
         });
+      }
+      this.draggablePrompt = this.draggableObj.prompt;
+      // this.judge();
+    },
+    judge() {
+      for (let i = 0; i < this.draggableList.length; i++) {
+        this.toChange(i);
       }
     },
     //move回调方法
@@ -90,6 +127,7 @@ export default {
       // if (this.variableList.length < this.draggableLimitNum) return false;
       return true;
     },
+
     // 拖拽
     toChange(i) {
       // if (this.draggableDisabled === true) {
@@ -98,7 +136,6 @@ export default {
       //     type: "error"
       //   });
       // }
-
       if (
         this.draggableList[i].variableList.length >=
         this.draggableList[i].draggableLimitNum
@@ -114,6 +151,11 @@ export default {
       this.draggableList.forEach(el => {
         data.push(...el.variableList);
       });
+      console.log(data, "tata");
+      if (data.length === 0) {
+        this.$message({ type: "warning", message: "请至少选择一个变量" });
+        return;
+      }
       this.$emit("startAnalysis", data);
     },
     // 清空变量
