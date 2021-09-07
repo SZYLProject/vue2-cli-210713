@@ -89,6 +89,7 @@ export default {
       this.activeNameInfo = tab.name.slice(3);
       console.log(tab, "tab");
       console.log(event);
+      this.$stroe.dispatch("setTabListIndex", tab.index);
     },
     //拖拽完成事件
     add(e) {

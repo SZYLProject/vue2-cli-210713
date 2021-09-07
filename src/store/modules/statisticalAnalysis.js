@@ -1,13 +1,15 @@
 const types = {
   LEFT_DRAGGABLE_LIST: "LEFT_DRAGGABLE_LIST",
   DESCRIPTIVESTATISTICS_DATA: "DESCRIPTIVESTATISTICS_DATA",
-  UNIVARIATEANALYSIS_DATA: "UNIVARIATEANALYSIS_DATA"
+  UNIVARIATEANALYSIS_DATA: "UNIVARIATEANALYSIS_DATA",
+  TABLIST_INDEX: "TABLIST_INDEX"
 };
 const statisticalAnalysis = {
   state: {
     leftDraggableList: [],
     descriptiveStatisticsData: [],
-    univariateAnalysisData: []
+    univariateAnalysisData: [],
+    tabListIndex: "1"
   },
   getters: {
     leftDraggableList: state => state.leftDraggableList,
@@ -23,6 +25,9 @@ const statisticalAnalysis = {
     },
     [types.UNIVARIATEANALYSIS_DATA](state, data) {
       state.univariateAnalysisData = data;
+    },
+    [types.TABLIST_INDEX](state, data) {
+      state.tabListIndex = data;
     }
   },
   actions: {
@@ -34,6 +39,9 @@ const statisticalAnalysis = {
     },
     setUnivariateAnalysisData: ({ commit }, data) => {
       commit("UNIVARIATEANALYSIS_DATA", data);
+    },
+    setTabListIndex: ({ commit }, data) => {
+      commit("", data);
     }
   }
 };
