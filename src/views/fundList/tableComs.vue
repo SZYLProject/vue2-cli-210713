@@ -128,7 +128,7 @@ export default {
           date: "2016-05-01",
           name: "李大胖",
           address: "上海市普陀区金沙江路 1518 弄",
-          age: "32"
+          age: "12"
         },
         {
           id: 2,
