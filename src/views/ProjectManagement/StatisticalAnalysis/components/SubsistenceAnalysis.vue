@@ -32,8 +32,9 @@
           </div>
         </div>
         <div class="describe-chart">
-          <div class="chartsBar" style="display:none">
+          <div class="chartsBar">
             <VerticalAxisBar
+              style="display:none"
               height="400px"
               width="100%"
               id="3"
@@ -41,36 +42,24 @@
               title="Smoking history在不同Gender分组中的堆积柱形图"
               :data="item.data.data1"
             />
+            <discount
+              height="400px"
+              width="100%"
+              title="Drinking History 频数饼图"
+              titleLocal="left"
+              labelPosition="center"
+              id="7"
+              :data="item.data.pieData"
+            ></discount>
           </div>
-          <el-row>
-            <el-col :span="12">
-              <div class="chartsBar">
-                <Bar
-                  height="400px"
-                  width="100%"
-                  id="9"
-                  titleLocal="left"
-                  title="Age频数直方图"
-                  :dataX="item.data.barDataX"
-                  :dataY="item.data.barDataY"
-                />
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="chartsBar">
-                <Pie
-                  height="400px"
-                  width="100%"
-                  title="Drinking History 频数饼图"
-                  titleLocal="left"
-                  labelPosition="center"
-                  id="7"
-                  :data="item.data.pieData"
-                />
-              </div>
-            </el-col>
-          </el-row>
         </div>
+        <SzylElTable
+          :colConfigs="item.data.colConfigs"
+          :tableList="item.data.tableData"
+          :min-height="90"
+          class="table_container"
+        >
+        </SzylElTable>
       </div>
     </el-scrollbar>
 
@@ -83,13 +72,12 @@
   </div>
 </template>
 <script>
-import Pie from "@/components/echarts/Pie";
-import Bar from "@/components/echarts/Bar";
+import discount from "@/components/echarts/discount";
 import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
-// import SzylElTable from "@/components/tableCom/tableCom.vue";
+import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, VerticalAxisBar },
+  components: { discount, SzylElTable, VerticalAxisBar },
   data() {
     return {};
   },

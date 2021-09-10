@@ -24,7 +24,10 @@
 <script>
 // 导入draggable组件
 import LeftDrag from "./components/LeftDrag"; //
-import { FenLeiBianLiangMiaoShuTongJi } from "@/api/statisticalAnalysis";
+import {
+  FenLeiBianLiangMiaoShuTongJi,
+  fenZuTongJi
+} from "@/api/statisticalAnalysis";
 import tabDescriptiveStatistics from "./components/tabDescriptiveStatistics"; // 统计性描述
 import tabUnivariateAnalysis from "./components/tabUnivariateAnalysis"; // 单因素分析
 import tabRelatedAnalysis from "./components/tabRelatedAnalysis"; // 相关分析
@@ -32,6 +35,7 @@ import tabMultivariateRegression from "./components/tabMultivariateRegression"; 
 import tabSubsistenceAnalysis from "./components/tabSubsistenceAnalysis"; // 生存分析
 import DescriptiveStatistics from "./components/DescriptiveStatistics";
 import UnivariateAnalysis from "./components/UnivariateAnalysis";
+import SubsistenceAnalysis from "./components/SubsistenceAnalysis";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 export default {
   name: "StatisticAnalysisCom",
@@ -43,7 +47,8 @@ export default {
     tabMultivariateRegression,
     tabSubsistenceAnalysis,
     DescriptiveStatistics,
-    UnivariateAnalysis
+    UnivariateAnalysis,
+    SubsistenceAnalysis
   },
   data() {
     return {
@@ -64,12 +69,17 @@ export default {
         },
         { name: "tabRelatedAnalysis", value: "相关分析" },
         { name: "tabMultivariateRegression", value: "多因素回归" },
-        { name: "tabSubsistenceAnalysis", value: "生存分析" }
+        {
+          name: "tabSubsistenceAnalysis",
+          info: "SubsistenceAnalysis",
+          value: "生存分析"
+        }
       ]
     };
   },
   mounted() {
     // this.FenLeiBianLiangMiaoShuTongJiFun();
+    this.fenZuTongJiFun();
     // const data = leftDraggableListData;
     this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
@@ -79,6 +89,12 @@ export default {
         name: "name,sex"
       };
       FenLeiBianLiangMiaoShuTongJi(param).then(res => {
+        console.log(res);
+      });
+    },
+    fenZuTongJiFun() {
+      const data = { name: "trt" };
+      fenZuTongJi(data).then(res => {
         console.log(res);
       });
     },

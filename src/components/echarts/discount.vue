@@ -1,27 +1,28 @@
 <template>
-  <div :id="id"
-       :class="className"
-       :style="{height:height,width:width}" />
+  <div :id="id" :class="className" :style="{ height: height, width: width }" />
 </template>
 
 <script>
-import echarts from 'echarts'
-import resize from './mixins/resize'
+import echarts from "echarts";
+import resize from "./mixins/resize";
 
 export default {
   mixins: [resize],
   props: {
-    disc: { // true 实心圆 false空心圆
+    disc: {
+      // true 实心圆 false空心圆
       type: Boolean,
       default: false
     },
-    titleLocal: { // 标题位置
+    titleLocal: {
+      // 标题位置
       type: String,
-      default: 'left'
+      default: "left"
     },
-    labelPosition: { // label 样式 outside center
+    labelPosition: {
+      // label 样式 outside center
       type: String,
-      default: 'outside'
+      default: "outside"
     },
     data: {
       type: Array,
@@ -29,158 +30,183 @@ export default {
     },
     className: {
       type: String,
-      default: 'chart'
+      default: "chart"
     },
     id: {
       type: String,
-      default: 'pieChart'
+      default: "pieChart"
     },
     width: {
       type: String,
-      default: '200px'
+      default: "200px"
     },
     height: {
       type: String,
-      default: '200px'
+      default: "200px"
     },
     title: {
       type: String,
-      default: 'chart'
+      default: "chart"
     },
     sn: {
       type: Number,
       default: 0
     }
   },
-  data () {
+  data() {
     return {
       chart: null
-    }
+    };
   },
-  mounted () {
-    this.initChart()
+  mounted() {
+    this.initChart();
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (!this.chart) {
-      return
+      return;
     }
-    this.chart.dispose()
-    this.chart = null
+    this.chart.dispose();
+    this.chart = null;
   },
   watch: {
-    data (val) { // 监听数据发生改变 刷新图表数据
-      this.initChart()
+    data(val) {
+      // 监听数据发生改变 刷新图表数据
+      this.initChart();
     },
-    sn (val) {
-      this.resize()
+    sn(val) {
+      this.resize();
     }
   },
   methods: {
-    initChart () {
-      this.chart = echarts.init(this.$el, 'light')
+    initChart() {
+      this.chart = echarts.init(this.$el, "light");
 
       this.chart.setOption({
-        // color: ['#0070f4', '#ff834f', '#a7d7e6'],
         title: {
-          text: this.title,
-          textStyle: {
-            fontSize: 14
-          },
-          x: this.titleLocal,
-          y: 'top'
+          text: "Step Line"
         },
         tooltip: {
-          show: this.labelPosition === 'outside',
-          trigger: 'item'
+          trigger: "axis"
         },
         legend: {
-          type: 'scroll',
-          icon: 'circle',
-          bottom: 10,
-          left: 'center',
-          height: 'auto',
-          data: this.data
+          data: [
+            {
+              name: "Step Start",
+              textStyle: {}
+            },
+            { name: "Step Middle" },
+            { name: "Step End" }
+          ],
+          icon: "circle", // title文字左侧图标圆形
+          right: "4%" // title距离右侧距离
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
         },
         toolbox: {
-          show: false,
           feature: {
-            mark: { show: true },
-            dataView: { show: true, readOnly: false },
-            restore: { show: true },
-            saveAsImage: { show: true }
+            // saveAsImage: {}// 保存图片
           }
         },
-        calculable: true,
+        xAxis: {
+          type: "category",
+          data: ["100", "200", "300", "400", "500", "600", "700", "800"],
+          /*改变xy轴颜色*/
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: "#CCCCCC",
+              width: 1 //这里是为了突出显示加上的
+            }
+          },
+          //  取消坐标轴刻度线
+          axisTick: {
+            show: false
+          },
+
+          // show: false, // 去掉主线
+          // 取消网格线
+          splitLine: {
+            // show: false// 去掉里面的线
+            color: "blue"
+          }
+        },
+        yAxis: {
+          axisTick: {
+            show: false
+          },
+          /*改变xy轴颜色*/
+          axisLine: {
+            show: false,
+
+            lineStyle: {
+              color: "#CCCCCC",
+              width: 1 //这里是为了突出显示加上的
+            }
+          },
+          type: "value",
+          // show: false,
+          splitLine: {
+            // show: false,
+            // color:'black'
+          }
+        },
         series: [
           {
-            type: 'pie',
-            radius: this.disc ? ['0', '70%'] : ['44%', '70%'],
-            avoidLabelOverlap: false,
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '30',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: true,
+            name: "Step Start",
+            type: "line",
+            step: "start",
+            symbol: "none", // 取消小圆圈
+            data: [0.98, 0.88, 0.8, 0.45, 0.19, 0.1, 0.08, 0.08],
+            itemStyle: {
               normal: {
-                length: 20,
-                length2: 30,
                 lineStyle: {
-                  width: 1
+                  width: 1,
+                  type: "solid" //'dotted'虚线 'solid'实线
                 }
               }
-            },
-            label: {
+            }
+          },
+          {
+            name: "Step Middle",
+            symbol: "none", // 取消小圆圈
+
+            type: "line",
+            step: "middle",
+            data: [0.95, 0.9, 0.85, 0.8, 0.69, 0.6, 0.02, 0.08],
+
+            itemStyle: {
               normal: {
-                // padding: [30, 30, 30, 30],
-                show: this.labelPosition === 'outside',
-                position: this.labelPosition, // outside
-                formatter:
-                  this.labelPosition === 'outside' ? '{a|{b}：{d}%}\n{hr|}'
-                    : [
-                      '{name|{b}}',
-                      '{value|{c}}'
-                    ].join('\n'),
-                rich: {
-                  hr: {
-                    backgroundColor: 't',
-                    borderRadius: 3,
-                    width: 3,
-                    height: 3,
-                    padding: [3, 3, 0, -12]
-                  },
-                  a: {
-                    padding: [-30, 15, -20, 15]
-                  },
-                  value: {
-                    // color: '#303133',
-                    fontSize: 40,
-                    fontWeight: 'bold',
-                    lineHeight: 40
-                  },
-                  name: {
-                    fontSize: 16,
-                    color: '#2B2B2B',
-                    lineHeight: 30
-                  }
-                }
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: '16',
-                  fontWeight: 'bold'
+                lineStyle: {
+                  width: 1,
+                  type: "solid" //'dotted'虚线 'solid'实线
                 }
               }
-            },
-            data: this.data
+            }
+          },
+          {
+            name: "Step End",
+            symbol: "none", // 取消小圆圈
+
+            type: "line",
+            step: "end",
+            data: [0.9, 0.88, 0.8, 0.6, 0.49, 0.32, 0.2, 0.08],
+
+            itemStyle: {
+              normal: {
+                lineStyle: {
+                  width: 1,
+                  type: "solid" //'dotted'虚线 'solid'实线
+                }
+              }
+            }
           }
         ]
-      })
+      });
     }
   }
-}
+};
 </script>
