@@ -11,13 +11,6 @@
         :key="i"
       >
         <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
-        <!-- <SzylElTable
-          :colConfigs="item.data.colConfigs"
-          :tableList="item.data.tableData"
-          :min-height="90"
-          class="table_container"
-        >
-        </SzylElTable> -->
         <div class="text">
           <p style="font-size:13px">
             <b>{{ item.data.statisticalResultsData.name }}</b>
@@ -33,15 +26,6 @@
         </div>
         <div class="describe-chart">
           <div class="chartsBar">
-            <VerticalAxisBar
-              style="display:none"
-              height="400px"
-              width="100%"
-              id="3"
-              :titleShow="true"
-              title="Smoking history在不同Gender分组中的堆积柱形图"
-              :data="item.data.data1"
-            />
             <discount
               height="400px"
               width="100%"
@@ -49,7 +33,7 @@
               titleLocal="left"
               labelPosition="center"
               id="7"
-              :data="item.data.pieData"
+              :discountData="item.data.discountData"
             ></discount>
           </div>
         </div>
@@ -73,11 +57,10 @@
 </template>
 <script>
 import discount from "@/components/echarts/discount";
-import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { discount, SzylElTable, VerticalAxisBar },
+  components: { discount, SzylElTable },
   data() {
     return {};
   },

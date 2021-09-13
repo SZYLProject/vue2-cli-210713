@@ -9,6 +9,10 @@ import resize from "./mixins/resize";
 export default {
   mixins: [resize],
   props: {
+    discountData: {
+      type: Object,
+      default: null
+    },
     disc: {
       // true 实心圆 false空心圆
       type: Boolean,
@@ -79,6 +83,44 @@ export default {
   },
   methods: {
     initChart() {
+      // var test = {
+      //   xAxisData: ["100", "200", "300", "400", "500", "600", "700", "800"],
+      //   seriesData: [
+      //     {
+      //       name: "Step Start",
+      //       value: [0.98, 0.88, 0.8, 0.45, 0.19, 0.1, 0.08, 0.08]
+      //     },
+      //     {
+      //       name: "Step Middle",
+      //       value: [0.95, 0.9, 0.85, 0.8, 0.69, 0.6, 0.02, 0.08]
+      //     },
+      //     {
+      //       name: "Step End",
+      //       value: [0.9, 0.88, 0.8, 0.6, 0.49, 0.32, 0.2, 0.08]
+      //     }
+      //   ]
+      // };
+      var test = this.discountData
+      var xAxisData = test.xAxisData;
+      var legendData = [],
+        seriesData = [];
+      legendData = seriesData = test.seriesData.map(item => {
+        return {
+          name: item.name, //seriesData与legendData共用，其余为seriesData属性
+          type: "line",
+          step: "start",
+          symbol: "none", // 取消小圆圈
+          data: item.value,
+          itemStyle: {
+            normal: {
+              lineStyle: {
+                width: 1,
+                type: "solid" //'dotted'虚线 'solid'实线
+              }
+            }
+          }
+        };
+      });
       this.chart = echarts.init(this.$el, "light");
 
       this.chart.setOption({
@@ -89,14 +131,7 @@ export default {
           trigger: "axis"
         },
         legend: {
-          data: [
-            {
-              name: "Step Start",
-              textStyle: {}
-            },
-            { name: "Step Middle" },
-            { name: "Step End" }
-          ],
+          data: legendData,
           icon: "circle", // title文字左侧图标圆形
           right: "4%" // title距离右侧距离
         },
@@ -113,7 +148,7 @@ export default {
         },
         xAxis: {
           type: "category",
-          data: ["100", "200", "300", "400", "500", "600", "700", "800"],
+          data: xAxisData,
           /*改变xy轴颜色*/
           axisLine: {
             show: false,
@@ -154,57 +189,7 @@ export default {
             // color:'black'
           }
         },
-        series: [
-          {
-            name: "Step Start",
-            type: "line",
-            step: "start",
-            symbol: "none", // 取消小圆圈
-            data: [0.98, 0.88, 0.8, 0.45, 0.19, 0.1, 0.08, 0.08],
-            itemStyle: {
-              normal: {
-                lineStyle: {
-                  width: 1,
-                  type: "solid" //'dotted'虚线 'solid'实线
-                }
-              }
-            }
-          },
-          {
-            name: "Step Middle",
-            symbol: "none", // 取消小圆圈
-
-            type: "line",
-            step: "middle",
-            data: [0.95, 0.9, 0.85, 0.8, 0.69, 0.6, 0.02, 0.08],
-
-            itemStyle: {
-              normal: {
-                lineStyle: {
-                  width: 1,
-                  type: "solid" //'dotted'虚线 'solid'实线
-                }
-              }
-            }
-          },
-          {
-            name: "Step End",
-            symbol: "none", // 取消小圆圈
-
-            type: "line",
-            step: "end",
-            data: [0.9, 0.88, 0.8, 0.6, 0.49, 0.32, 0.2, 0.08],
-
-            itemStyle: {
-              normal: {
-                lineStyle: {
-                  width: 1,
-                  type: "solid" //'dotted'虚线 'solid'实线
-                }
-              }
-            }
-          }
-        ]
+        series: seriesData
       });
     }
   }
