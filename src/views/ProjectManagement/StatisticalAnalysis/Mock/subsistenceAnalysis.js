@@ -1,7 +1,8 @@
+// 生存分析mock数据
 const subsistenceAnalysisData = [
   {
     id: 1,
-    name: "的描述性统计",
+    name: "分析多个因素对结局发生的影响程度",
     data: {
       colConfigs: [
         {

@@ -1,17 +1,16 @@
 <template>
-  <div :id="id"
-       :class="className"
-       :style="{height:height,width:width}" />
+  <div :id="id" :class="className" :style="{ height: height, width: width }" />
 </template>
 
 <script>
-import echarts from 'echarts'
-import resize from './mixins/resize'
+import echarts from "echarts";
+import resize from "./mixins/resize";
 
 export default {
   mixins: [resize],
   props: {
-    direction: { // 横向还是纵向
+    direction: {
+      // 横向还是纵向
       type: Boolean,
       default: false
     },
@@ -21,7 +20,7 @@ export default {
     },
     nameY: {
       type: String,
-      default: ''
+      default: ""
     },
     dataX: {
       type: Array,
@@ -33,66 +32,69 @@ export default {
     },
     className: {
       type: String,
-      default: 'chart'
+      default: "chart"
     },
     id: {
       type: String,
-      default: 'barChart'
+      default: "barChart"
     },
     width: {
       type: String,
-      default: '200px'
+      default: "200px"
     },
     height: {
       type: String,
-      default: '200px'
+      default: "200px"
     },
     title: {
       type: String,
-      default: 'chart'
+      default: "chart"
     },
-    titleLocal: { // 标题位置
+    titleLocal: {
+      // 标题位置
       type: String,
-      default: 'center'
+      default: "center"
     }
   },
-  data () {
+  data() {
     return {
       chart: null
-    }
+    };
   },
-  mounted () {
-    this.initChart()
+  mounted() {
+    this.initChart();
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (!this.chart) {
-      return
+      return;
     }
-    this.chart.dispose()
-    this.chart = null
+    this.chart.dispose();
+    this.chart = null;
   },
   watch: {
-    dataY (val) { // 监听数据发生改变 刷新图表数据
-      this.initChart()
+    dataY() {
+      // 监听数据发生改变 刷新图表数据
+      this.initChart();
     }
   },
   methods: {
-    initChart () {
-      this.chart = echarts.init(this.$el)
+    initChart() {
+      this.chart = echarts.init(this.$el);
       this.chart.setOption({
-        color: ['#b2d4fc'],
+        color: ["#7FB7F9", "#FF9F51"],
         title: {
           text: this.title,
           textStyle: {
             fontSize: 14
           },
           x: this.titleLocal,
-          y: 'top'
+          y: "top"
         },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          trigger: "axis",
+          axisPointer: {
+            // 坐标轴指示器，坐标轴触发有效
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
           }
         },
         legend: {
@@ -103,7 +105,7 @@ export default {
           feature: {
             mark: { show: true },
             dataView: { show: true, readOnly: false },
-            magicType: { show: true, type: ['line', 'bar'] },
+            magicType: { show: true, type: ["line", "bar"] },
             restore: { show: true },
             saveAsImage: { show: true }
           }
@@ -117,22 +119,22 @@ export default {
         },
         xAxis: [
           {
-            type: this.direction ? 'value' : 'category',
+            type: this.direction ? "value" : "category",
             axisLabel: {
-              color: '#999999',
+              color: "#999999",
               // interval: 0, // 横轴信息全部显示
               rotate: -40 // -30度角倾斜显示
             }, // 设置轴线的属性
             axisLine: {
               lineStyle: {
-                color: '#E6E6E6'
+                color: "#E6E6E6"
               }
             },
             splitLine: {
               show: false,
               lineStyle: {
-                color: '#f5f5f5',
-                type: 'dashed'
+                color: "#f5f5f5",
+                type: "dashed"
               }
             },
             data: this.dataX
@@ -140,24 +142,24 @@ export default {
         ],
         yAxis: [
           {
-            type: this.direction ? 'category' : 'value',
+            type: this.direction ? "category" : "value",
             axisLabel: {
-              color: '#999999'
+              color: "#999999"
             },
             axisLine: {
               lineStyle: {
-                color: '#E6E6E6'
+                color: "#E6E6E6"
               }
             },
             splitLine: {
               show: true,
               lineStyle: {
-                color: '#f5f5f5',
-                type: 'dashed'
+                color: "#f5f5f5",
+                type: "dashed"
               }
             },
             nameTextStyle: {
-              color: '#999999'
+              color: "#999999"
             },
             name: this.nameY,
             data: this.dataY
@@ -165,13 +167,37 @@ export default {
         ],
         series: [
           {
+            // barMinHeight: "20", //设置每根柱条最小高度为50
+            barMaxWidth: "20", //设置每根柱条最大宽度为50
             name: this.nameY,
-            type: 'bar',
+            type: "bar",
             data: this.direction ? this.dataX : this.dataY,
             // 移入当前的柱状图时改变颜色
             itemStyle: {
               emphasis: {
-                color: '#5dafd1'
+                color: "#5dafd1"
+              }
+            }
+            // markPoint: {
+            //   data: [
+            //     { name: '年最高', value: 182.2, xAxis: 7, yAxis: 183, symbolSize: 18 },
+            //     { name: '年最低', value: 2.3, xAxis: 11, yAxis: 3 }
+            //   ]
+            // },
+            // markLine: {
+            //   data: [
+            //     { type: 'average', name: '平均值' }
+            //   ]
+            // }
+          },
+          {
+            name: this.nameY,
+            type: "line",
+            data: this.direction ? this.dataX : this.dataY,
+            // 移入当前的柱状图时改变颜色
+            itemStyle: {
+              emphasis: {
+                color: "red"
               }
             }
             // markPoint: {
@@ -187,8 +213,8 @@ export default {
             // }
           }
         ]
-      })
+      });
     }
   }
-}
+};
 </script>

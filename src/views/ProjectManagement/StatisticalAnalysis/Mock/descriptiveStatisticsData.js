@@ -1,3 +1,4 @@
+// 描述性统计mock数据
 const descriptiveStatisticsData = [
   {
     id: 1,
@@ -85,59 +86,17 @@ const descriptiveStatisticsData = [
         { value: 435, name: "是" },
         { value: 310, name: "否" }
       ],
-      barDataY: [123, 456, 1102, 4230, 3520, 1102, 123],
-      barDataX: [17, 28, 45, 88, 100, 200, 300],
-      data1: {
-        name: ["待录入", "录入中", "已提交"],
-        color: [
-          "rgba(0,112,244,0.5)",
-          "rgba(76,204,161,0.5)",
-          "rgba(255,149,64,0.5)"
-        ],
-        allData: [
-          {
-            title: "合计",
-            value: [320, 302, 301]
-          },
-          {
-            title: "合计",
-            value: [420, 332, 501]
-          },
-          {
-            title: "合计",
-            value: [10, 382, 591]
-          },
-          {
-            title: "合计",
-            value: [420, 332, 501]
-          },
-          {
-            title: "合计",
-            value: [10, 382, 591]
-          },
-          {
-            title: "合计",
-            value: [420, 332, 501]
-          },
-          {
-            title: "合计",
-            value: [420, 332, 501]
-          },
-          {
-            title: "合计",
-            value: [420, 332, 501]
-          }
-        ]
-      },
+      barDataY: [40, 60, 30, 85, 35, 70, 18],
+      barDataX: [17, 23, 29, 35, 41, 47, 53, 59],
       statisticalResultsData: {
         name: "统计结果说明:",
         data: [
-          "1、Shapiro-Wilk正态性检验：Shapiro-Wilk正态性检验的P值>0.05，接受原假设，说明Age变量服从正态分布。通常适用于样本量小于2000的情况。<br />",
+          "1、Shapiro-Wilk正态性检验：Shapiro-Wilk正态性检验的P值>0.05，接受原假设，说明Age变量服从正态分布。通常适用于样本量小于2000的情况。",
           "2、Kolmogorov-Smirnov正态性检验：Kolmogorov-Smirnov正态性检验的P值=0.05，拒绝原假设，说明Age变量不服从正态分布。通常适用于样本量大于2000的情况。"
         ]
       }
     }
-  },
+  }
 ];
 
 export default descriptiveStatisticsData;

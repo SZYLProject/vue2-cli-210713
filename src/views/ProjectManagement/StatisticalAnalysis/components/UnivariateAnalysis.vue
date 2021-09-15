@@ -32,8 +32,9 @@
           </div>
         </div>
         <div class="describe-chart">
-          <div class="chartsBar" >
+          <div class="chartsBar">
             <VerticalAxisBar
+              v-if="radioRight == '堆积柱图'"
               height="400px"
               width="100%"
               id="3"
@@ -41,35 +42,20 @@
               title="Smoking history在不同Gender分组中的堆积柱形图"
               :data="item.data.data1"
             />
+            <ScatterPlot
+              v-if="radioRight == '分组柱图'"
+              height="400px"
+              width="100%"
+              id="4"
+              :titleShow="true"
+              title="Smoking history在不同Gender分组中的堆积柱形图"
+              :scatterPlotData="item.data.scatterData"
+            />
+            <el-radio-group class="barBotton" v-model="radioRight">
+              <el-radio-button label="堆积柱图"></el-radio-button>
+              <el-radio-button label="分组柱图"></el-radio-button>
+            </el-radio-group>
           </div>
-          <el-row style="display:none">
-            <el-col :span="12">
-              <div class="chartsBar">
-                <Bar
-                  height="400px"
-                  width="100%"
-                  id="9"
-                  titleLocal="left"
-                  title="Age频数直方图"
-                  :dataX="item.data.barDataX"
-                  :dataY="item.data.barDataY"
-                />
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="chartsBar">
-                <Pie
-                  height="400px"
-                  width="100%"
-                  title="Drinking History 频数饼图"
-                  titleLocal="left"
-                  labelPosition="center"
-                  id="7"
-                  :data="item.data.pieData"
-                />
-              </div>
-            </el-col>
-          </el-row>
         </div>
       </div>
     </el-scrollbar>
@@ -83,15 +69,15 @@
   </div>
 </template>
 <script>
-import Pie from "@/components/echarts/Pie";
-import Bar from "@/components/echarts/Bar";
 import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
+import ScatterPlot from "@/components/echarts/ScatterPlot";
+
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, VerticalAxisBar, SzylElTable },
+  components: { VerticalAxisBar, SzylElTable, ScatterPlot },
   data() {
-    return {};
+    return { radioRight: "分组柱图" };
   },
   computed: {
     ...mapState({
@@ -122,6 +108,15 @@ export default {
   .describe-chart {
     border-top: 1px solid #e6e6e6;
     padding: 15px 0;
+    .chartsBar {
+      position: relative;
+      .barBotton {
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        right: 0%;
+      }
+    }
   }
 }
 </style>

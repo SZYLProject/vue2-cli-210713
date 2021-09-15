@@ -52,9 +52,9 @@ export default {
   },
   data() {
     return {
-      activeName: "tabDescriptiveStatistics", // 切换组件
-      activeNameInfo: "DescriptiveStatistics",
-      activeValue: "描述性统计", // 显示名字
+      activeName: "tabUnivariateAnalysis", // 切换组件
+      activeNameInfo: "UnivariateAnalysis",
+      activeValue: "单因素分析", // 显示名字
       // 切换tab数据
       tabList: [
         {

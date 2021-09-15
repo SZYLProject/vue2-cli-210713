@@ -176,7 +176,6 @@ export default {
           /*改变xy轴颜色*/
           axisLine: {
             show: false,
-
             lineStyle: {
               color: "#CCCCCC",
               width: 1 //这里是为了突出显示加上的

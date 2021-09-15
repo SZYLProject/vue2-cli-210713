@@ -32,20 +32,11 @@
           </div>
         </div>
         <div class="describe-chart">
-          <div class="chartsBar" style="display:none">
-            <VerticalAxisBar
-              height="400px"
-              width="100%"
-              id="3"
-              :titleShow="true"
-              title="Smoking history在不同Gender分组中的堆积柱形图"
-              :data="item.data.data1"
-            />
-          </div>
           <el-row>
             <el-col :span="12">
               <div class="chartsBar">
                 <Bar
+                  v-if="radioLeft == '直线图'"
                   height="400px"
                   width="100%"
                   id="9"
@@ -54,11 +45,8 @@
                   :dataX="item.data.barDataX"
                   :dataY="item.data.barDataY"
                 />
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="chartsBar">
                 <Pie
+                  v-if="radioLeft == '箱线图'"
                   height="400px"
                   width="100%"
                   title="Drinking History 频数饼图"
@@ -67,6 +55,39 @@
                   id="7"
                   :data="item.data.pieData"
                 />
+                <!-- <el-button size="mini">直线图</el-button> -->
+                <el-radio-group class="barBotton" v-model="radioLeft">
+                  <el-radio-button label="直线图"></el-radio-button>
+                  <el-radio-button label="箱线图"></el-radio-button>
+                </el-radio-group>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="chartsBar">
+                <Pie
+                  v-if="radioRight == '饼图'"
+                  height="400px"
+                  width="100%"
+                  title="Drinking History 频数饼图"
+                  titleLocal="left"
+                  labelPosition="center"
+                  id="7"
+                  :data="item.data.pieData"
+                />
+                <Bar
+                  v-if="radioRight == '条形图'"
+                  height="400px"
+                  width="100%"
+                  id="9"
+                  titleLocal="left"
+                  title="Age频数直方图"
+                  :dataX="item.data.barDataX"
+                  :dataY="item.data.barDataY"
+                />
+                <el-radio-group class="barBotton" v-model="radioRight">
+                  <el-radio-button label="饼图"></el-radio-button>
+                  <el-radio-button label="条形图"></el-radio-button>
+                </el-radio-group>
               </div>
             </el-col>
           </el-row>
@@ -85,13 +106,15 @@
 <script>
 import Pie from "@/components/echarts/Pie";
 import Bar from "@/components/echarts/Bar";
-import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, VerticalAxisBar, SzylElTable },
+  components: { Pie, Bar, SzylElTable },
   data() {
-    return {};
+    return {
+      radioLeft: "直线图",
+      radioRight: "饼图"
+    };
   },
   computed: {
     ...mapState({
@@ -122,6 +145,15 @@ export default {
   .describe-chart {
     border-top: 1px solid #e6e6e6;
     padding: 15px 0;
+    .chartsBar {
+      position: relative;
+      .barBotton {
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        right: 46px;
+      }
+    }
   }
 }
 </style>
