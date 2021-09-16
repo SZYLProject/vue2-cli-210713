@@ -71,14 +71,14 @@
                   title="Drinking History 频数饼图"
                   titleLocal="left"
                   labelPosition="center"
-                  id="7"
+                  id="DescriptiveStatisticsPie"
                   :data="item.data.pieData"
                 />
                 <Bar
                   v-if="radioRight == '条形图'"
                   height="400px"
                   width="100%"
-                  id="9"
+                  id="DescriptiveStatisticsBar"
                   titleLocal="left"
                   title="Age频数直方图"
                   :dataX="item.data.barDataX"

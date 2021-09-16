@@ -42,7 +42,6 @@ const statisticalAnalysis = {
     [types.MULTIVARIATERESSION_DATA](state, data) {
       state.multivariateRegressionData = data;
     },
-
     [types.TABLIST_INDEX](state, data) {
       state.tabListIndex = data;
     }
@@ -67,7 +66,7 @@ const statisticalAnalysis = {
       commit("MULTIVARIATERESSION_DATA", data);
     },
     setTabListIndex: ({ commit }, data) => {
-      commit("", data);
+      commit("TABLIST_INDEX", data);
     }
   }
 };
