@@ -3,11 +3,11 @@
     <el-scrollbar
       style="height: 440px"
       ref="scroll"
-      v-if="relatedAnalysisData.length > 0"
+      v-if="multivariateRegressionData.length > 0"
     >
       <div
         class="describe-block"
-        v-for="(item, i) in relatedAnalysisData"
+        v-for="(item, i) in multivariateRegressionData"
         :key="i"
       >
         <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
@@ -81,8 +81,8 @@ export default {
   },
   computed: {
     ...mapState({
-      relatedAnalysisData: state =>
-        state.statisticalAnalysis.relatedAnalysisData
+      multivariateRegressionData: state =>
+        state.statisticalAnalysis.multivariateRegressionData
     })
   },
   watch: {},

@@ -3,11 +3,11 @@
     <el-scrollbar
       style="height: 440px"
       ref="scroll"
-      v-if="descriptiveStatisticsData.length > 0"
+      v-if="subsistenceAnalysisData.length > 0"
     >
       <div
         class="describe-block"
-        v-for="(item, i) in descriptiveStatisticsData"
+        v-for="(item, i) in subsistenceAnalysisData"
         :key="i"
       >
         <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
-      descriptiveStatisticsData: state =>
+      subsistenceAnalysisData: state =>
         state.statisticalAnalysis.subsistenceAnalysisData
     })
   },

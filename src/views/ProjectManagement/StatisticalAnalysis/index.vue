@@ -37,6 +37,7 @@ import DescriptiveStatistics from "./components/DescriptiveStatistics";
 import UnivariateAnalysis from "./components/UnivariateAnalysis";
 import SubsistenceAnalysis from "./components/SubsistenceAnalysis";
 import RelatedAnalysis from "./components/RelatedAnalysis";
+import MultivariateRegression from "./components/MultivariateRegression";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 export default {
   name: "StatisticAnalysisCom",
@@ -50,7 +51,8 @@ export default {
     DescriptiveStatistics,
     UnivariateAnalysis,
     SubsistenceAnalysis,
-    RelatedAnalysis
+    RelatedAnalysis,
+    MultivariateRegression
   },
   data() {
     return {
@@ -74,7 +76,11 @@ export default {
           info: "RelatedAnalysis",
           value: "相关分析"
         },
-        { name: "tabMultivariateRegression", value: "多因素回归" },
+        {
+          name: "tabMultivariateRegression",
+          info: "MultivariateRegression",
+          value: "多因素回归"
+        },
         {
           name: "tabSubsistenceAnalysis",
           info: "SubsistenceAnalysis",

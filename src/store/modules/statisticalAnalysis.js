@@ -3,16 +3,18 @@ const types = {
   DESCRIPTIVESTATISTICS_DATA: "DESCRIPTIVESTATISTICS_DATA",
   UNIVARIATEANALYSIS_DATA: "UNIVARIATEANALYSIS_DATA",
   SUBSISTENCEANALYSIS_DATA: "SUBSISTENCEANALYSIS_DATA",
-  RELATEDANALYSIS_DATA: "RELATEDANALYSIS_DATA", // 生存分析
+  RELATEDANALYSIS_DATA: "RELATEDANALYSIS_DATA", // 相关分析
+  MULTIVARIATERESSION_DATA: "MULTIVARIATERESSION_DATA",
   TABLIST_INDEX: "TABLIST_INDEX"
 };
 const statisticalAnalysis = {
   state: {
     leftDraggableList: [],
-    descriptiveStatisticsData: [],
-    univariateAnalysisData: [],
-    subsistenceAnalysisData: [],
-    relatedAnalysisData: [], // 生存分析结果
+    descriptiveStatisticsData: [], //描述性分析结果
+    univariateAnalysisData: [], // 单因素分析结果
+    subsistenceAnalysisData: [], //生存分析结果
+    relatedAnalysisData: [], // 相关分析结果
+    multivariateRegressionData: [], // 多因素分析结果
     tabListIndex: "1"
   },
   getters: {
@@ -37,6 +39,9 @@ const statisticalAnalysis = {
     [types.RELATEDANALYSIS_DATA](state, data) {
       state.relatedAnalysisData = data;
     },
+    [types.MULTIVARIATERESSION_DATA](state, data) {
+      state.multivariateRegressionData = data;
+    },
 
     [types.TABLIST_INDEX](state, data) {
       state.tabListIndex = data;
@@ -57,6 +62,9 @@ const statisticalAnalysis = {
     },
     setRelatedAnalysisData: ({ commit }, data) => {
       commit("RELATEDANALYSIS_DATA", data);
+    },
+    setMultivariateRegressionData: ({ commit }, data) => {
+      commit("MULTIVARIATERESSION_DATA", data);
     },
     setTabListIndex: ({ commit }, data) => {
       commit("", data);
