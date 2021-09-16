@@ -42,7 +42,7 @@
               title="Smoking history在不同Gender分组中的堆积柱形图"
               :data="item.data.data1"
             />
-            <ScatterPlot
+            <LinearRegression
               v-if="radioRight == '分组柱图'"
               height="400px"
               width="100%"
@@ -70,12 +70,12 @@
 </template>
 <script>
 import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
-import ScatterPlot from "@/components/echarts/ScatterPlot";
+import LinearRegression from "@/components/echarts/ScatterPlot/LinearRegression";
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { VerticalAxisBar, SzylElTable, ScatterPlot },
+  components: { VerticalAxisBar, SzylElTable, LinearRegression },
   data() {
     return { radioRight: "堆积柱图" };
   },

@@ -33,7 +33,7 @@
         </div>
         <div class="describe-chart">
           <div class="chartsBar">
-            <ScatterPlot
+            <LinearRegression
               v-if="radioRight == '残差图'"
               height="400px"
               width="100%"
@@ -42,7 +42,7 @@
               title="Smoking history在不同Gender分组中的堆积柱形图"
               :scatterPlotData="item.data.scatterData"
             />
-            <ScatterPlot
+            <LinearRegression
               v-if="radioRight == '散点图'"
               height="400px"
               width="100%"
@@ -69,11 +69,11 @@
   </div>
 </template>
 <script>
-import ScatterPlot from "@/components/echarts/ScatterPlot";
+import LinearRegression from "@/components/echarts/ScatterPlot/LinearRegression";
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { SzylElTable, ScatterPlot },
+  components: { SzylElTable, LinearRegression },
   data() {
     return { radioRight: "残差图" };
   },

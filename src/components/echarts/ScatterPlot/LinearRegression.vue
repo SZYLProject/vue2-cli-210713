@@ -3,10 +3,11 @@
 </template>
 <script></script>
 <script>
-import resize from "./mixins/resize";
+import resize from "../mixins/resize";
 import * as echarts from "echarts5";
 import { transform } from "echarts-stat";
 export default {
+  name: "LinearRegression",
   mixins: [resize],
   props: {
     scatterPlotData: {
@@ -59,9 +60,7 @@ export default {
   methods: {
     initChart() {
       echarts.registerTransform(transform.regression);
-      this.chart = echarts.init(this.$el);
-
-      this.chart.setOption({
+      const option = {
         dataset: [
           {
             source: this.scatterPlotData
@@ -137,7 +136,9 @@ export default {
             encode: { label: 2, tooltip: 1 }
           }
         ]
-      });
+      };
+      this.chart = echarts.init(this.$el);
+      this.chart.setOption(option);
     }
   }
 };
