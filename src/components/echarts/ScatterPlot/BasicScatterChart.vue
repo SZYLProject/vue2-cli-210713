@@ -7,10 +7,10 @@ import resize from "../mixins/resize";
 import * as echarts from "echarts5";
 import { transform } from "echarts-stat";
 export default {
-  name: "LinearRegression",
+  name: "BasicScatterChart",
   mixins: [resize],
   props: {
-    LinearRegressionData: {
+    BasicScatterChartData: {
       type: Array,
       default: []
     },
@@ -52,7 +52,7 @@ export default {
     this.chart = null;
   },
   watch: {
-    LinearRegressionData(val) {
+    BasicScatterChartData(val) {
       // 监听数据发生改变 刷新图表数据
       this.initChart();
     }
@@ -60,34 +60,8 @@ export default {
   methods: {
     initChart() {
       echarts.registerTransform(transform.regression);
+
       const option = {
-        dataset: [
-          {
-            source: this.LinearRegressionData
-          },
-          {
-            transform: {
-              type: "ecStat:regression"
-              // 'linear' by default.
-              // config: { method: 'linear', formulaOn: 'end'}
-            }
-          }
-        ],
-        title: {
-          text: "Linear Regression",
-          subtext: "By ecStat.regression",
-          sublink: "https://github.com/ecomfe/echarts-stat",
-          left: "center"
-        },
-        legend: {
-          bottom: 5
-        },
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross"
-          }
-        },
         xAxis: {
           min: -3,
           splitLine: {
@@ -122,21 +96,13 @@ export default {
         },
         series: [
           {
-            name: "scatter",
+            symbolSize: 20,
+            data: [],
             type: "scatter"
-          },
-          {
-            name: "line",
-            type: "line",
-            datasetIndex: 1,
-            symbolSize: 0.1,
-            symbol: "circle",
-            label: { show: true, fontSize: 16 },
-            labelLayout: { dx: -20 },
-            encode: { label: 2, tooltip: 1 }
           }
         ]
       };
+      option.series[0].data = this.BasicScatterChartData;
       this.chart = echarts.init(this.$el);
       this.chart.setOption(option);
     }

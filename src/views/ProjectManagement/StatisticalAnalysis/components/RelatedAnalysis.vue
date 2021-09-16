@@ -40,16 +40,16 @@
               id="4"
               :titleShow="true"
               title="Smoking history在不同Gender分组中的堆积柱形图"
-              :scatterPlotData="item.data.scatterData"
+              :LinearRegressionData="item.data.scatterData"
             />
-            <LinearRegression
+            <BasicScatterChart
               v-if="radioRight == '散点图'"
               height="400px"
               width="100%"
-              id="4"
+              id="5"
               :titleShow="true"
               title="Smoking history在不同Gender分组中的堆积柱形图"
-              :scatterPlotData="item.data.scatterData"
+              :BasicScatterChartData="item.data.scatterData"
             />
             <el-radio-group class="barBotton" v-model="radioRight">
               <el-radio-button label="残差图"></el-radio-button>
@@ -70,10 +70,12 @@
 </template>
 <script>
 import LinearRegression from "@/components/echarts/ScatterPlot/LinearRegression";
+import BasicScatterChart from "@/components/echarts/ScatterPlot/BasicScatterChart";
+
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { SzylElTable, LinearRegression },
+  components: { SzylElTable, LinearRegression, BasicScatterChart },
   data() {
     return { radioRight: "残差图" };
   },

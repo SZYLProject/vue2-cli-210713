@@ -49,7 +49,7 @@
               id="4"
               :titleShow="true"
               title="Smoking history在不同Gender分组中的堆积柱形图"
-              :scatterPlotData="item.data.scatterData"
+              :LinearRegressionData="item.data.scatterData"
             />
             <el-radio-group class="barBotton" v-model="radioRight">
               <el-radio-button label="堆积柱图"></el-radio-button>
