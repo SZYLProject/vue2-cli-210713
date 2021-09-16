@@ -33,17 +33,17 @@
         </div>
         <div class="describe-chart">
           <div class="chartsBar">
-            <VerticalAxisBar
-              v-if="radioRight == '堆积柱图'"
+            <ScatterPlot
+              v-if="radioRight == '残差图'"
               height="400px"
               width="100%"
-              id="3"
+              id="4"
               :titleShow="true"
               title="Smoking history在不同Gender分组中的堆积柱形图"
-              :data="item.data.data1"
+              :scatterPlotData="item.data.scatterData"
             />
             <ScatterPlot
-              v-if="radioRight == '分组柱图'"
+              v-if="radioRight == '散点图'"
               height="400px"
               width="100%"
               id="4"
@@ -52,8 +52,8 @@
               :scatterPlotData="item.data.scatterData"
             />
             <el-radio-group class="barBotton" v-model="radioRight">
-              <el-radio-button label="堆积柱图"></el-radio-button>
-              <el-radio-button label="分组柱图"></el-radio-button>
+              <el-radio-button label="残差图"></el-radio-button>
+              <el-radio-button label="散点图"></el-radio-button>
             </el-radio-group>
           </div>
         </div>
@@ -69,20 +69,18 @@
   </div>
 </template>
 <script>
-import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
 import ScatterPlot from "@/components/echarts/ScatterPlot";
-
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { VerticalAxisBar, SzylElTable, ScatterPlot },
+  components: { SzylElTable, ScatterPlot },
   data() {
-    return { radioRight: "堆积柱图" };
+    return { radioRight: "残差图" };
   },
   computed: {
     ...mapState({
       univariateAnalysisData: state =>
-        state.statisticalAnalysis.univariateAnalysisData
+        state.statisticalAnalysis.relatedAnalysisData
     })
   },
   watch: {},

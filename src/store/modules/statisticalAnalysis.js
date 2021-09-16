@@ -3,6 +3,7 @@ const types = {
   DESCRIPTIVESTATISTICS_DATA: "DESCRIPTIVESTATISTICS_DATA",
   UNIVARIATEANALYSIS_DATA: "UNIVARIATEANALYSIS_DATA",
   SUBSISTENCEANALYSIS_DATA: "SUBSISTENCEANALYSIS_DATA",
+  RELATEDANALYSIS_DATA: "RELATEDANALYSIS_DATA", // 生存分析
   TABLIST_INDEX: "TABLIST_INDEX"
 };
 const statisticalAnalysis = {
@@ -11,6 +12,7 @@ const statisticalAnalysis = {
     descriptiveStatisticsData: [],
     univariateAnalysisData: [],
     subsistenceAnalysisData: [],
+    relatedAnalysisData: [], // 生存分析结果
     tabListIndex: "1"
   },
   getters: {
@@ -32,6 +34,9 @@ const statisticalAnalysis = {
     [types.SUBSISTENCEANALYSIS_DATA](state, data) {
       state.subsistenceAnalysisData = data;
     },
+    [types.RELATEDANALYSIS_DATA](state, data) {
+      state.relatedAnalysisData = data;
+    },
 
     [types.TABLIST_INDEX](state, data) {
       state.tabListIndex = data;
@@ -49,6 +54,9 @@ const statisticalAnalysis = {
     },
     setSubsistenceAnalysisData: ({ commit }, data) => {
       commit("SUBSISTENCEANALYSIS_DATA", data);
+    },
+    setRelatedAnalysisData: ({ commit }, data) => {
+      commit("RELATEDANALYSIS_DATA", data);
     },
     setTabListIndex: ({ commit }, data) => {
       commit("", data);

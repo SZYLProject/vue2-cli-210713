@@ -36,6 +36,7 @@ import tabSubsistenceAnalysis from "./components/tabSubsistenceAnalysis"; // 生
 import DescriptiveStatistics from "./components/DescriptiveStatistics";
 import UnivariateAnalysis from "./components/UnivariateAnalysis";
 import SubsistenceAnalysis from "./components/SubsistenceAnalysis";
+import RelatedAnalysis from "./components/RelatedAnalysis";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 export default {
   name: "StatisticAnalysisCom",
@@ -48,13 +49,14 @@ export default {
     tabSubsistenceAnalysis,
     DescriptiveStatistics,
     UnivariateAnalysis,
-    SubsistenceAnalysis
+    SubsistenceAnalysis,
+    RelatedAnalysis
   },
   data() {
     return {
-      activeName: "tabUnivariateAnalysis", // 切换组件
-      activeNameInfo: "UnivariateAnalysis",
-      activeValue: "单因素分析", // 显示名字
+      activeName: "tabDescriptiveStatistics", // 切换组件
+      activeNameInfo: "DescriptiveStatistics",
+      activeValue: "描述性统计", // 显示名字
       // 切换tab数据
       tabList: [
         {
@@ -67,7 +69,11 @@ export default {
           info: "UnivariateAnalysis",
           value: "单因素分析"
         },
-        { name: "tabRelatedAnalysis", value: "相关分析" },
+        {
+          name: "tabRelatedAnalysis",
+          info: "RelatedAnalysis",
+          value: "相关分析"
+        },
         { name: "tabMultivariateRegression", value: "多因素回归" },
         {
           name: "tabSubsistenceAnalysis",
