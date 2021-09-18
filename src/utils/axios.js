@@ -5,8 +5,10 @@ import { getToken } from "@/utils/auth";
 
 // 创建axios实例
 let service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  // baseURL: process.env.VUE_APP_URL, // api的base_url
   // baseURL:'http://172.16.117.174:5689',
+  baseURL: "http://152.136.182.96:5689",
+
   timeout: 5000 // 请求超时时间
 });
 // request拦截器

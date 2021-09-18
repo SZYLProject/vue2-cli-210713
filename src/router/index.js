@@ -33,6 +33,12 @@ export const constantRouterMap = [
     hidden: true
   },
   {
+    path: "/tj",
+    name: "tj",
+    component: () => import("@/views/ProjectManagement/StatisticalAnalysis"),
+    hidden: true
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/views/login"),

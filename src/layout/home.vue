@@ -1,6 +1,6 @@
 <template>
   <div class="home rflex">
-    <left-menu></left-menu>
+    <left-menu v-if="menuIsTrue"></left-menu>
     <div
       class="menu_right wflex el-scrollbar"
       ref="menu_right"
@@ -8,12 +8,12 @@
     >
       <!-- <head-nav></head-nav> -->
       <div class="menu_content" ref="menu_content">
-        <bread></bread>
+        <bread v-if="menuIsTrue"></bread>
         <router-view></router-view
         ><!--页面渲染入口-->
       </div>
       <!-- <footerNav></footerNav> -->
-      <backTop :ele="$refs.menu_right"></backTop>
+      <backTop v-if="menuIsTrue" :ele="$refs.menu_right"></backTop>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["sidebar"])
+    ...mapGetters(["sidebar",'menuIsTrue']),
   },
   components: {
     // HeadNav,

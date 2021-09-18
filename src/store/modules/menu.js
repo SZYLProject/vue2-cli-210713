@@ -8,15 +8,17 @@ const menu = {
   state: {
     minLeftMenuWidth: 35,
     maxLeftMenuWidth: 180,
+    menuIsTrue: true, // 控制侧边栏和抬头栏不显示，如果为false将改sidebar.width =0,false =180
     sidebar: {
       opened: true,
-      width: 180
+      width: 180 // menuISTrue==false?0:180
     },
     isCollapse: false, // 菜单默认展开
     isFooter: false
   },
   getters: {
     sidebar: state => state.sidebar,
+    menuIsTrue: state => state.menuIsTrue,
     isCollapse: state => state.isCollapse,
     isFooter: state => state.isFooter
   },
