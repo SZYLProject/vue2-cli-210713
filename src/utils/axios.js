@@ -17,12 +17,15 @@ service.interceptors.request.use(
     if (store.getters.token) {
       config.headers = {
         //请求接口返回中文都是？，需要在请求头设置即可
-        "X-Requested-With": "XMLHttpRequest",
+        // "X-Requested-With": "XMLHttpRequest",
         // Accept: "application/x-www-form-urlencoded",
-        // Accept: 'application/x-www-form-urlencoded',
+        Accept: "application/x-www-form-urlencoded",
         // Accept: 'application/x-www-form-urlencoded；charset=UTF-8',
         Authorization: "Token " + getToken("Token") //携带权限参数
       };
+    }
+    if (config.methods === "post") {
+      config.data = {};
     }
     return config;
   },
@@ -77,3 +80,40 @@ service.interceptors.response.use(
 );
 
 export default service;
+
+/**
+ * get方法，对应get请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export const get = obj => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(obj.url, {
+        params: obj.params
+      })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err.data);
+      });
+  });
+};
+/**
+ * post方法，对应post请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export const post = obj => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(obj.url, obj.data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err.data);
+      });
+  });
+};

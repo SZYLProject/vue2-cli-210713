@@ -1,5 +1,5 @@
 import request from "@/utils/axios";
-
+import { get, post } from "@/utils/axios";
 export function FenLeiBianLiangMiaoShuTongJi(params) {
   return request({
     url: "/FenLeiBianLiangMiaoShuTongJi",
@@ -7,10 +7,17 @@ export function FenLeiBianLiangMiaoShuTongJi(params) {
     params: params
   });
 }
-export function fenZuTongJi(params) {
+export function fenZuTongJi(data) {
   return request({
-    url: "/fenZuTongJi",
+    url: "/fenZuTongJi?name=trt",
     method: "post",
-    params: params
+    params: data
   });
 }
+const statisticalAnalysis = {
+  fenZuTongJi(data) {
+    return post({ url: `/fenZuTongJi?name=${data.name}`, data: data.data });
+  }
+};
+
+export default statisticalAnalysis;
