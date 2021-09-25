@@ -54,6 +54,7 @@ module.exports = {
     proxy: {
       "": {
         target: 'http://152.136.182.96:5689',
+        logLevel:'debug', // 请求打印真实ip
         changeOrigin: true
       }
     }

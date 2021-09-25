@@ -24,11 +24,6 @@
 <script>
 // 导入draggable组件
 import LeftDrag from "./components/LeftDrag"; //
-import {
-  FenLeiBianLiangMiaoShuTongJi,
-  fenZuTongJi
-} from "@/api/statisticalAnalysis";
-import statisticalAnalysis from "@/api/statisticalAnalysis";
 import tabDescriptiveStatistics from "./components/tabDescriptiveStatistics"; // 统计性描述
 import tabUnivariateAnalysis from "./components/tabUnivariateAnalysis"; // 单因素分析
 import tabRelatedAnalysis from "./components/tabRelatedAnalysis"; // 相关分析
@@ -91,46 +86,10 @@ export default {
     };
   },
   mounted() {
-    // this.FenLeiBianLiangMiaoShuTongJiFun();
-    this.fenZuTongJiFun();
     // const data = leftDraggableListData;
     this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
   methods: {
-    FenLeiBianLiangMiaoShuTongJiFun() {
-      const param = {
-        name: "name,sex"
-      };
-      FenLeiBianLiangMiaoShuTongJi(param).then(res => {
-        console.log(res);
-      });
-    },
-    fenZuTongJiFun() {
-      const data = {
-        name: "trt",
-        data: [
-          {
-            trt: "1time",
-            response: 3.8612
-          },
-          {
-            trt: "1time",
-            response: 10.3868
-          },
-          {
-            trt: "1time",
-            response: 5.9059
-          },
-          {
-            trt: "1time",
-            response: 3.0609
-          }
-        ]
-      };
-      statisticalAnalysis.fenZuTongJi(data).then(res => {
-        console.log(res);
-      });
-    },
     // tab 切换
     handleClick(tab, event) {
       this.activeName = tab.name;

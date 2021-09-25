@@ -7,7 +7,8 @@ import { getToken } from "@/utils/auth";
 let service = axios.create({
   // baseURL: process.env.VUE_APP_URL, // api的base_url
   // baseURL:'http://172.16.117.174:5689',
-  baseURL: "http://152.136.182.96:5689",
+  // baseURL: "http://152.136.182.96:5689",
+  baseURL: window.BASE_URL,
 
   timeout: 5000 // 请求超时时间
 });

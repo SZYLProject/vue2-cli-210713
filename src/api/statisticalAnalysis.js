@@ -15,6 +15,9 @@ export function fenZuTongJi(data) {
   });
 }
 const statisticalAnalysis = {
+  FenLeiBianLiangMiaoShuTongJi(params) {
+    return get({ url: "/FenLeiBianLiangMiaoShuTongJi", params: params });
+  },
   fenZuTongJi(data) {
     return post({ url: `/fenZuTongJi?name=${data.name}`, data: data.data });
   }
