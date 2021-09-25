@@ -45,7 +45,7 @@
                   :dataX="item.data.barDataX"
                   :dataY="item.data.barDataY"
                 />
-                <Pie
+                <BoxplotLightVelocity
                   v-if="radioLeft == '箱线图'"
                   height="400px"
                   width="100%"
@@ -106,10 +106,12 @@
 <script>
 import Pie from "@/components/echarts/Pie";
 import Bar from "@/components/echarts/Bar";
+import BoxplotLightVelocity from "@/components/echarts/ScatterPlot/BoxplotLightVelocity";
+
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, SzylElTable },
+  components: { Pie, Bar, SzylElTable ,BoxplotLightVelocity},
   data() {
     return {
       radioLeft: "直线图",
