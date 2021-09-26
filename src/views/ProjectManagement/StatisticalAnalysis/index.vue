@@ -35,6 +35,7 @@ import SubsistenceAnalysis from "./components/SubsistenceAnalysis";
 import RelatedAnalysis from "./components/RelatedAnalysis";
 import MultivariateRegression from "./components/MultivariateRegression";
 import leftDraggableListData from "./Mock/leftDraggableListData";
+import statisticalAnalysis from "@/api/statisticalAnalysis";
 export default {
   name: "StatisticAnalysisCom",
   components: {
@@ -86,10 +87,29 @@ export default {
     };
   },
   mounted() {
+    this.GetVariables();
     // const data = leftDraggableListData;
-    this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
+    // this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
   methods: {
+    // 左侧栏变量数据
+    GetVariables() {
+      const data = {
+        projectId: 1
+      };
+      statisticalAnalysis.GetVariables(data).then(res => {
+        const data = res.data.map(item => {
+          return {
+            ...item,
+            name: item.variableCode,
+            value: item.variableName,
+            fillRate: "100.00"
+          };
+        });
+        console.log(data, "GetVariables");
+        this.$store.dispatch("setLeftDraggableList", data);
+      });
+    },
     // tab 切换
     handleClick(tab, event) {
       this.activeName = tab.name;

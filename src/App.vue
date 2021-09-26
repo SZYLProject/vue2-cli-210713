@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import { setProjectIdSession } from "@/utils/auth.js";
 export default {
-  name: "App"
+  name: "App",
+  mounted() {
+    // 初始化存放当前项目projectId
+    setProjectIdSession("1");
+  }
 };
 </script>
 

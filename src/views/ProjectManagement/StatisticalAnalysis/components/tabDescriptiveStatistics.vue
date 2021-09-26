@@ -13,7 +13,7 @@
 import descriptiveStatisticsData from "../Mock/descriptiveStatisticsData.js";
 import dragArea from "./dragArea.vue";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
-
+import { getObjectKeys } from "@/utils/objectArray";
 export default {
   components: {
     dragArea
@@ -45,14 +45,26 @@ export default {
           name: element.name + descriptiveStatisticsData[0].name,
           data: descriptiveStatisticsData[0].data
         });
-      });
-      this.fenZuTongJiFun().then(list => {
-        this.temporaryVar1 = list;
-      this.$store.dispatch("setDescriptiveStatisticsData", data);
+        this.yiBanXingMiaoShu(element.variableCode).then(list => {
+          console.log(list, "list");
 
+          data[i].data.tableData[0] = list;
+          data[i].data.colConfigs = getObjectKeys(list).map(item => {
+            return {
+              prop: item,
+              label: item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
+          this.$store.dispatch("setDescriptiveStatisticsData", data);
+        });
       });
-      // console.log(this.temporaryVar1, "test10");
-
+      // this.fenZuTongJiFun().then(list => {
+      //   this.temporaryVar1 = list;
+      //   this.$store.dispatch("setDescriptiveStatisticsData", data);
+      // });
       this.$store.dispatch("setDescriptiveStatisticsData", data);
     },
     async fenZuTongJiFun() {
@@ -78,10 +90,22 @@ export default {
         ]
       };
       let value = await statisticalAnalysis.fenZuTongJi(data).then(res => {
-        return res[0]['1time'][0];
+        return res[0]["1time"][0];
       });
-      console.log(value,'value');
+      console.log(value, "value");
       return value;
+    },
+    async yiBanXingMiaoShu(variableCode) {
+      const data = {
+        projectId: 1,
+        variableCode: variableCode
+      };
+      let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
+        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        const data = JSON.parse(res.data)
+        return data;
+      });
+      return value[0];
     }
   }
 };
