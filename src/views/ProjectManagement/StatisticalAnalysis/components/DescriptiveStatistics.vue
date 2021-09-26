@@ -39,7 +39,7 @@
                   v-if="radioLeft == '直线图'"
                   height="400px"
                   width="100%"
-                  id="9"
+                  id="descriptiveStatisticsBar"
                   titleLocal="left"
                   title="Age频数直方图"
                   :dataX="item.data.barDataX"
@@ -52,7 +52,7 @@
                   title="Drinking History 频数饼图"
                   titleLocal="left"
                   labelPosition="center"
-                  id="7"
+                  id="main"
                   :data="item.data.pieData"
                 />
                 <!-- <el-button size="mini">直线图</el-button> -->

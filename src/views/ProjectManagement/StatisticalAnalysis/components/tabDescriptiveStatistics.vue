@@ -53,7 +53,7 @@ export default {
       });
       // console.log(this.temporaryVar1, "test10");
 
-      // this.$store.dispatch("setDescriptiveStatisticsData", data);
+      this.$store.dispatch("setDescriptiveStatisticsData", data);
     },
     async fenZuTongJiFun() {
       const data = {
