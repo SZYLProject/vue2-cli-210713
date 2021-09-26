@@ -49,7 +49,7 @@
                   v-if="radioLeft == '箱线图'"
                   height="400px"
                   width="100%"
-                  title="Drinking History 频数饼图"
+                  title="年龄的箱线图"
                   titleLocal="left"
                   labelPosition="center"
                   id="main"
@@ -106,7 +106,7 @@
 <script>
 import Pie from "@/components/echarts/Pie";
 import Bar from "@/components/echarts/Bar";
-import BoxplotLightVelocity from "@/components/echarts/ScatterPlot/BoxplotLightVelocity";
+import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";

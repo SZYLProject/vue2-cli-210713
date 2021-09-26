@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div :ref="id" :style="{ height: height, width: width }"></div>
+    <div
+      :title="title"
+      :ref="id"
+      :style="{ height: height, width: width }"
+    ></div>
   </div>
 </template>
 
@@ -27,6 +31,14 @@ export default {
     BoxplotLightVelocityData: {
       type: Object,
       default: null
+    },
+    title: {
+      type: String,
+      default: "何须图"
+    },
+    titleLocal: {
+      type: String,
+      default: "left"
     }
   },
   // 监听
@@ -53,11 +65,11 @@ export default {
 
         title: [
           {
-            text: "年龄的箱线图",
+            text: this.title,
             textStyle: {
               fontSize: 14
             },
-            x: this.titleLocal,
+            x: "",
             y: "top"
           }
         ],
@@ -120,8 +132,6 @@ export default {
           nameTextStyle: {
             color: "#999999"
           },
-          name: this.nameY,
-          data: this.dataY
         },
         series: [
           {
