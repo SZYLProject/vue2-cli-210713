@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-scrollbar
-      style="height: 440px"
+      :style="{ height: clientHeight + 'px' }"
       ref="scroll"
       v-if="relatedAnalysisData.length > 0"
     >
@@ -61,7 +61,7 @@
     </el-scrollbar>
 
     <el-empty
-      style="height:440px"
+      :style="{ height: clientHeight + 'px' }"
       class="describe-block"
       v-else
       description="点击开始分析后，统计结果会呈现在此处"
@@ -78,6 +78,12 @@ export default {
   components: { SzylElTable, LinearRegression, BasicScatterChart },
   data() {
     return { radioRight: "残差图" };
+  },
+  props: {
+    clientHeight: {
+      type: Number,
+      default: 410
+    }
   },
   computed: {
     ...mapState({

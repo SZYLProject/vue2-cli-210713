@@ -17,7 +17,7 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-      <component :is="activeNameInfo"></component>
+      <component :clientHeight="clientHeight" :is="activeNameInfo"></component>
     </div>
   </div>
 </template>
@@ -83,15 +83,25 @@ export default {
           info: "SubsistenceAnalysis",
           value: "生存分析"
         }
-      ]
+      ],
+      clientHeight: 410
     };
   },
   mounted() {
     this.GetVariables();
+    this.getHeight();
     // const data = leftDraggableListData;
     // this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
   methods: {
+    // 控制每个展示echart图与table表格区域的高度
+    getHeight() {
+      this.clientHeight = `${document.documentElement.clientHeight}` - 352; //获取浏览器可视区域高度
+      // window.onresize = function() {
+      //   this.clientHeight = `${document.documentElement.clientHeight}`;
+      //   this.clientHeight = this.clientHeight - 1080 ;
+      // };
+    },
     // 左侧栏变量数据
     GetVariables() {
       const data = {

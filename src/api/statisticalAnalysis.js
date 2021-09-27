@@ -31,7 +31,7 @@ const statisticalAnalysis = {
   },
   yiBanXingMiaoShu(parmas) {
     return get({
-      url: `/api/yiBanXingMiaoShu?projectId=${porjectId}&variableName=${parmas.variableCode}`,
+      url: `/api/yiBanXingMiaoShu?projectId=${porjectId}&variableCode=${parmas.variableCode}`,
       parmas: parmas
     });
   }

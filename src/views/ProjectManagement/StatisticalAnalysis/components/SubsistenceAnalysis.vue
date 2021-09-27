@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-scrollbar
-      style="height: 440px"
+      :style="{ height: clientHeight + 'px' }"
       ref="scroll"
       v-if="subsistenceAnalysisData.length > 0"
     >
@@ -48,7 +48,7 @@
     </el-scrollbar>
 
     <el-empty
-      style="height:440px"
+      :style="{ height: clientHeight + 'px' }"
       class="describe-block"
       v-else
       description="点击开始分析后，统计结果会呈现在此处"
@@ -63,6 +63,12 @@ export default {
   components: { discount, SzylElTable },
   data() {
     return {};
+  },
+  props: {
+    clientHeight: {
+      type: Number,
+      default: 410
+    }
   },
   computed: {
     ...mapState({

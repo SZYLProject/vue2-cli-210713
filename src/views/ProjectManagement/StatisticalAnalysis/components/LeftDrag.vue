@@ -29,7 +29,7 @@
         >个样本
       </p>
       <div class="list-title"><span>变量列表</span><span>填充率(%)</span></div>
-      <el-scrollbar style="height: 620px" ref="scroll">
+      <el-scrollbar :style="{ height: clientHeight + 'px' }" ref="scroll">
         <div class="lists">
           <draggable
             :group="{ name: 'variable', pull: 'clone', put: false }"
@@ -70,7 +70,8 @@ export default {
   data() {
     return {
       searchVariableValue: "",
-      variable: variable
+      variable: variable,
+      clientHeight: 620
     };
   },
   computed: {
@@ -78,7 +79,17 @@ export default {
       leftDraggableList: state => state.statisticalAnalysis.leftDraggableList
     })
   },
+  mounted() {
+    this.getHeight();
+  },
   methods: {
+    getHeight() {
+      this.clientHeight = `${document.documentElement.clientHeight}` -170; //获取浏览器可视区域高度
+      // window.onresize = function() {
+      //   this.clientHeight = `${document.documentElement.clientHeight}`;
+      //   this.clientHeight = this.clientHeight - 1080 ;
+      // };
+    },
     start() {
       // 修改调用此方法
       this.$store.dispatch("setLeftDraggableList");

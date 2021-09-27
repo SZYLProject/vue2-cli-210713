@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-scrollbar
-      style="height: 440px"
+      :style="{ height: clientHeight + 'px' }"
       ref="scroll"
       v-if="descriptiveStatisticsData.length > 0"
     >
@@ -96,7 +96,7 @@
     </el-scrollbar>
 
     <el-empty
-      style="height:440px"
+      :style="{ height: clientHeight + 'px' }"
       class="describe-block"
       v-else
       description="点击开始分析后，统计结果会呈现在此处"
@@ -111,12 +111,18 @@ import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVeloc
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, SzylElTable ,BoxplotLightVelocity},
+  components: { Pie, Bar, SzylElTable, BoxplotLightVelocity },
   data() {
     return {
       radioLeft: "直线图",
       radioRight: "饼图"
     };
+  },
+  props: {
+    clientHeight: {
+      type: Number,
+      default: 410
+    }
   },
   computed: {
     ...mapState({
