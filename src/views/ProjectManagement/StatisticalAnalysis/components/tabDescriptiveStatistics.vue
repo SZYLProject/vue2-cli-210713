@@ -14,6 +14,7 @@ import descriptiveStatisticsData from "../Mock/descriptiveStatisticsData.js";
 import dragArea from "./dragArea.vue";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getObjectKeys } from "@/utils/objectArray";
+import dataInterpretation from "@/utils/dataInterpretation";
 export default {
   components: {
     dragArea
@@ -37,6 +38,7 @@ export default {
   methods: {
     // 开始分析
     startAnalysis(startAnalysis) {
+      console.log(dataInterpretation, "dataInterpretation");
       console.log(startAnalysis, "startAnalysis");
       let data = [];
       startAnalysis.forEach((element, i) => {
@@ -48,11 +50,11 @@ export default {
         this.yiBanXingMiaoShu(element.variableCode).then(list => {
           console.log(list, "list");
 
-          data[i].data.tableData[0] = list;
-          data[i].data.colConfigs = getObjectKeys(list).map(item => {
+          data[i].data.tableData = list;
+          data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
             return {
               prop: item,
-              label: item,
+              label: item ? dataInterpretation[item] : item,
               "min-width": 40,
               sort: false,
               align: "center"
@@ -102,10 +104,10 @@ export default {
       };
       let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
         console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
-        const data = JSON.parse(res.data)
+        const data = JSON.parse(res.data);
         return data;
       });
-      return value[0];
+      return value;
     }
   }
 };
