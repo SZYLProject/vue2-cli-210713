@@ -31,8 +31,10 @@
     background-color:#fff;
 }
 
-
-
+// 底部不出现左右滚动条
+.el-scrollbar__wrap{
+    margin-top: 18px;
+}
 
 
 

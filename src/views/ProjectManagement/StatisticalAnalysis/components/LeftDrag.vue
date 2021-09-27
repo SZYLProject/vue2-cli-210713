@@ -87,7 +87,7 @@ export default {
     cloneElement(clone) {
       console.log(clone, "clone");
       return {
-        ...clone,
+        ...clone
       };
     },
     querySearch(queryString, callback) {
@@ -177,5 +177,8 @@ export default {
 .el-icon-search:before {
   color: #0070f4;
 }
+// /deep/.el-scrollbar__wrap {
+//   margin-top: 18px;
+// }
 // }
 </style>
