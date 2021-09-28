@@ -113,7 +113,7 @@
         <RefererOfAWebsite type="ordertype"></RefererOfAWebsite>
       </el-col>
       <el-col :span="10">
-        <line-chart></line-chart>
+        <StackedAreaChart></StackedAreaChart>
       </el-col>
       <el-col :span="7">
         <radar-chart></radar-chart>
@@ -142,7 +142,7 @@ import logList from "./components/logList"; // 日志列表
 import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation"; // 用户投资类型 柱状图
 import RefererOfAWebsite from "@/components/echarts/Pie/RefererOfAWebsite"; // 用户投资类型 饼状图
 import radarChart from "@/components/echarts/radarChart"; // 用户投资类型 雷达图
-import lineChart from "@/components/echarts/lineChart"; // 用户投资类型 折线图
+import StackedAreaChart from "@/components/echarts/Line/StackedAreaChart"; // 用户投资类型 折线图
 import { github } from "@/utils/env";
 
 export default {
@@ -159,7 +159,7 @@ export default {
     RainfallAndEvaporation,
     RefererOfAWebsite,
     radarChart,
-    lineChart
+    StackedAreaChart
   },
   created() {},
   mounted() {},

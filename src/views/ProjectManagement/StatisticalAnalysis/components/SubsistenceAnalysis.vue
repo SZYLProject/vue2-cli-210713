@@ -26,7 +26,7 @@
         </div>
         <div class="describe-chart">
           <div class="chartsBar">
-            <discount
+            <StepLine
               height="400px"
               width="100%"
               title="Drinking History 频数饼图"
@@ -34,7 +34,7 @@
               labelPosition="center"
               id="7"
               :discountData="item.data.discountData"
-            ></discount>
+            ></StepLine>
           </div>
         </div>
         <SzylElTable
@@ -56,11 +56,11 @@
   </div>
 </template>
 <script>
-import discount from "@/components/echarts/discount";
+import StepLine from "@/components/echarts/Line/StepLine";
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { discount, SzylElTable },
+  components: { StepLine, SzylElTable },
   data() {
     return {};
   },

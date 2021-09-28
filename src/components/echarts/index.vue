@@ -63,14 +63,14 @@
         <!-- 折线图 -->
         <el-row>
           <el-col :span="12">
-            <lineChart title="lineChart" height="400px" width="100%" />
+            <StackedAreaChart title="StackedAreaChart" height="400px" width="100%" />
           </el-col>
           <el-col :span="12">
-            <discount
+            <StepLine
               height="400px"
               width="100%"
               title="年龄的箱线图"
-              id="discount"
+              id="StepLine"
             />
           </el-col>
         </el-row>
@@ -103,8 +103,8 @@ import DoughnutChart from "@/components/echarts/Pie/DoughnutChart";
 import MixedLineAndBar from "@/components/echarts/Bar/MixedLineAndBar";
 import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation";
 import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
-import discount from "@/components/echarts/discount";
-import lineChart from "@/components/echarts/lineChart";
+import StepLine from "@/components/echarts/Line/StepLine";
+import StackedAreaChart from "@/components/echarts/Line/StackedAreaChart";
 import NestedPies from "@/components/echarts/Pie/NestedPies";
 import RefererOfAWebsite from "@/components/echarts/Pie/RefererOfAWebsite";
 import radarChart from "@/components/echarts/radarChart";
@@ -116,8 +116,8 @@ export default {
     MixedLineAndBar,
     BoxplotLightVelocity,
     RainfallAndEvaporation,
-    discount,
-    lineChart,
+    StepLine,
+    StackedAreaChart,
     NestedPies,
     RefererOfAWebsite,
     radarChart,
