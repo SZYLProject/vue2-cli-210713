@@ -35,6 +35,42 @@ export const removeStore = name => {
 };
 
 /**
+ * 存储sessionStorage
+ */
+ export const setSessionStore = (name, content) => {
+  if (!name) return;
+  if (typeof content !== "string") {
+    content = JSON.stringify(content);
+  }
+  window.sessionStorage.setItem(name, content);
+};
+
+/**
+ * 获取sessionStorage
+ */
+export const getSessionStore = name => {
+  if (!name) return;
+  var value = window.sessionStorage.getItem(name);
+  if (value !== null) {
+    try {
+      value = JSON.parse(value);
+    } catch (e) {
+      // eslint-disable-next-line no-self-assign
+      value = value;
+    }
+  }
+  return value;
+};
+
+/**
+ * 删除sessionStorage
+ */
+export const removeSessionStore = name => {
+  if (!name) return;
+  window.sessionStorage.removeItem(name);
+};
+
+/**
  * 让整数自动保留2位小数
  */
 // export const returnFloat = value => {

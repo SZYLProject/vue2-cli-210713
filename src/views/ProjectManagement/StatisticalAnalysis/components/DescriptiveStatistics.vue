@@ -96,7 +96,7 @@
     </el-scrollbar>
 
     <el-empty
-      :style="{ height: clientHeight + 'px' }"
+      :style="{ height: clientHeight - 18 + 'px', 'margin-top': '18px' }"
       class="describe-block"
       v-else
       description="点击开始分析后，统计结果会呈现在此处"
@@ -138,7 +138,6 @@ export default {
 <style scoped lang="scss">
 .describe-block {
   background: #ffffff;
-  // margin-top: 15px;
   padding: 15px 20px;
   h1 {
     font-size: 15px;

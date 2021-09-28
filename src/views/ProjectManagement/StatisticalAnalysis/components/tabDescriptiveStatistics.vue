@@ -15,6 +15,7 @@ import dragArea from "./dragArea.vue";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getObjectKeys } from "@/utils/objectArray";
 import dataInterpretation from "@/utils/dataInterpretation";
+import { getSessionStore } from "@/utils/mUtils";
 export default {
   components: {
     dragArea
@@ -47,6 +48,14 @@ export default {
           name: element.name + descriptiveStatisticsData[0].name,
           data: descriptiveStatisticsData[0].data
         });
+
+        console.log(getSessionStore("isMock"), "(getSessionStore(isMock)");
+
+        if (getSessionStore("isMock") === 0) {
+          this.$store.dispatch("setDescriptiveStatisticsData", data);
+          return;
+        }
+
         this.yiBanXingMiaoShu(element.variableCode).then(list => {
           console.log(list, "list");
 
@@ -67,7 +76,6 @@ export default {
       //   this.temporaryVar1 = list;
       //   this.$store.dispatch("setDescriptiveStatisticsData", data);
       // });
-      this.$store.dispatch("setDescriptiveStatisticsData", data);
     },
     async fenZuTongJiFun() {
       const data = {

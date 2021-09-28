@@ -36,6 +36,8 @@ import RelatedAnalysis from "./components/RelatedAnalysis";
 import MultivariateRegression from "./components/MultivariateRegression";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
+import { getSessionStore } from "@/utils/mUtils";
+
 export default {
   name: "StatisticAnalysisCom",
   components: {
@@ -96,7 +98,7 @@ export default {
   methods: {
     // 控制每个展示echart图与table表格区域的高度
     getHeight() {
-      this.clientHeight = `${document.documentElement.clientHeight}` - 352; //获取浏览器可视区域高度
+      this.clientHeight = `${document.documentElement.clientHeight}` - 337; //获取浏览器可视区域高度
       // window.onresize = function() {
       //   this.clientHeight = `${document.documentElement.clientHeight}`;
       //   this.clientHeight = this.clientHeight - 1080 ;
@@ -107,6 +109,11 @@ export default {
       const data = {
         projectId: 1
       };
+
+      if (getSessionStore("isMock") === 0) {
+        this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
+        return;
+      }
       statisticalAnalysis.GetVariables(data).then(res => {
         const data = res.data.map(item => {
           return {
@@ -152,7 +159,7 @@ export default {
     vertical-align: top;
     width: calc(100% - 255px);
     .tab {
-      margin-bottom: 15px;
+      // margin-bottom: 15px;
       background: #ffffff;
     }
   }
