@@ -16,7 +16,11 @@
             />
           </el-col>
           <el-col :span="12">
-            <RainfallAndEvaporation titel="RainfallAndEvaporation" height="400px" width="100%" />
+            <RainfallAndEvaporation
+              titel="RainfallAndEvaporation"
+              height="400px"
+              width="100%"
+            />
           </el-col>
           <el-col :span="12">
             <VerticalAxisBar
@@ -31,18 +35,18 @@
         <!-- 饼图 -->
         <el-row>
           <el-col :span="12">
-            <Pie
+            <DoughnutChart
               height="400px"
               width="100%"
               title="Drinking History 频数饼图"
               titleLocal="left"
               labelPosition="center"
-              id="DescriptiveStatisticsPie"
+              id="DescriptiveDoughnutChart"
               :data="pieData"
             />
           </el-col>
           <el-col :span="12">
-            <orderSource
+            <NestedPies
               height="400px"
               width="100%"
               title="用户投资途径"
@@ -53,10 +57,7 @@
             />
           </el-col>
           <el-col :span="12">
-            <pieChart height="400px" width="100%" />
-          </el-col>
-          <el-col :span="12">
-            <radarChart title="radarChart" height="400px" width="100%" />
+            <RefererOfAWebsite height="400px" width="100%" />
           </el-col>
         </el-row>
         <!-- 折线图 -->
@@ -71,6 +72,12 @@
               title="年龄的箱线图"
               id="discount"
             />
+          </el-col>
+        </el-row>
+        <!-- 雷达图 -->
+        <el-row>
+          <el-col :span="12">
+            <radarChart title="radarChart" height="400px" width="100%" />
           </el-col>
         </el-row>
         <!-- 何须图 -->
@@ -92,27 +99,27 @@
   </div>
 </template>
 <script>
-import Pie from "@/components/echarts/Pie";
+import DoughnutChart from "@/components/echarts/Pie/DoughnutChart";
 import MixedLineAndBar from "@/components/echarts/Bar/MixedLineAndBar";
 import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation";
 import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
 import discount from "@/components/echarts/discount";
 import lineChart from "@/components/echarts/lineChart";
-import orderSource from "@/components/echarts/orderSource";
-import pieChart from "@/components/echarts/pieChart";
+import NestedPies from "@/components/echarts/Pie/NestedPies";
+import RefererOfAWebsite from "@/components/echarts/Pie/RefererOfAWebsite";
 import radarChart from "@/components/echarts/radarChart";
 import VerticalAxisBar from "@/components/echarts/Bar/VerticalAxisBar";
 
 export default {
   components: {
-    Pie,
+    DoughnutChart,
     MixedLineAndBar,
     BoxplotLightVelocity,
     RainfallAndEvaporation,
     discount,
     lineChart,
-    orderSource,
-    pieChart,
+    NestedPies,
+    RefererOfAWebsite,
     radarChart,
     VerticalAxisBar
   },

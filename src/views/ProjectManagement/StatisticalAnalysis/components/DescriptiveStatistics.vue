@@ -64,14 +64,14 @@
             </el-col>
             <el-col :span="12">
               <div class="chartsBar">
-                <Pie
+                <DoughnutChart
                   v-if="radioRight == '饼图'"
                   height="400px"
                   width="100%"
                   title="Drinking History 频数饼图"
                   titleLocal="left"
                   labelPosition="center"
-                  id="DescriptiveStatisticsPie"
+                  id="DescriptiveStatisticsDoughnutChart"
                   :data="item.data.pieData"
                 />
                 <Bar
@@ -104,14 +104,14 @@
   </div>
 </template>
 <script>
-import Pie from "@/components/echarts/Pie";
+import DoughnutChart from "@/components/echarts/Pie/DoughnutChart";
 import Bar from "@/components/echarts/Bar/MixedLineAndBar";
 import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
 export default {
-  components: { Pie, Bar, SzylElTable, BoxplotLightVelocity },
+  components: { DoughnutChart, Bar, SzylElTable, BoxplotLightVelocity },
   data() {
     return {
       radioLeft: "直线图",

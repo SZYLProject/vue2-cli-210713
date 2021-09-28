@@ -21,7 +21,7 @@ export default {
     },
     id: {
       type: String,
-      default: "pieChart"
+      default: "LinearRegression"
     },
     width: {
       type: String,

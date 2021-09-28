@@ -6,7 +6,7 @@
 
 <script>
 import echarts from 'echarts'
-import resize from './mixins/resize'
+import resize from '../mixins/resize'
 
 export default {
   mixins: [resize],
@@ -33,7 +33,7 @@ export default {
     },
     id: {
       type: String,
-      default: 'pieChart'
+      default: 'DoughnutChart'
     },
     width: {
       type: String,

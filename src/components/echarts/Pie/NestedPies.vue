@@ -22,11 +22,11 @@ export default {
     },
     titel: {
       type: String,
-      default: "orderSource"
+      default: "NestedPies"
     },
     id:{
       type: String,
-      default: "orderSource"
+      default: "NestedPies"
     },
      type:{
       type: String,

@@ -38,7 +38,7 @@ export default {
     },
     id: {
       type: String,
-      default: "pieChart"
+      default: "discount"
     },
     width: {
       type: String,

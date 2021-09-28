@@ -110,7 +110,7 @@
     </el-row>
     <el-row :gutter="10" class="row_list order_list">
       <el-col :span="7">
-        <pie-chart type="ordertype"></pie-chart>
+        <RefererOfAWebsite type="ordertype"></RefererOfAWebsite>
       </el-col>
       <el-col :span="10">
         <line-chart></line-chart>
@@ -140,7 +140,7 @@ import commentList from "./components/commentList"; // 用户评论列表
 import cardList from "./components/cardList"; // card列表
 import logList from "./components/logList"; // 日志列表
 import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation"; // 用户投资类型 柱状图
-import pieChart from "@/components/echarts/pieChart"; // 用户投资类型 饼状图
+import RefererOfAWebsite from "@/components/echarts/Pie/RefererOfAWebsite"; // 用户投资类型 饼状图
 import radarChart from "@/components/echarts/radarChart"; // 用户投资类型 雷达图
 import lineChart from "@/components/echarts/lineChart"; // 用户投资类型 折线图
 import { github } from "@/utils/env";
@@ -157,7 +157,7 @@ export default {
     cardList,
     logList,
     RainfallAndEvaporation,
-    pieChart,
+    RefererOfAWebsite,
     radarChart,
     lineChart
   },
