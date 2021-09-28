@@ -24,17 +24,19 @@ export default {
       type: String,
       default: "NestedPies"
     },
-    id:{
+    id: {
       type: String,
       default: "NestedPies"
     },
-     type:{
+    type: {
       type: String,
       default: "type"
     }
   },
   mounted() {
-    this.myChart = echarts.init(document.getElementById(this.id));
+    // this.myChart = echarts.init(document.getElementById(this.id));
+    this.myChart = echarts.init(this.$el);
+
     this.myChart.setOption(this.redyBin2Option(this.type));
   },
   methods: {

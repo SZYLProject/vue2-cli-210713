@@ -49,7 +49,9 @@ export default {
   methods: {
     loadChart() {
       this.$nextTick(() => {
-        this.myChart = echarts.init(document.getElementById(this.id));
+        // this.myChart = echarts.init(document.getElementById(this.id));
+        this.myChart = echarts.init(this.$el);
+
         this.myChart.setOption(this.initOption());
       });
     },

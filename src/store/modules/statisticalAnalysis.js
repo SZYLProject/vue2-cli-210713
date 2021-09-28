@@ -15,7 +15,7 @@ const statisticalAnalysis = {
     subsistenceAnalysisData: [], //生存分析结果
     relatedAnalysisData: [], // 相关分析结果
     multivariateRegressionData: [], // 多因素分析结果
-    tabListIndex: "1"
+    tabListIndex: "1" // 当前显示的tab：描述性统计
   },
   getters: {
     leftDraggableList: state => state.leftDraggableList,
