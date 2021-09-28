@@ -77,7 +77,7 @@
         <!-- 雷达图 -->
         <el-row>
           <el-col :span="12">
-            <radarChart title="radarChart" height="400px" width="100%" />
+            <CustomizedRadarChart title="CustomizedRadarChart" height="400px" width="100%" />
           </el-col>
         </el-row>
         <!-- 何须图 -->
@@ -107,7 +107,7 @@ import StepLine from "@/components/echarts/Line/StepLine";
 import StackedAreaChart from "@/components/echarts/Line/StackedAreaChart";
 import NestedPies from "@/components/echarts/Pie/NestedPies";
 import RefererOfAWebsite from "@/components/echarts/Pie/RefererOfAWebsite";
-import radarChart from "@/components/echarts/radarChart";
+import CustomizedRadarChart from "@/components/echarts/Radar/CustomizedRadarChart";
 import VerticalAxisBar from "@/components/echarts/Bar/VerticalAxisBar";
 
 export default {
@@ -120,7 +120,7 @@ export default {
     StackedAreaChart,
     NestedPies,
     RefererOfAWebsite,
-    radarChart,
+    CustomizedRadarChart,
     VerticalAxisBar
   },
   data() {

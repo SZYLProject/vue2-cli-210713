@@ -11,10 +11,10 @@ import echarts from "echarts";
 // import echartsTheme from "@/components/echarts/theme/westeros.json";
 
 export default {
-  name: "radarChart",
+  name: "CustomizedRadarChart",
   data() {
     return {
-      id: "radarChart",
+      id: "CustomizedRadarChart",
       myChart: null
     };
   },
@@ -33,7 +33,7 @@ export default {
     },
     title: {
       type: String,
-      default: "radarChart"
+      default: "CustomizedRadarChart"
     }
   },
   mounted() {
