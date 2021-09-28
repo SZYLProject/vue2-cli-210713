@@ -1,5 +1,9 @@
 <template>
-  <div :id="id" class="orderArea"></div>
+  <div
+    :id="id"
+    :style="{ height: height, width: width }"
+    class="orderArea"
+  ></div>
 </template>
 
 <script>
@@ -13,7 +17,20 @@ export default {
       myChart: null
     };
   },
-  props: ["type"],
+  props: {
+    width: {
+      type: String,
+      default: "200px"
+    },
+    height: {
+      type: String,
+      default: "200px"
+    },
+     type: {
+      type: String,
+      default: "type"
+    },
+  },
   mounted() {
     this.loadChart();
   },

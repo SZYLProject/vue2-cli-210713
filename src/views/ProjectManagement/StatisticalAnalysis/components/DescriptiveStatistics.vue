@@ -105,7 +105,7 @@
 </template>
 <script>
 import Pie from "@/components/echarts/Pie";
-import Bar from "@/components/echarts/Bar";
+import Bar from "@/components/echarts/Bar/MixedLineAndBar";
 import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";

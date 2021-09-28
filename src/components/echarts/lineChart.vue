@@ -1,5 +1,9 @@
 <template>
-  <div :id="id" class="orderArea"></div>
+  <div
+    :id="id"
+    :style="{ height: height, width: width }"
+    class="orderArea"
+  ></div>
 </template>
 
 <script>
@@ -12,6 +16,20 @@ export default {
       id: "lineChart",
       myChart: null
     };
+  },
+  props: {
+    width: {
+      type: String,
+      default: "200px"
+    },
+    height: {
+      type: String,
+      default: "200px"
+    },
+    title: {
+      type: String,
+      default: "lineChart"
+    }
   },
   mounted() {
     this.loadChart();
@@ -37,7 +55,7 @@ export default {
     initOption() {
       let data = {
         title: {
-          text: ""
+          text: this.title
         },
         tooltip: {
           trigger: "axis",

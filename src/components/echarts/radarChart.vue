@@ -1,5 +1,9 @@
 <template>
-  <div :id="id" class="orderArea"></div>
+  <div
+    :id="id"
+    class="orderArea"
+    :style="{ height: height, width: width }"
+  ></div>
 </template>
 
 <script>
@@ -13,6 +17,24 @@ export default {
       id: "radarChart",
       myChart: null
     };
+  },
+  props: {
+    width: {
+      type: String,
+      default: "200px"
+    },
+    height: {
+      type: String,
+      default: "200px"
+    },
+    type: {
+      type: String,
+      default: "type"
+    },
+    title: {
+      type: String,
+      default: "radarChart"
+    }
   },
   mounted() {
     this.loadChart();
@@ -33,6 +55,9 @@ export default {
     },
     initOption() {
       let option = {
+        title: {
+          text: this.title
+        },
         radar: [
           {
             name: {

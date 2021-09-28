@@ -22,7 +22,7 @@ export default {
     },
     id: {
       type: String,
-      default: 'barChart'
+      default: 'VerticalAxisBar'
     },
     width: {
       type: String,

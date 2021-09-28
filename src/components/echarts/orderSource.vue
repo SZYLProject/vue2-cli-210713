@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" style="width:100%;height:280px;"></div>
+  <div :id="id" style="width:100%;height:400px;"></div>
 </template>
 
 <script>
@@ -11,11 +11,32 @@ export default {
       myChart: null
     };
   },
+  props: {
+    width: {
+      type: String,
+      default: "400px"
+    },
+    height: {
+      type: String,
+      default: "400px"
+    },
+    titel: {
+      type: String,
+      default: "orderSource"
+    },
+    id:{
+      type: String,
+      default: "orderSource"
+    },
+     type:{
+      type: String,
+      default: "type"
+    }
+  },
   mounted() {
     this.myChart = echarts.init(document.getElementById(this.id));
     this.myChart.setOption(this.redyBin2Option(this.type));
   },
-  props: ["id", "type"],
   methods: {
     redyBin2Option(type) {
       let text, legend_data, series_data, inner_data;
