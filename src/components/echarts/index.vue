@@ -2,9 +2,10 @@
   <div>
     <el-scrollbar style=" height: 100% " ref="scroll">
       <div class="describe-chart">
+        <!-- 柱状图 -->
         <el-row>
           <el-col :span="12">
-            <Bar
+            <MixedLineAndBar
               height="400px"
               width="100%"
               id="descriptiveStatisticsBar"
@@ -15,7 +16,7 @@
             />
           </el-col>
           <el-col :span="12">
-            <barChart titel="barChart" height="400px" width="100%" />
+            <RainfallAndEvaporation titel="RainfallAndEvaporation" height="400px" width="100%" />
           </el-col>
           <el-col :span="12">
             <VerticalAxisBar
@@ -27,6 +28,7 @@
             />
           </el-col>
         </el-row>
+        <!-- 饼图 -->
         <el-row>
           <el-col :span="12">
             <Pie
@@ -57,7 +59,7 @@
             <radarChart title="radarChart" height="400px" width="100%" />
           </el-col>
         </el-row>
-
+        <!-- 折线图 -->
         <el-row>
           <el-col :span="12">
             <lineChart title="lineChart" height="400px" width="100%" />
@@ -71,7 +73,7 @@
             />
           </el-col>
         </el-row>
-
+        <!-- 何须图 -->
         <el-row>
           <el-col :span="12">
             <BoxplotLightVelocity
@@ -91,22 +93,22 @@
 </template>
 <script>
 import Pie from "@/components/echarts/Pie";
-import Bar from "@/components/echarts/Bar/MixedLineAndBar";
-import barChart from "@/components/echarts/barChart";
+import MixedLineAndBar from "@/components/echarts/Bar/MixedLineAndBar";
+import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation";
 import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVelocity";
 import discount from "@/components/echarts/discount";
 import lineChart from "@/components/echarts/lineChart";
 import orderSource from "@/components/echarts/orderSource";
 import pieChart from "@/components/echarts/pieChart";
 import radarChart from "@/components/echarts/radarChart";
-import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
+import VerticalAxisBar from "@/components/echarts/Bar/VerticalAxisBar";
 
 export default {
   components: {
     Pie,
-    Bar,
+    MixedLineAndBar,
     BoxplotLightVelocity,
-    barChart,
+    RainfallAndEvaporation,
     discount,
     lineChart,
     orderSource,

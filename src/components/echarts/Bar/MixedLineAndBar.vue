@@ -36,7 +36,7 @@ export default {
     },
     id: {
       type: String,
-      default: "barChart"
+      default: "MixedLineAndBar"
     },
     width: {
       type: String,

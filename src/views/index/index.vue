@@ -103,7 +103,9 @@
         <log-list></log-list>
       </el-col>
       <el-col :span="17">
-        <bar-chart type="barChart"></bar-chart>
+        <RainfallAndEvaporation
+          type="RainfallAndEvaporation"
+        ></RainfallAndEvaporation>
       </el-col>
     </el-row>
     <el-row :gutter="10" class="row_list order_list">
@@ -137,7 +139,7 @@ import salesTable from "./components/salesTable"; // 销售数据表格
 import commentList from "./components/commentList"; // 用户评论列表
 import cardList from "./components/cardList"; // card列表
 import logList from "./components/logList"; // 日志列表
-import barChart from "@/components/echarts/barChart"; // 用户投资类型 柱状图
+import RainfallAndEvaporation from "@/components/echarts/Bar/RainfallAndEvaporation"; // 用户投资类型 柱状图
 import pieChart from "@/components/echarts/pieChart"; // 用户投资类型 饼状图
 import radarChart from "@/components/echarts/radarChart"; // 用户投资类型 雷达图
 import lineChart from "@/components/echarts/lineChart"; // 用户投资类型 折线图
@@ -154,7 +156,7 @@ export default {
     commentList,
     cardList,
     logList,
-    barChart,
+    RainfallAndEvaporation,
     pieChart,
     radarChart,
     lineChart

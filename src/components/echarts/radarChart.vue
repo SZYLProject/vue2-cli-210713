@@ -21,11 +21,11 @@ export default {
   props: {
     width: {
       type: String,
-      default: "200px"
+      default: ""
     },
     height: {
       type: String,
-      default: "200px"
+      default: ""
     },
     type: {
       type: String,

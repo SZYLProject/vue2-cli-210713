@@ -20,15 +20,15 @@ export default {
   props: {
     width: {
       type: String,
-      default: "400px"
+      default: ""
     },
     height: {
       type: String,
-      default: "400px"
+      default: ""
     },
     titel: {
       type: String,
-      default: "barChart"
+      default: "RainfallAndEvaporation"
     }
   },
   mounted() {

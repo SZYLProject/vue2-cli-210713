@@ -46,7 +46,7 @@
               v-if="radioRight == '分组柱图'"
               height="400px"
               width="100%"
-              id="UnivariateAnalysisVerticalAxisBar"
+              id="LinearRegression"
               :titleShow="true"
               title="Smoking history在不同Gender分组中的堆积柱形图"
               :LinearRegressionData="item.data.scatterData"
@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-import VerticalAxisBar from "@/components/echarts/VerticalAxisBar";
+import VerticalAxisBar from "@/components/echarts/Bar/VerticalAxisBar";
 import LinearRegression from "@/components/echarts/ScatterPlot/LinearRegression";
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";
