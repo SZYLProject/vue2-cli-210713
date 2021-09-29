@@ -45,7 +45,7 @@ export default {
       startAnalysis.forEach((element, i) => {
         data.push({
           id: i,
-          name: element.name + descriptiveStatisticsData[0].name,
+          name: element.value + descriptiveStatisticsData[0].name,
           data: descriptiveStatisticsData[0].data
         });
 
