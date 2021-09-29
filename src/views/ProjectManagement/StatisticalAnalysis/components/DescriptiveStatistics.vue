@@ -10,14 +10,67 @@
         v-for="(item, i) in descriptiveStatisticsData"
         :key="i"
       >
-        <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
+        <div style="display: flex;">
+          <!-- <h1
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '0'"
+          >
+            {{ item.name }}
+          </h1> -->
+
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '0'"
+            >{{ item.name }}</el-button
+          >
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '1'"
+            >{{ item.data.name2 }}</el-button
+          >
+          <!-- <h1
+            style="margin:0 15px 15px 0;font-size:15px ; cursor: pointer; "
+            @click="tableRadio = '1'"
+          >
+            {{ item.data.name2 }}
+          </h1> -->
+        </div>
+
         <SzylElTable
+          v-show="tableRadio === '0'"
           :colConfigs="item.data.colConfigs"
           :tableList="item.data.tableData"
           :min-height="90"
           class="table_container"
         >
         </SzylElTable>
+        <SzylElTable
+          :tableRowClassName="tableRowClassName"
+          v-show="tableRadio === '1'"
+          :colConfigs="item.data.colConfigs2"
+          :tableList="item.data.tableData2"
+          :min-height="90"
+          class="table_container"
+        >
+          <!-- <template v-slot:scope>
+            <i class="el-icon-time"></i>
+            <el-table-column
+              v-if="scope.row.rowIndex === 0"
+              width="45"
+              label=""
+              type="index"
+              align="left"
+            >
+              <img style="height: 36px" :src="recommend" alt="" />
+            </el-table-column>
+          </template> -->
+        </SzylElTable>
+        <!-- <el-radio-group class="tableRadio" v-model="tableRadio">
+          <el-radio-button label="一般性描述"></el-radio-button>
+          <el-radio-button label="正态性检验"></el-radio-button>
+        </el-radio-group> -->
         <div class="text">
           <p style="font-size:13px">
             <b>{{ item.data.statisticalResultsData.name }}</b>
@@ -110,12 +163,16 @@ import BoxplotLightVelocity from "@/components/echarts/Boxplot/BoxplotLightVeloc
 
 import SzylElTable from "@/components/tableCom/tableCom.vue";
 import { mapState } from "vuex";
+import recommend from "@/assets/StatisticalAnalysis/recommend.png";
+
 export default {
   components: { DoughnutChart, Bar, SzylElTable, BoxplotLightVelocity },
   data() {
     return {
       radioLeft: "直线图",
-      radioRight: "饼图"
+      radioRight: "饼图",
+      tableRadio: "0",
+      recommend: recommend
     };
   },
   props: {
@@ -132,7 +189,19 @@ export default {
   },
   watch: {},
   mounted() {},
-  methods: {}
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 0) {
+        return "success-row";
+      } else if (rowIndex === 1) {
+        return "warning-row";
+      }
+      return "";
+    },
+    click(scope) {
+      console.log(scope, "scope");
+    }
+  }
 };
 </script>
 <style scoped lang="scss">

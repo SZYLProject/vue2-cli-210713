@@ -16,6 +16,7 @@
       :stripe="stripe"
       tooltip-effect="dark"
       v-bind="$attrs"
+      :row-class-name="tableRowClassName"
     >
       <template v-for="colConfig in colConfigs">
         <slot v-if="colConfig.slot" :name="colConfig.slot"></slot>
@@ -107,6 +108,7 @@
 <script>
 import SzylTableCell from "./tableCell.vue";
 
+import recommend from "@/assets/StatisticalAnalysis/recommend.png";
 export default {
   components: {
     SzylTableCell
@@ -129,7 +131,8 @@ export default {
     height: Number,
     maxHeight: Number,
     rowKey: Function,
-    spanMethod: Function
+    spanMethod: Function,
+    tableRowClassName: Function
   },
   data() {
     return {
@@ -139,7 +142,8 @@ export default {
       searchData: {
         filter: [], //列过滤条件集合
         sort: [] //列排序条件集合
-      }
+      },
+      recommend: recommend
     };
   },
   watch: {
@@ -326,5 +330,20 @@ export default {
   width: 99px;
   height: 72px;
   padding: 110px 0;
+}
+</style>
+
+<style>
+.el-table .warning-row {
+  background: #ffffff;
+}
+
+.el-table .success-row {
+  /* background: #edfbf4; */
+  background: #edfbf4 url("../../assets/StatisticalAnalysis/recommend.svg")
+    no-repeat;
+  background-size: 36px;
+  /* // 只显示一次 */
+  /* background-repeat: no-repeat; */
 }
 </style>

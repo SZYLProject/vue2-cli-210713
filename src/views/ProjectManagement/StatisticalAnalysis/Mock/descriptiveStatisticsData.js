@@ -4,6 +4,7 @@ const descriptiveStatisticsData = [
     id: 1,
     name: "的描述性统计",
     data: {
+      name1: "的描述性统计",
       colConfigs: [
         {
           prop: "col1",
@@ -80,6 +81,63 @@ const descriptiveStatisticsData = [
           col7: "45.00",
           col8: "53.25",
           col9: "73.00"
+        }
+      ],
+      name2: "正态性检验",
+      colConfigs2: [
+        // {
+        //   slot: "scope",
+        // },
+        {
+          prop: "col1",
+          label: "",
+          "min-width": 40,
+          sort: false,
+          align: "center"
+        },
+        {
+          prop: "col2",
+          label: "统计量",
+          "min-width": 40,
+          sort: false,
+          align: "center"
+        },
+        {
+          prop: "col3",
+          label: "值",
+          "min-width": 40,
+          sort: false,
+          align: "center"
+        },
+        {
+          prop: "col4",
+          label: "P值",
+          "min-width": 40,
+          sort: false,
+          align: "center"
+        },
+        {
+          prop: "col5",
+          label: "意义",
+          "min-width": 40,
+          sort: false,
+          align: "center"
+        }
+      ],
+      tableData2: [
+        {
+          col1: "Shapiro-Wilk正态性检验",
+          col2: "W",
+          col3: "0.9663",
+          col4: "0.0694",
+          col5: "正态性"
+        },
+        {
+          col1: "One-sample Kolmogorov-Smirnov正态性检验",
+          col2: "D",
+          col3: "0.1184",
+          col4: "0.3134",
+          col5: "正态性"
         }
       ],
       pieData: [
