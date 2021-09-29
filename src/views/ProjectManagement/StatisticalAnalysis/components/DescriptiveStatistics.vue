@@ -45,6 +45,14 @@
           :min-height="90"
           class="table_container"
         >
+          <template v-slot:MultiLevelHeader>
+            <el-table-column label="95%置信区间[a]" align='center'>
+              <el-table-column prop="col8" align='center' label="Q3" min-width="120">
+              </el-table-column>
+              <el-table-column prop="col9" align='center' label="最大值" min-width="120">
+              </el-table-column>
+            </el-table-column>
+          </template>
         </SzylElTable>
         <SzylElTable
           :tableRowClassName="tableRowClassName"

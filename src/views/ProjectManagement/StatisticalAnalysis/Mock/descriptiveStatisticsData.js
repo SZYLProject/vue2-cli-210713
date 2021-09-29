@@ -56,19 +56,22 @@ const descriptiveStatisticsData = [
           align: "center"
         },
         {
-          prop: "col8",
-          label: "Q3",
-          "min-width": 40,
-          sort: false,
-          align: "center"
+          slot: "MultiLevelHeader"
         },
-        {
-          prop: "col9",
-          label: "最大值",
-          "min-width": 40,
-          sort: false,
-          align: "center"
-        }
+        // {
+        //   prop: "col8",
+        //   label: "Q3",
+        //   "min-width": 40,
+        //   sort: false,
+        //   align: "center"
+        // },
+        // {
+        //   prop: "col9",
+        //   label: "最大值",
+        //   "min-width": 40,
+        //   sort: false,
+        //   align: "center"
+        // }
       ],
       tableData: [
         {
