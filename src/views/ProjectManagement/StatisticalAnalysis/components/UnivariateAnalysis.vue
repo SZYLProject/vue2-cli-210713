@@ -10,10 +10,87 @@
         v-for="(item, i) in univariateAnalysisData"
         :key="i"
       >
-        <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
+        <div style="display: flex;">
+          <!-- <h1
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '0'"
+          >
+            {{ item.name }}
+          </h1> -->
+
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '0'"
+            >{{ item.data.name1 }}</el-button
+          >
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '1'"
+            >{{ item.data.name2 }}</el-button
+          >
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '2'"
+            >{{ item.data.name3 }}</el-button
+          >
+          <el-button
+            type="text"
+            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
+            @click="tableRadio = '3'"
+            >{{ item.data.name4 }}</el-button
+          >
+          <!-- <h1
+            style="margin:0 15px 15px 0;font-size:15px ; cursor: pointer; "
+            @click="tableRadio = '1'"
+          >
+            {{ item.data.name2 }}
+          </h1> -->
+        </div>
         <SzylElTable
+          v-show="tableRadio === '0'"
           :colConfigs="item.data.colConfigs"
           :tableList="item.data.tableData"
+          :min-height="90"
+          class="table_container"
+        >
+        </SzylElTable>
+        <SzylElTable
+          :tableRowClassName="tableRowClassName"
+          v-show="tableRadio === '1'"
+          :colConfigs="item.data.colConfigs2"
+          :tableList="item.data.tableData2"
+          :min-height="90"
+          class="table_container"
+        >
+          <!-- <template v-slot:scope>
+            <i class="el-icon-time"></i>
+            <el-table-column
+              v-if="scope.row.rowIndex === 0"
+              width="45"
+              label=""
+              type="index"
+              align="left"
+            >
+              <img style="height: 36px" :src="recommend" alt="" />
+            </el-table-column>
+          </template> -->
+        </SzylElTable>
+        <SzylElTable
+          v-show="tableRadio === '2'"
+          :colConfigs="item.data.colConfigs3"
+          :tableList="item.data.tableData3"
+          :min-height="90"
+          class="table_container"
+        >
+        </SzylElTable>
+        <SzylElTable
+          :tableRowClassName="tableRowClassName"
+          v-show="tableRadio === '3'"
+          :colConfigs="item.data.colConfigs4"
+          :tableList="item.data.tableData4"
           :min-height="90"
           class="table_container"
         >
@@ -77,7 +154,7 @@ import { mapState } from "vuex";
 export default {
   components: { VerticalAxisBar, SzylElTable, LinearRegression },
   data() {
-    return { radioRight: "堆积柱图" };
+    return { radioRight: "堆积柱图", tableRadio: "0" };
   },
   props: {
     clientHeight: {
@@ -93,7 +170,16 @@ export default {
   },
   watch: {},
   mounted() {},
-  methods: {}
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 0) {
+        return "success-row";
+      } else if (rowIndex === 1) {
+        return "warning-row";
+      }
+      return "";
+    }
+  }
 };
 </script>
 <style scoped lang="scss">

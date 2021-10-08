@@ -20,4 +20,4 @@ const dataInterpretation = {
   lower: "下线(%)",
   upper: "上线(%)"
 };
-export default dataInterpretation;
+export default dataInterpretation; 

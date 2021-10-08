@@ -2,7 +2,10 @@
   <div>
     <div class="tab-con">
       <h1>{{ activeValue }}<span>描述数据特征</span></h1>
-      <drag-area :draggableObj="draggableObj" @startAnalysis="startAnalysis"></drag-area>
+      <drag-area
+        :draggableObj="draggableObj"
+        @startAnalysis="startAnalysis"
+      ></drag-area>
     </div>
   </div>
 </template>
@@ -20,24 +23,27 @@ export default {
     }
   },
   data() {
-    return { draggableObj: {
+    return {
+      draggableObj: {
         draggableNum: 2,
-        prompt: "您可拖入0个分组变量，5个观察变量",
+        prompt: "您可拖入1个分组变量，5个观察变量",
         draggableList: [
-          { explanation: "分组变量", draggableNum: 0 },
+          { explanation: "分组变量", draggableNum: 1 },
           { explanation: "观察变量", draggableNum: 5 }
-        ]
-      }};
+        ],
+        returnGroup: true // 按照分组返回分组变量和观察变量
+      }
+    };
   },
   methods: {
     // 开始分析
     startAnalysis(startAnalysis) {
       console.log(startAnalysis, "startAnalysis");
       let data = [];
-      startAnalysis.forEach((element, i) => {
+      startAnalysis[1].forEach((element, i) => {
         data.push({
           id: i,
-          name: element.name + univariateAnalysisData[0].name,
+          name: element.value + univariateAnalysisData[0].name,
           data: univariateAnalysisData[0].data
         });
       });

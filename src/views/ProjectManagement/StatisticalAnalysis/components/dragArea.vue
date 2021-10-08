@@ -80,7 +80,8 @@ export default {
           draggableList: [
             { explanation: "任意变量1", draggableNum: 1 },
             { explanation: "任意变量2", draggableNum: 2 }
-          ]
+          ],
+          returnGroup: false // true的时候按照分类返回
         };
       }
     }
@@ -153,17 +154,40 @@ export default {
     },
     // 开始分析
     startAnalysis() {
+      if (!this.draggableObj.returnGroup) {
+        const data = this.returnAll();
+        this.$emit("startAnalysis", data);
+      } else {
+        const data = this.returnGroup();
+        this.$emit("startAnalysis", data);
+      }
+    },
+    returnAll() {
       const data = [];
       this.draggableList.forEach(el => {
         data.push(...el.variableList);
       });
+      console.log(this.draggableList, "draggableList");
       console.log(data, "tata");
       if (data.length === 0) {
         this.$message({ type: "warning", message: "请至少选择一个变量" });
         return;
       }
-      this.$emit("startAnalysis", data);
+      return data;
     },
+    returnGroup() {
+      const data = [];
+      this.draggableList.forEach(el => {
+        data.push(el.variableList);
+      });
+      console.log(this.draggableList, "draggableList");
+      if (data.length === 0) {
+        this.$message({ type: "warning", message: "请至少选择一个变量" });
+        return;
+      }
+      return data;
+    },
+
     // 清空变量
     clearVariables() {
       this.draggableList.forEach(el => {
