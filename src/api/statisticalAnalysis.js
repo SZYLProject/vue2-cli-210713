@@ -47,28 +47,28 @@ const statisticalAnalysis = {
   // 正态性检验
   zhengTaiJianYan(parmas) {
     return get({
-      url: `/api/zhengTaiJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}$lianXuCode=${parmas.lianXuCode}`,
+      url: `/api/zhengTaiJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
   },
   // 方差齐性检验
   fangChaQiXingJianYan(parmas) {
     return get({
-      url: `/api/fangChaQiXingJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}$lianXuCode=${parmas.lianXuCode}`,
+      url: `/api/fangChaQiXingJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
   },
   // 秩和检验   （二分类下有问题）
   zhiHeJianYan(parmas) {
     return get({
-      url: `/api/zhiHeJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}$lianXuCode=${parmas.lianXuCode}`,
+      url: `/api/zhiHeJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
   },
   // T检验
   TJianYan(parmas) {
     return get({
-      url: `/api/TJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}$lianXuCode=${parmas.lianXuCode}`,
+      url: `/api/TJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
   }
