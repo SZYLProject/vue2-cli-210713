@@ -13,7 +13,7 @@
 import univariateAnalysisData from "../Mock/univariateAnalysisData.js";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getSessionStore } from "@/utils/mUtils";
-import { getObjectKeys } from "@/utils/objectArray";
+import { unid, getObjectParseValues } from "@/utils/objectArray";
 import dataInterpretation from "@/utils/dataInterpretation";
 import dragArea from "./dragArea.vue";
 export default {
@@ -44,29 +44,42 @@ export default {
     startAnalysis(startAnalysis) {
       console.log(startAnalysis, "startAnalysis");
       let data = [];
+      // 当前选择的分组为第一个
+      const lianxuCode = startAnalysis[0][0].variableCode;
       startAnalysis[1].forEach((element, i) => {
         data.push({
           id: i,
-          name: element.value + univariateAnalysisData[0].name,
+          name: element.value + univariateAnalysisData[0].name, // 显示title
           data: univariateAnalysisData[0].data
         });
 
         if (getSessionStore("isMock") === 0) {
+          console.log(lianxuCode, "lianxuCode");
+
           this.$store.dispatch("setUnivariateAnalysisData", data);
           return;
         }
-        this.zhengTaiJianYan(element.variableCode, "sex").then(res => {
+        this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
           console.log(res, "res");
-          data[i].data.tableData = res;
-          data[i].data.colConfigs = getObjectKeys(res[0]).map(item => {
-            return {
-              prop: item,
-              label: item ? dataInterpretation[item] : item,
-              "min-width": 40,
-              sort: false,
-              align: "center"
-            };
-          });
+          // const resTable = [];
+          // for (var i in res) {
+          //   resTable.push(JSON.parse(res[i]));
+          // }
+          let resTable = getObjectParseValues(res);
+          // resTable = unid(JSON.parse(JSON.stringify(resTable)));
+          resTable = [].concat.apply([], resTable);
+          // const resTable2 = restable.map;
+          console.log(resTable, "resTable");
+          data[i].data.tableData2 = resTable;
+          // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
+          //   return {
+          //     prop: item,
+          //     label: item ? dataInterpretation[item] : item,
+          //     "min-width": 40,
+          //     sort: false,
+          //     align: "center"
+          //   };
+          // });
           this.$store.dispatch("setUnivariateAnalysisData", data);
         });
       });
@@ -78,9 +91,9 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.zhengTaiJianYan(data).then(res => {
-        console.log(JSON.parse(res.data), "zhengTaiJianYan");
-        const data = JSON.parse(res.data);
-        return data;
+        console.log(res.data, "zhengTaiJianYan");
+        // const data = JSON.parse(res.data);
+        return res.data;
       });
       return value;
     },
