@@ -43,6 +43,7 @@ export default {
       console.log(startAnalysis, "startAnalysis");
       let data = [];
       startAnalysis.forEach((element, i) => {
+        // 当前按照第一组数据push假数据，之后调用接口替换此数据
         data.push({
           id: i,
           name: element.value + descriptiveStatisticsData[0].name,
@@ -58,7 +59,6 @@ export default {
 
         this.yiBanXingMiaoShu(element.variableCode).then(list => {
           console.log(list, "list");
-
           data[i].data.tableData = list;
           data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
             return {
@@ -72,11 +72,21 @@ export default {
           this.$store.dispatch("setDescriptiveStatisticsData", data);
         });
       });
-      // this.fenZuTongJiFun().then(list => {
-      //   this.temporaryVar1 = list;
-      //   this.$store.dispatch("setDescriptiveStatisticsData", data);
-      // });
     },
+    async yiBanXingMiaoShu(variableCode) {
+      const data = {
+        projectId: 1,
+        variableCode: variableCode
+      };
+      let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
+        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        const data = JSON.parse(res.data);
+        return data;
+      });
+      return value;
+    },
+
+    // ---------------------------------废弃-------------------
     async fenZuTongJiFun() {
       const data = {
         name: "trt",
@@ -103,18 +113,6 @@ export default {
         return res[0]["1time"][0];
       });
       console.log(value, "value");
-      return value;
-    },
-    async yiBanXingMiaoShu(variableCode) {
-      const data = {
-        projectId: 1,
-        variableCode: variableCode
-      };
-      let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
-        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
-        const data = JSON.parse(res.data);
-        return data;
-      });
       return value;
     }
   }

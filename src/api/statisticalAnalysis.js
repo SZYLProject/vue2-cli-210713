@@ -74,6 +74,20 @@ const statisticalAnalysis = {
       url: `/api/TJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
+  },
+  // 方差分析
+  fangChaFenXi(parmas) {
+    return get({
+      url: `/api/fangChaFenXi?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
+      parmas: parmas
+    });
+  },
+  // 返回推荐的算法
+  getCompareWay(parmas) {
+    return get({
+      url: `/api/getCompareWay?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
+      parmas: parmas
+    });
   }
 };
 

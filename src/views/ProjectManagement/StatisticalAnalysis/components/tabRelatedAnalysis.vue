@@ -22,10 +22,10 @@ export default {
   data() {
     return { draggableObj: {
         draggableNum: 2,
-        prompt: "您可拖入0个分组变量，5个观察变量",
+        prompt: "您可拖入1个变量1，1个变量2",
         draggableList: [
-          { explanation: "分组变量", draggableNum: 0 },
-          { explanation: "观察变量", draggableNum: 5 }
+          { explanation: "变量1", draggableNum: 1 },
+          { explanation: "变量2", draggableNum: 1 }
         ]
       }};
   },

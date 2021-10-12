@@ -60,44 +60,46 @@ export default {
           return;
         }
 
-        this.yiBanXingMiaoShu(element.variableCode).then(list => {
-          console.log(list, "list");
+        // this.yiBanXingMiaoShu(element.variableCode).then(list => {
+        //   console.log(list, "list");
 
-          data[i].data.tableData = list;
-          data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
-            return {
-              prop: item,
-              label: item ? dataInterpretation[item] : item,
-              "min-width": 40,
-              sort: false,
-              align: "center"
-            };
-          });
-          this.$store.dispatch("setUnivariateAnalysisData", data);
-        });
-        this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
-          // const resTable = [];
-          // for (var i in res) {
-          //   resTable.push(JSON.parse(res[i]));
-          // }
-          let resTable = getObjectParseValues(res);
-          // resTable = unid(JSON.parse(JSON.stringify(resTable)));
-          resTable = [].concat.apply([], resTable);
-          // const resTable2 = restable.map;
-          console.log(resTable, "resTable");
-          data[i].data.tableData2 = resTable;
-          // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
-          //   return {
-          //     prop: item,
-          //     label: item ? dataInterpretation[item] : item,
-          //     "min-width": 40,
-          //     sort: false,
-          //     align: "center"
-          //   };
-          // });
-          this.$store.dispatch("setUnivariateAnalysisData", data);
-        });
+        //   data[i].data.tableData = list;
+        //   data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
+        //     return {
+        //       prop: item,
+        //       label: item ? dataInterpretation[item] : item,
+        //       "min-width": 40,
+        //       sort: false,
+        //       align: "center"
+        //     };
+        //   });
+        //   this.$store.dispatch("setUnivariateAnalysisData", data);
+        // });
+
+        // this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        //   // const resTable = [];
+        //   // for (var i in res) {
+        //   //   resTable.push(JSON.parse(res[i]));
+        //   // }
+        //   let resTable = getObjectParseValues(res);
+        //   // resTable = unid(JSON.parse(JSON.stringify(resTable)));
+        //   resTable = [].concat.apply([], resTable);
+        //   // const resTable2 = restable.map;
+        //   console.log(resTable, "resTable");
+        //   data[i].data.tableData2 = resTable;
+        //   // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
+        //   //   return {
+        //   //     prop: item,
+        //   //     label: item ? dataInterpretation[item] : item,
+        //   //     "min-width": 40,
+        //   //     sort: false,
+        //   //     align: "center"
+        //   //   };
+        //   // });
+        //   this.$store.dispatch("setUnivariateAnalysisData", data);
+        // });
+
         this.fangChaQiXingJianYan(element.variableCode, lianxuCode).then(
           res => {
             console.log(res, "res");
@@ -123,6 +125,22 @@ export default {
             this.$store.dispatch("setUnivariateAnalysisData", data);
           }
         );
+
+        // this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        // });
+
+        // this.TJianYan(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        // });
+
+        // this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        // });
+
+        // this.getCompareWay(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        // });
       });
     },
     yiBanXingMiaoShu(variableCode) {
@@ -163,10 +181,11 @@ export default {
       });
       return value;
     },
-    async zhiHeJianYan(variableCode) {
+    async zhiHeJianYan(variableCode, fenZuCode) {
       const data = {
         projectId: 1,
-        variableCode: variableCode
+        lianXuCode: variableCode,
+        fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.zhiHeJianYan(data).then(res => {
         console.log(JSON.parse(res.data), "zhiHeJianYan");
@@ -175,13 +194,40 @@ export default {
       });
       return value;
     },
-    async TJianYan(variableCode) {
+    async TJianYan(variableCode, fenZuCode) {
       const data = {
         projectId: 1,
-        variableCode: variableCode
+        lianXuCode: variableCode,
+        fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.TJianYan(data).then(res => {
         console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        const data = JSON.parse(res.data);
+        return data;
+      });
+      return value;
+    },
+    async fangChaFenXi(variableCode, fenZuCode) {
+      const data = {
+        projectId: 1,
+        lianXuCode: variableCode,
+        fenZuCode: fenZuCode
+      };
+      let value = await statisticalAnalysis.fangChaFenXi(data).then(res => {
+        console.log(JSON.parse(res.data), "fangChaFenXi");
+        const data = JSON.parse(res.data);
+        return data;
+      });
+      return value;
+    },
+    async getCompareWay(variableCode, fenZuCode) {
+      const data = {
+        projectId: 1,
+        lianXuCode: variableCode,
+        fenZuCode: fenZuCode
+      };
+      let value = await statisticalAnalysis.getCompareWay(data).then(res => {
+        console.log(JSON.parse(res.data), "getCompareWay");
         const data = JSON.parse(res.data);
         return data;
       });
