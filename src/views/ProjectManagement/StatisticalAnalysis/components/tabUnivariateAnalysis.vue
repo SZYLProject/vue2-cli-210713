@@ -13,7 +13,7 @@
 import univariateAnalysisData from "../Mock/univariateAnalysisData.js";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getSessionStore } from "@/utils/mUtils";
-import { unid, getObjectParseValues } from "@/utils/objectArray";
+import { unid, getObjectKeys, getObjectParseValues } from "@/utils/objectArray";
 import dataInterpretation from "@/utils/dataInterpretation";
 import dragArea from "./dragArea.vue";
 export default {
@@ -59,6 +59,22 @@ export default {
           this.$store.dispatch("setUnivariateAnalysisData", data);
           return;
         }
+
+        this.yiBanXingMiaoShu(element.variableCode).then(list => {
+          console.log(list, "list");
+
+          data[i].data.tableData = list;
+          data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
+            return {
+              prop: item,
+              label: item ? dataInterpretation[item] : item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
+          this.$store.dispatch("setUnivariateAnalysisData", data);
+        });
         this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
           console.log(res, "res");
           // const resTable = [];
@@ -82,33 +98,69 @@ export default {
           // });
           this.$store.dispatch("setUnivariateAnalysisData", data);
         });
+        this.fangChaQiXingJianYan(element.variableCode, lianxuCode).then(
+          res => {
+            console.log(res, "res");
+            // const resTable = [];
+            // for (var i in res) {
+            //   resTable.push(JSON.parse(res[i]));
+            // }
+            let resTable = getObjectParseValues(res);
+            // resTable = unid(JSON.parse(JSON.stringify(resTable)));
+            resTable = [].concat.apply([], resTable);
+            // const resTable2 = restable.map;
+            console.log(resTable, "resTable");
+            data[i].data.tableData2 = resTable;
+            // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
+            //   return {
+            //     prop: item,
+            //     label: item ? dataInterpretation[item] : item,
+            //     "min-width": 40,
+            //     sort: false,
+            //     align: "center"
+            //   };
+            // });
+            this.$store.dispatch("setUnivariateAnalysisData", data);
+          }
+        );
       });
     },
-    async zhengTaiJianYan(variableCode, fenZuCode) {
+    yiBanXingMiaoShu(variableCode) {
+      const data = {
+        projectId: 1,
+        variableCode: variableCode
+      };
+      let value = statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
+        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        const data = JSON.parse(res.data);
+        return data;
+      });
+      return value;
+    },
+    zhengTaiJianYan(variableCode, fenZuCode) {
       const data = {
         projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
-      let value = await statisticalAnalysis.zhengTaiJianYan(data).then(res => {
+      let value = statisticalAnalysis.zhengTaiJianYan(data).then(res => {
         console.log(res.data, "zhengTaiJianYan");
         // const data = JSON.parse(res.data);
         return res.data;
       });
       return value;
     },
-    async fangChaQiXingJianYan(variableCode) {
+    fangChaQiXingJianYan(variableCode, fenZuCode) {
       const data = {
         projectId: 1,
-        variableCode: variableCode
+        lianXuCode: variableCode,
+        fenZuCode: fenZuCode
       };
-      let value = await statisticalAnalysis
-        .fangChaQiXingJianYan(data)
-        .then(res => {
-          console.log(JSON.parse(res.data), "fangChaQiXingJianYan");
-          const data = JSON.parse(res.data);
-          return data;
-        });
+      let value = statisticalAnalysis.fangChaQiXingJianYan(data).then(res => {
+        console.log(JSON.parse(res.data), "fangChaQiXingJianYan");
+        const data = JSON.parse(res.data);
+        return data;
+      });
       return value;
     },
     async zhiHeJianYan(variableCode) {

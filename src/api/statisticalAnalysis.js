@@ -23,6 +23,9 @@ const statisticalAnalysis = {
   fenZuTongJi(data) {
     return post({ url: `/fenZuTongJi?name=${data.name}`, data: data.data });
   },
+
+  /*************************************一般描述接口*********************************/
+
   GetVariables(parmas) {
     return get({
       url: `/api/GetVariables?projectId=${porjectId}`,
