@@ -13,7 +13,12 @@
 import univariateAnalysisData from "../Mock/univariateAnalysisData.js";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getSessionStore } from "@/utils/mUtils";
-import { unid, getObjectKeys, getObjectParseValues } from "@/utils/objectArray";
+import {
+  unid,
+  getObjectKeys,
+  getObjectValues,
+  getObjectParseValues
+} from "@/utils/objectArray";
 import dataInterpretation from "@/utils/dataInterpretation";
 import dragArea from "./dragArea.vue";
 export default {
@@ -59,88 +64,91 @@ export default {
           this.$store.dispatch("setUnivariateAnalysisData", data);
           return;
         }
+        // 一般性描述已经出来
+        this.yiBanXingMiaoShu(element.variableCode).then(list => {
+          console.log(list, "list");
 
-        // this.yiBanXingMiaoShu(element.variableCode).then(list => {
-        //   console.log(list, "list");
+          data[i].data.tableData = list;
+          data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
+            return {
+              prop: item,
+              label: item ? dataInterpretation[item] : item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
+          this.$store.dispatch("setUnivariateAnalysisData", data);
+        });
 
-        //   data[i].data.tableData = list;
-        //   data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
-        //     return {
-        //       prop: item,
-        //       label: item ? dataInterpretation[item] : item,
-        //       "min-width": 40,
-        //       sort: false,
-        //       align: "center"
-        //     };
-        //   });
-        //   this.$store.dispatch("setUnivariateAnalysisData", data);
-        // });
+        this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
+          console.log(res, "res");
 
-        // this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        //   // const resTable = [];
-        //   // for (var i in res) {
-        //   //   resTable.push(JSON.parse(res[i]));
-        //   // }
-        //   let resTable = getObjectParseValues(res);
-        //   // resTable = unid(JSON.parse(JSON.stringify(resTable)));
-        //   resTable = [].concat.apply([], resTable);
-        //   // const resTable2 = restable.map;
-        //   console.log(resTable, "resTable");
-        //   data[i].data.tableData2 = resTable;
-        //   // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
-        //   //   return {
-        //   //     prop: item,
-        //   //     label: item ? dataInterpretation[item] : item,
-        //   //     "min-width": 40,
-        //   //     sort: false,
-        //   //     align: "center"
-        //   //   };
-        //   // });
-        //   this.$store.dispatch("setUnivariateAnalysisData", data);
-        // });
+          let resTable = getObjectParseValues(res);
+          resTable = [].concat.apply([], resTable);
+          resTable = resTable.map(res => {
+            return res[0];
+          });
+          data[i].data.tableData2 = resTable;
+          data[i].data.colConfigs2 = getObjectKeys(resTable[0]).map(item => {
+            return {
+              prop: item,
+              label: item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
 
+          // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
+          //   return {
+          //     prop: item,
+          //     label: item ? dataInterpretation[item] : item,
+          //     "min-width": 40,
+          //     sort: false,
+          //     align: "center"
+          //   };
+          // });
+          this.$store.dispatch("setUnivariateAnalysisData", data);
+        });
+
+        // 方差齐性已经出来
         this.fangChaQiXingJianYan(element.variableCode, lianxuCode).then(
           res => {
             console.log(res, "res");
-            // const resTable = [];
-            // for (var i in res) {
-            //   resTable.push(JSON.parse(res[i]));
-            // }
-            let resTable = getObjectParseValues(res);
-            // resTable = unid(JSON.parse(JSON.stringify(resTable)));
-            resTable = [].concat.apply([], resTable);
-            // const resTable2 = restable.map;
-            console.log(resTable, "resTable");
-            data[i].data.tableData2 = resTable;
-            // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
-            //   return {
-            //     prop: item,
-            //     label: item ? dataInterpretation[item] : item,
-            //     "min-width": 40,
-            //     sort: false,
-            //     align: "center"
-            //   };
-            // });
+            data[i].data.tableData3 = res;
+            data[i].data.colConfigs3 = getObjectKeys(res[0]).map(item => {
+              return {
+                prop: item,
+                label: item,
+                "min-width": 40,
+                sort: false,
+                align: "center"
+              };
+            });
+            console.log(data[i].data.tableData3, "dest");
+            console.log(data[i].data.colConfigs3, "dest");
             this.$store.dispatch("setUnivariateAnalysisData", data);
           }
         );
 
-        // this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        // });
+        this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
+          console.log(res, "res");
+        });
 
-        // this.TJianYan(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        // });
+        this.TJianYan(element.variableCode, lianxuCode).then(res => {
+          console.log(res, "res");
+        });
 
-        // this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        // });
+        this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
+          console.log(res, "res");
+        });
 
-        // this.getCompareWay(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        // });
+        this.getCompareWay(element.variableCode, lianxuCode).then(res => {
+          console.log(res, "res");
+        });
+
+        // this.$store.dispatch("setUnivariateAnalysisData", data);
       });
     },
     yiBanXingMiaoShu(variableCode) {
@@ -175,9 +183,8 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = statisticalAnalysis.fangChaQiXingJianYan(data).then(res => {
-        console.log(JSON.parse(res.data), "fangChaQiXingJianYan");
-        const data = JSON.parse(res.data);
-        return data;
+        console.log(res.data, "fangChaQiXingJianYan");
+        return JSON.parse(res.data);
       });
       return value;
     },

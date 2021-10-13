@@ -172,12 +172,12 @@ export default {
   mounted() {},
   methods: {
     tableRowClassName({ row, rowIndex }) {
-      if (rowIndex === 0) {
-        return "success-row";
-      } else if (rowIndex === 1) {
+      if (rowIndex % 2) {
         return "warning-row";
+      } else {
+        return "success-row";
       }
-      return "";
+      // return "";
     }
   }
 };
