@@ -17,7 +17,8 @@ import {
   unid,
   getObjectKeys,
   getObjectValues,
-  getObjectParseValues
+  getObjectParseValues,
+  getObjectKeysValues
 } from "@/utils/objectArray";
 import dataInterpretation from "@/utils/dataInterpretation";
 import dragArea from "./dragArea.vue";
@@ -40,7 +41,10 @@ export default {
           { explanation: "分组变量", draggableNum: 1 },
           { explanation: "观察变量", draggableNum: 5 }
         ],
-        returnGroup: true // 按照分组返回分组变量和观察变量
+        returnGroup: true, // 按照分组返回分组变量和观察变量
+        groupRecommend: null, // 组间比较推荐字段
+        groupTableData: [],
+        groupColConfigs: []
       }
     };
   },
@@ -84,31 +88,21 @@ export default {
         this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
           console.log(res, "res");
 
-          let resTable = getObjectParseValues(res);
-          resTable = [].concat.apply([], resTable);
-          resTable = resTable.map(res => {
-            return res[0];
-          });
+          let resTable = getObjectKeysValues(res);
           data[i].data.tableData2 = resTable;
           data[i].data.colConfigs2 = getObjectKeys(resTable[0]).map(item => {
             return {
               prop: item,
-              label: item,
+              label: item == "name" ? "变量的取值" : item,
               "min-width": 40,
               sort: false,
               align: "center"
             };
           });
+          // 最后一位移动到第一位
+          const last = data[i].data.colConfigs2.pop(); //取数组最后一项
+          data[i].data.colConfigs2.unshift(last); //插入数组第一位
 
-          // data[i].data.colConfigs2 = getObjectKeys(res[0]).map(item => {
-          //   return {
-          //     prop: item,
-          //     label: item ? dataInterpretation[item] : item,
-          //     "min-width": 40,
-          //     sort: false,
-          //     align: "center"
-          //   };
-          // });
           this.$store.dispatch("setUnivariateAnalysisData", data);
         });
 
@@ -132,23 +126,56 @@ export default {
           }
         );
 
+        // 组间比较：
         this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
+          this.groupTableData = [];
+          this.groupColConfigs = [];
+          this.groupTableData = res;
+          console.log(res, "reszhiHeJianYan");
         });
 
         this.TJianYan(element.variableCode, lianxuCode).then(res => {
           console.log(res, "res");
-        });
 
-        this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
+          let resTable = getObjectParseValues(res);
+
+          // resTable = [].concat.apply([], resTable);
+          resTable = resTable.map(res => {
+            return res[0];
+          });
+          console.log(resTable, "resTableTJianYan");
+          // this.groupTableData.push();
+          resTable.map(res => {
+            this.groupTableData.push(res);
+          });
+          this.groupColConfigs = getObjectKeys(
+            this.groupTableData[this.groupTableData.length - 1]
+          ).map(item => {
+            return {
+              prop: item,
+              label: item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
+          data[i].data.tableData4 = this.groupTableData;
+          data[i].data.colConfigs4 = this.groupColConfigs;
+          console.log(this.groupTableData, " this.groupTableData;");
+          console.log(this.groupColConfigs, " this.groupColConfigs;");
+          this.$store.dispatch("setUnivariateAnalysisData", data);
         });
 
         this.getCompareWay(element.variableCode, lianxuCode).then(res => {
           console.log(res, "res");
+          this.groupRecommend = res.data;
         });
 
-        // this.$store.dispatch("setUnivariateAnalysisData", data);
+        // // 暂无用处
+        // this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
+        //   console.log(res, "res");
+        // });
+        // // this.$store.dispatch("setUnivariateAnalysisData", data);
       });
     },
     yiBanXingMiaoShu(variableCode) {
@@ -171,7 +198,7 @@ export default {
       };
       let value = statisticalAnalysis.zhengTaiJianYan(data).then(res => {
         console.log(res.data, "zhengTaiJianYan");
-        // const data = JSON.parse(res.data);
+        // const data = res.data;
         return res.data;
       });
       return value;
@@ -184,7 +211,7 @@ export default {
       };
       let value = statisticalAnalysis.fangChaQiXingJianYan(data).then(res => {
         console.log(res.data, "fangChaQiXingJianYan");
-        return JSON.parse(res.data);
+        return res.data;
       });
       return value;
     },
@@ -195,8 +222,8 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.zhiHeJianYan(data).then(res => {
-        console.log(JSON.parse(res.data), "zhiHeJianYan");
-        const data = JSON.parse(res.data);
+        console.log(res.data, "zhiHeJianYan");
+        const data = res.data;
         return data;
       });
       return value;
@@ -208,9 +235,9 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.TJianYan(data).then(res => {
-        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
-        const data = JSON.parse(res.data);
-        return data;
+        console.log(res.data, "yiBanXingMiaoShu");
+        // const data = res.data;
+        return res.data;
       });
       return value;
     },
@@ -221,8 +248,8 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.fangChaFenXi(data).then(res => {
-        console.log(JSON.parse(res.data), "fangChaFenXi");
-        const data = JSON.parse(res.data);
+        console.log(res.data, "fangChaFenXi");
+        const data = res.data;
         return data;
       });
       return value;
@@ -234,9 +261,9 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.getCompareWay(data).then(res => {
-        console.log(JSON.parse(res.data), "getCompareWay");
-        const data = JSON.parse(res.data);
-        return data;
+        // console.log(res.data, "getCompareWay");
+        // const data = res.data;
+        return res.data;
       });
       return value;
     }

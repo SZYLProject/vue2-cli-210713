@@ -13,13 +13,20 @@ export function getObjectValues(object) {
 // 自定义方法变量，获取对象的value(返回对象中数组字符串)
 export function getObjectParseValues(object) {
   var values = [];
-  for (var key in object) values.push(JSON.parse(object[key]));
+  for (var key in object) values.push(object[key]);
   return values;
 }
 // 自定义方法变量，获取对象的value(返回对象中数组字符串+添加对象key值到第一个)
-export function getObjectParseKeysValues(object) {
+export function getObjectKeysValues(object) {
   var values = [];
-  for (var key in object) values.push(JSON.parse(object[key]));
+  for (var key in object) {
+    values = values.concat(...object[key]);
+    values.forEach(item => {
+      if (!item.name) {
+        item.name = key;
+      }
+    });
+  }
   return values;
 }
 
