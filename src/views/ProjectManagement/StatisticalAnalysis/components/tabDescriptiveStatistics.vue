@@ -79,8 +79,8 @@ export default {
         variableCode: variableCode
       };
       let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
-        console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
-        const data = JSON.parse(res.data);
+        // console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        const data = res.data;
         return data;
       });
       return value;
