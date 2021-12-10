@@ -106,9 +106,7 @@ export default {
     },
     // 左侧栏变量数据
     GetVariables() {
-      const data = {
-        projectId: 1
-      };
+      const data = {};
 
       if (getSessionStore("isMock") === 0) {
         this.$store.dispatch("setLeftDraggableList", leftDraggableListData);

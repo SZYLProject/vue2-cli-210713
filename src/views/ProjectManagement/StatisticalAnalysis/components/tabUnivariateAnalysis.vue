@@ -180,7 +180,6 @@ export default {
     },
     yiBanXingMiaoShu(variableCode) {
       const data = {
-        projectId: 1,
         variableCode: variableCode
       };
       let value = statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
@@ -192,7 +191,6 @@ export default {
     },
     zhengTaiJianYan(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
@@ -205,7 +203,6 @@ export default {
     },
     fangChaQiXingJianYan(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
@@ -217,7 +214,6 @@ export default {
     },
     async zhiHeJianYan(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
@@ -230,7 +226,6 @@ export default {
     },
     async TJianYan(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
@@ -243,7 +238,6 @@ export default {
     },
     async fangChaFenXi(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };
@@ -256,7 +250,6 @@ export default {
     },
     async getCompareWay(variableCode, fenZuCode) {
       const data = {
-        projectId: 1,
         lianXuCode: variableCode,
         fenZuCode: fenZuCode
       };

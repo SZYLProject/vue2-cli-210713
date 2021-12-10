@@ -71,17 +71,50 @@ export default {
           });
           this.$store.dispatch("setDescriptiveStatisticsData", data);
         });
+
+        // this.zhengTaiJianYan(element.variableCode).then(res => {
+        //   console.log(res, "reszhengTaiJianYan");
+
+        //   // let resTable = getObjectKeysValues(res);
+        //   // data[i].data.tableData2 = resTable;
+        //   // data[i].data.colConfigs2 = getObjectKeys(resTable[0]).map(item => {
+        //   //   return {
+        //   //     prop: item,
+        //   //     label: item == "name" ? "变量的取值" : item,
+        //   //     "min-width": 40,
+        //   //     sort: false,
+        //   //     align: "center"
+        //   //   };
+        //   // });
+        //   // // 最后一位移动到第一位
+        //   // const last = data[i].data.colConfigs2.pop(); //取数组最后一项
+        //   // data[i].data.colConfigs2.unshift(last); //插入数组第一位
+
+        //   // this.$store.dispatch("setUnivariateAnalysisData", data);
+        // });
       });
     },
     async yiBanXingMiaoShu(variableCode) {
       const data = {
-        projectId: 1,
         variableCode: variableCode
       };
       let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
         // console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
         const data = res.data;
         return data;
+      });
+      return value;
+    },
+
+    zhengTaiJianYan(variableCode) {
+      const data = {
+        lianXuCode: variableCode,
+        fenZuCode: ""
+      };
+      let value = statisticalAnalysis.zhengTaiJianYan(data).then(res => {
+        console.log(res.data, "zhengTaiJianYan");
+        // const data = res.data;
+        return res.data;
       });
       return value;
     },
