@@ -88,7 +88,30 @@ const statisticalAnalysis = {
       url: `/api/getCompareWay?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas
     });
-  }
+  },
+
+  /*************************************相关分析*********************************/
+  // // 正态性检验
+  // luoJiHuiGui(parmas) {
+  //   return get({
+  //     url: `/api/luoJiHuiGui?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
+  //     parmas: parmas
+  //   });
+  // },
+  //  // 正态性检验
+  //  xianXingHuiGui(parmas) {
+  //   return get({
+  //     url: `/api/luoJiHuiGui?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
+  //     parmas: parmas
+  //   });
+  // },
+   // 相关分析
+   XiangGuanXingFenxi(parmas) {
+    return get({
+      url: `/api/XiangGuanXingFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
+      parmas: parmas
+    });
+  },
 };
 
 export default statisticalAnalysis;

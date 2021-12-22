@@ -55,9 +55,9 @@ export default {
   },
   data() {
     return {
-      activeName: "tabUnivariateAnalysis", // 切换组件
-      activeNameInfo: "UnivariateAnalysis",
-      activeValue: "单因素分析", // 显示名字
+      activeName: "tabRelatedAnalysis", // 切换组件
+      activeNameInfo: "RelatedAnalysis",
+      activeValue: "相关分析", // 显示名字
       // 切换tab数据
       tabList: [
         {
