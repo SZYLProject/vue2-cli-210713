@@ -172,6 +172,26 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: "/formList",
+    name: "formList",
+    meta: {
+      title: "表单管理",
+      icon: "iconpay3"
+    },
+    component: Layout,
+    children: [
+      {
+        path: "form1",
+        name: "form1",
+        meta: {
+          title: "表单1",
+          routerType: "leftmenu"
+        },
+        component: () => import("@/views/formList/form1")
+      }
+    ]
+  },
+  {
     path: "/error",
     component: Layout,
     name: "errorPage",
