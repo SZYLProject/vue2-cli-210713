@@ -2,7 +2,7 @@
 const multivariateRegressionData = [
     {
       id: 1,
-      name: "的描述性统计",
+      name: "回归模型统计表",
       data: {
         colConfigs: [
           {

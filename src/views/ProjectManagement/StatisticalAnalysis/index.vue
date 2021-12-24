@@ -55,9 +55,9 @@ export default {
   },
   data() {
     return {
-      activeName: "tabRelatedAnalysis", // 切换组件
-      activeNameInfo: "RelatedAnalysis",
-      activeValue: "相关分析", // 显示名字
+      activeName: "tabMultivariateRegression", // 切换组件
+      activeNameInfo: "MultivariateRegression",
+      activeValue: "多因素回归", // 显示名字
       // 切换tab数据
       tabList: [
         {

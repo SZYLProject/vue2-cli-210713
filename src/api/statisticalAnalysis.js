@@ -112,6 +112,15 @@ const statisticalAnalysis = {
       parmas: parmas
     });
   },
+
+  /*************************************回归分析*********************************/
+ // 相关分析
+ huiGuiFenxi(parmas) {
+  return get({
+    url: `/api/huiGuiFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
+    parmas: parmas
+  });
+},
 };
 
 export default statisticalAnalysis;
