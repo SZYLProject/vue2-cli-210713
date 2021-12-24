@@ -15,11 +15,11 @@ import dragArea from "./dragArea.vue";
 import { getSessionStore } from "@/utils/mUtils";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import {
-  unid,
+  // unid,
   getObjectKeys,
-  getObjectValues,
-  getObjectParseValues,
-  getObjectKeysValues
+  getObjectValues
+  // getObjectParseValues,
+  // getObjectKeysValues
 } from "@/utils/objectArray";
 import { Message } from "element-ui";
 
@@ -41,7 +41,8 @@ export default {
         draggableList: [
           { explanation: "变量1", draggableNum: 1 },
           { explanation: "变量2", draggableNum: 1 }
-        ]
+        ],
+        returnGroup: true // 按照分组返回分组变量和观察变量
       }
     };
   },
@@ -50,38 +51,42 @@ export default {
     startAnalysis(startAnalysis) {
       console.log(startAnalysis, "startAnalysis");
       let data = [];
-      startAnalysis.forEach((element, i) => {
+      startAnalysis[0].forEach((element, i) => {
         data.push({
           id: i,
-          name: element.name + relatedAnalysisData[0].name,
+          name: relatedAnalysisData[0].name,
           data: relatedAnalysisData[0].data
         });
-      });
 
-      // data.push({
-      //     id: 0,
-      //     name: relatedAnalysisData[0].name + relatedAnalysisData[1].name,
-      //     data: relatedAnalysisData[0].data
-      //   });
-
-      if (getSessionStore("isMock") === 0) {
-        this.$store.dispatch("setRelatedAnalysisData", data);
-        return;
-      }
-      console.log(data, "datadat");
-
-      this.XiangGuanXingFenxi(
-        startAnalysis[0].variableCode,
-        startAnalysis[1].variableCode
-      ).then(res => {
-        console.log(res, "res");
-        if (res["相关性分析"]) {
-          Message.error(res['相关性分析'] || "Verification failed, please login again");
-
+        if (getSessionStore("isMock") === 0) {
+          this.$store.dispatch("setRelatedAnalysisData", data);
           return;
         }
-        const resDataConfigs = getObjectKeys(getObjectValues(res)[0][0]).map(
-          item => {
+
+        this.XiangGuanXingFenxi(
+          element.variableCode,
+          startAnalysis[1][i].variableCode
+        ).then(res => {
+          // 如果没有数据则提示
+          if (res["相关性分析"]) {
+            this.$store.dispatch("setRelatedAnalysisData", (data = []));
+
+            Message.error(
+              res["相关性分析"] || "Verification failed, please login again"
+            );
+            return;
+          }
+          const resDataValue = res; // 存储返回值数据
+          // 存储推荐名称
+          if (resDataValue["推荐"]) {
+            data[i].data.recommendValue = resDataValue["推荐"];
+            delete resDataValue["推荐"];
+          }
+
+          // 存储表格title
+          const resDataConfigs = getObjectKeys(
+            getObjectValues(resDataValue)[0][0]
+          ).map(item => {
             return {
               prop: item,
               label: item == "name" ? "变量的取值" : item,
@@ -89,29 +94,19 @@ export default {
               sort: false,
               align: "center"
             };
+          });
+          data[i].data.colConfigs = resDataConfigs;
+
+          // 存储表格数据
+          const resDataTable = [];
+          for (const key in resDataValue) {
+            resDataTable.push(...resDataValue[key]);
           }
-        );
-        data[0].data.colConfigs = resDataConfigs;
-        if (res["推荐"]) {
-          const objTuijian = res["推荐"];
-          console.log(objTuijian, "objTuijian");
-        }
+          data[i].data.tableData = resDataTable;
 
-        const resDataTable = [];
-        for (const key in res) {
-          if (key === "推荐") {
-            continue;
-          }
-          resDataTable.push(...res[key]);
-          // for (let index = 0; index < res[key].length; index++) {
-          //   resDataTable.push(res[key][index])
-          // }
-        }
-        data[0].data.tableData = resDataTable;
-
-        console.log(resDataTable, "resDataTable");
-
-        this.$store.dispatch("setRelatedAnalysisData", data);
+          // 存储数据显示table
+          this.$store.dispatch("setRelatedAnalysisData", data);
+        });
       });
     },
     XiangGuanXingFenxi(variableCode1, variableCode2) {

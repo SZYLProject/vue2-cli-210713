@@ -12,6 +12,7 @@
       >
         <h1 style="margin-bottom:15px;font-size:15px">{{ item.name }}</h1>
         <SzylElTable
+          :tableRowClassName="tableRowClassName"
           :colConfigs="item.data.colConfigs"
           :tableList="item.data.tableData"
           :min-height="90"
@@ -78,7 +79,7 @@ export default {
   components: { SzylElTable, LinearRegression, BasicScatterChart },
   data() {
     return { radioRight: "残差图" };
-  },
+  }, 
   props: {
     clientHeight: {
       type: Number,
@@ -93,7 +94,18 @@ export default {
   },
   watch: {},
   mounted() {},
-  methods: {}
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      // console.log(row,'row');
+      if (row.name === this.relatedAnalysisData[0].data.recommendValue) {
+        return "success-row";
+      } else {
+        return "warning-row";
+
+      }
+      // return "";
+    }
+  }
 };
 </script>
 <style scoped lang="scss">

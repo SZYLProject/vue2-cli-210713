@@ -53,6 +53,7 @@ module.exports = {
     // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
     proxy: {
       "": {
+        // target: 'http://172.16.118.173:8200',
         target: 'http://152.136.182.96:8200',
         logLevel:'debug', // 请求打印真实ip
         changeOrigin: true
