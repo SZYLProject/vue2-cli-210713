@@ -72,15 +72,17 @@ export default {
         };
         this.shenCunFenXi(dataValue).then(res => {
           // 如果没有数据则提示
-          if (typeof res === "string") {
-            this.$store.dispatch("setRelatedAnalysisData", (data = []));
+          if (!res) {
+            this.$store.dispatch("setSubsistenceAnalysisData", (data = []));
             Message.error(res || "Verification failed, please login again");
             return;
           }
-          const resDataValue = res; // 存储返回值数据
+
+          let resDataValue = res; // 存储返回值数据
+          delete resDataValue["中位生存时间"];
 
           // 存储表格title
-          const resDataConfigs = getObjectKeys(resDataValue[0]).map(item => {
+          const resDataConfigs = getObjectKeys(resDataValue).map(item => {
             return {
               prop: item,
               label: item == "name" ? "变量的取值" : item,
@@ -89,22 +91,31 @@ export default {
               align: "center"
             };
           });
-          data[0].data.colConfigs = resDataConfigs;
+          data[i].data.colConfigs = resDataConfigs;
+
+          const resDataData = [{}];
+          Object.keys(resDataValue).forEach(key => {
+
+            resDataData[0][key]= resDataValue[key][0]
+            console.log(resDataData);
+          });
 
           // 存储表格数据
-          data[0].data.tableData = resDataValue;
+          data[i].data.tableData = resDataData;
 
           // 存储数据显示table
-          this.$store.dispatch("setMultivariateRegressionData", data);
+          this.$store.dispatch("setSubsistenceAnalysisData", data);
         });
       });
     },
-    shenCunFenXi(dataValue) {
-      let value = statisticalAnalysis.shenCunFenXi(dataValue).then(res => {
-        console.log(res.data, "shenCunFenXi");
-        // const data = res.data;
-        return res.data;
-      });
+    async shenCunFenXi(dataValue) {
+      let value = await statisticalAnalysis
+        .shenCunFenXi(dataValue)
+        .then(res => {
+          console.log(res.data, "shenCunFenXi");
+          // const data = res.data;
+          return res.data;
+        });
       return value;
     }
   }

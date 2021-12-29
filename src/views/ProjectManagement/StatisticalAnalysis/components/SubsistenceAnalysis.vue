@@ -24,6 +24,13 @@
             <div>{{ itemStatistical }}</div>
           </div>
         </div>
+        <SzylElTable
+          :colConfigs="item.data.colConfigs"
+          :tableList="item.data.tableData"
+          :min-height="90"
+          class="table_container"
+        >
+        </SzylElTable>
         <div class="describe-chart">
           <div class="chartsBar">
             <StepLine
@@ -37,13 +44,6 @@
             ></StepLine>
           </div>
         </div>
-        <SzylElTable
-          :colConfigs="item.data.colConfigs"
-          :tableList="item.data.tableData"
-          :min-height="90"
-          class="table_container"
-        >
-        </SzylElTable>
       </div>
     </el-scrollbar>
 

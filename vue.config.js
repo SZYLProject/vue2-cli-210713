@@ -100,7 +100,7 @@ module.exports = {
     config.plugin("webpack-bundle-analyzer").use(
       new BundleAnalyzerPlugin({
         openAnalyzer: false, // 是否打开默认浏览器
-        analyzerPort: 9800 // 项目相同时候修改此端口
+        analyzerPort: 9801 // 项目相同时候修改此端口
       })
     );
 
