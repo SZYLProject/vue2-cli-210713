@@ -105,8 +105,8 @@ const statisticalAnalysis = {
   //     parmas: parmas
   //   });
   // },
-   // 相关分析
-   XiangGuanXingFenxi(parmas) {
+  // 相关分析
+  XiangGuanXingFenxi(parmas) {
     return get({
       url: `/api/XiangGuanXingFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
       parmas: parmas
@@ -114,13 +114,22 @@ const statisticalAnalysis = {
   },
 
   /*************************************回归分析*********************************/
- // 相关分析
- huiGuiFenxi(parmas) {
-  return get({
-    url: `/api/huiGuiFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
-    parmas: parmas
-  });
-},
+  // 相关分析
+  huiGuiFenxi(parmas) {
+    return get({
+      url: `/api/huiGuiFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
+      parmas: parmas
+    });
+  },
+
+  /*************************************生存分析*********************************/
+  // 相关分析
+  shenCunFenXi(parmas) {
+    return get({
+      url: `/api/shenCunFenXi?projectId=${porjectId}&shengCunShiJianCode=${parmas.shengCunShiJianCode}&fenZhuCode=${parmas.fenZhuCode}&Code_x=${parmas.Code_x}&codeType_x=${parmas.codeType_x}`,
+      parmas: parmas
+    });
+  }
 };
 
 export default statisticalAnalysis;

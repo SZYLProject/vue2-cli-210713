@@ -55,9 +55,9 @@ export default {
   },
   data() {
     return {
-      activeName: "tabMultivariateRegression", // 切换组件
-      activeNameInfo: "MultivariateRegression",
-      activeValue: "多因素回归", // 显示名字
+      activeName: "tabSubsistenceAnalysis", // 切换组件
+      activeNameInfo: "SubsistenceAnalysis",
+      activeValue: "生存分析", // 显示名字
       // 切换tab数据
       tabList: [
         {
