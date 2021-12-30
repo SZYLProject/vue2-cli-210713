@@ -8,7 +8,7 @@ const resolve = dir => {
 };
 
 // const env = process.env.NODE_ENV
-let target = process.env.BASE_API  // development和production环境是不同的
+let target = process.env.BASE_API; // development和production环境是不同的
 
 const cdn = {
   // 开发环境
@@ -19,7 +19,8 @@ const cdn = {
   // 生产环境
   build: {
     css: [
-      "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
+      // "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
+      "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
     ],
     js: [
@@ -28,7 +29,8 @@ const cdn = {
       "https://cdn.bootcss.com/vuex/2.3.1/vuex.min.js",
       "https://cdn.bootcss.com/axios/0.19.0/axios.min.js",
       "https://cdn.bootcss.com/vue-i18n/8.13.0/vue-i18n.min.js",
-      "https://cdn.bootcss.com/element-ui/2.11.1/index.js",
+      // "https://cdn.bootcss.com/element-ui/2.11.1/index.js",
+      "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/index.js",
       "https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js",
       "https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js",
@@ -54,8 +56,8 @@ module.exports = {
     proxy: {
       "": {
         // target: 'http://172.16.118.173:8200',
-        target: 'http://152.136.182.96:8200',
-        logLevel:'debug', // 请求打印真实ip
+        target: "http://152.136.182.96:8200",
+        logLevel: "debug", // 请求打印真实ip
         changeOrigin: true
       }
     }
@@ -100,7 +102,7 @@ module.exports = {
     config.plugin("webpack-bundle-analyzer").use(
       new BundleAnalyzerPlugin({
         openAnalyzer: false, // 是否打开默认浏览器
-        analyzerPort: 9801 // 项目相同时候修改此端口
+        analyzerPort: 9800 // 项目相同时候修改此端口
       })
     );
 
