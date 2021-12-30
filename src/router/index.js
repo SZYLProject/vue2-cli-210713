@@ -29,7 +29,7 @@ export const constantRouterMap = [
   {
     path: "",
     component: Layout,
-    redirect: "/index/index",
+    redirect: "/tj/index",
     hidden: true
   },
   {
@@ -38,12 +38,12 @@ export const constantRouterMap = [
     component: () => import("@/components/echarts/index"),
     hidden: true
   },
-  {
-    path: "/tj",
-    name: "tj",
-    component: () => import("@/views/ProjectManagement/StatisticalAnalysis"),
-    hidden: true
-  },
+  // {
+  //   path: "/tj",
+  //   name: "tj",
+  //   component: () => import("@/views/ProjectManagement/StatisticalAnalysis"),
+  //   hidden: true
+  // },
   {
     path: "/login",
     name: "login",
@@ -61,26 +61,47 @@ export const constantRouterMap = [
     hidden: true
   },
   {
-    path: "/index",
-    name: "index",
-    component: Layout,
+    path: "/tj",
+    name: "tj",
     meta: {
-      title: "首页",
-      icon: "icondashboard"
+      title: "项目管理",
+      icon: "iconpay3"
     },
-    noDropdown: true,
+    component: Layout,
+    redirect: '/tj/index',
     children: [
       {
         path: "index",
+        name: "index",
         meta: {
-          title: "首页",
-          icon: "icondashboard",
+          title: "统计分析",
           routerType: "leftmenu"
         },
-        component: () => import("@/views/index/index")
+        component: () => import("@/views/ProjectManagement/StatisticalAnalysis")
       }
     ]
-  }
+  },
+  // {
+  //   path: "/index",
+  //   name: "index",
+  //   component: Layout,
+  //   meta: {
+  //     title: "首页",
+  //     icon: "icondashboard"
+  //   },
+  //   noDropdown: true,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       meta: {
+  //         title: "首页",
+  //         icon: "icondashboard",
+  //         routerType: "leftmenu"
+  //       },
+  //       component: () => import("@/views/index/index")
+  //     }
+  //   ]
+  // }
 ];
 
 //注册路由

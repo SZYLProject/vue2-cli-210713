@@ -105,7 +105,7 @@ export default {
           login(userinfo).then(res => {
             let userList = res.data.userList;
             setToken("Token", userList.token);
-            this.$router.push({ path: "/" });
+            this.$router.push({ path: "/tj" });
             this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
           });
         }
