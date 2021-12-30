@@ -87,6 +87,26 @@ export default service;
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
+/**
+ * get方法，对应get请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+//  export const get = obj => {
+//   return new Promise((resolve, reject) => {
+//     service({
+//       url: obj.url,
+//       method: "get",
+//       params: obj.params
+//     })
+//       .then(res => {
+//         resolve(res.data);
+//       })
+//       .catch(err => {
+//         reject(err.data);
+//       });
+//   });
+// };
 export const get = obj => {
   return new Promise((resolve, reject) => {
     axios

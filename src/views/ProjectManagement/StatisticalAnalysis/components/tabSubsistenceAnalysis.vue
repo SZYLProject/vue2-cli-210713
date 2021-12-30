@@ -65,9 +65,9 @@ export default {
         }
 
         const dataValue = {
+          fenxiCode: startAnalysis[0][0].variableCode,
           shengCunShiJianCode: startAnalysis[1][0].variableCode,
-          fenZhuCode: startAnalysis[1][0].variableCode,
-          Code_x: element.variableCode,
+          jiejuCode: element.variableCode,
           codeType_x: element.variableType
         };
         this.shenCunFenXi(dataValue).then(res => {

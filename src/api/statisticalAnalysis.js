@@ -126,7 +126,7 @@ const statisticalAnalysis = {
   // 相关分析
   shenCunFenXi(parmas) {
     return get({
-      url: `/api/shenCunFenXi?projectId=${porjectId}&shengCunShiJianCode=${parmas.shengCunShiJianCode}&fenZhuCode=${parmas.fenZhuCode}&Code_x=${parmas.Code_x}&codeType_x=${parmas.codeType_x}`,
+      url: `/api/shenCunFenXi?projectId=${porjectId}&shengCunShiJianCode=${parmas.shengCunShiJianCode}&fenxiCode=${parmas.fenxiCode}&jiejuCode=${parmas.jiejuCode}&codeType_x=${parmas.codeType_x}`,
       parmas: parmas
     });
   }
