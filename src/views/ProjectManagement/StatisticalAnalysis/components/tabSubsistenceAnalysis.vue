@@ -60,7 +60,6 @@ export default {
         });
         if (getSessionStore("isMock") === 0) {
           this.$store.dispatch("setSubsistenceAnalysisData", data);
-
           return;
         }
 
@@ -77,9 +76,25 @@ export default {
             Message.error(res || "Verification failed, please login again");
             return;
           }
+          data[i].data.discountData = {};
 
           let resDataValue = res; // 存储返回值数据
           delete resDataValue["中位生存时间"];
+          const resDataEcarts = resDataValue["各时间点的生存率"];
+          delete resDataValue["各时间点的生存率"];
+          if (resDataEcarts) {
+            data[i].data.discountData.xAxisData = resDataEcarts.map(item => {
+              return item.time;
+            });
+            data[i].data.discountData.seriesData = [{}];
+            data[i].data.discountData.seriesData[0].name = "分析结果";
+            data[i].data.discountData.seriesData[0].value = resDataEcarts.map(
+              item => {
+                return item.estimate;
+              }
+            );
+          }
+          console.log(resDataEcarts);
 
           // 存储表格title
           const resDataConfigs = getObjectKeys(resDataValue).map(item => {
@@ -95,8 +110,7 @@ export default {
 
           const resDataData = [{}];
           Object.keys(resDataValue).forEach(key => {
-
-            resDataData[0][key]= resDataValue[key][0]
+            resDataData[0][key] = resDataValue[key][0];
             console.log(resDataData);
           });
 

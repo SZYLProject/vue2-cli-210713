@@ -83,24 +83,24 @@ export default {
   },
   methods: {
     initChart() {
-      var test = {
-        xAxisData: ["100", "200", "300", "400", "500", "600", "700", "800"],
-        seriesData: [
-          {
-            name: "Step Start",
-            value: [0.98, 0.88, 0.8, 0.45, 0.19, 0.1, 0.08, 0.08]
-          },
-          {
-            name: "Step Middle",
-            value: [0.95, 0.9, 0.85, 0.8, 0.69, 0.6, 0.02, 0.08]
-          },
-          {
-            name: "Step End",
-            value: [0.9, 0.88, 0.8, 0.6, 0.49, 0.32, 0.2, 0.08]
-          }
-        ]
-      };
-      // var test = this.discountData
+      // var test = {
+      //   xAxisData: ["100", "200", "300", "400", "500", "600", "700", "800"],
+      //   seriesData: [
+      //     {
+      //       name: "Step Start",
+      //       value: [0.98, 0.88, 0.8, 0.45, 0.19, 0.1, 0.08, 0.08]
+      //     },
+      //     {
+      //       name: "Step Middle",
+      //       value: [0.95, 0.9, 0.85, 0.8, 0.69, 0.6, 0.02, 0.08]
+      //     },
+      //     {
+      //       name: "Step End",
+      //       value: [0.9, 0.88, 0.8, 0.6, 0.49, 0.32, 0.2, 0.08]
+      //     }
+      //   ]
+      // };
+      var test = this.discountData
       var xAxisData = test.xAxisData;
       var legendData = [],
         seriesData = [];
@@ -149,6 +149,7 @@ export default {
         xAxis: {
           type: "category",
           data: xAxisData,
+          name:'生存时间',
           /*改变xy轴颜色*/
           axisLine: {
             show: false,
@@ -173,6 +174,7 @@ export default {
           axisTick: {
             show: false
           },
+          name:'生存率 %',
           /*改变xy轴颜色*/
           axisLine: {
             show: false,
