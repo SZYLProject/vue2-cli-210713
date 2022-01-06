@@ -37,6 +37,8 @@ import MultivariateRegression from "./components/MultivariateRegression";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getSessionStore } from "@/utils/mUtils";
+import { login } from "@/api/user";
+import { setToken } from "@/utils/auth";
 
 export default {
   name: "StatisticAnalysisCom",
@@ -55,6 +57,10 @@ export default {
   },
   data() {
     return {
+      loginForm: {
+        username: "admin",
+        password: "123456"
+      },
       activeName: "tabSubsistenceAnalysis", // 切换组件
       activeNameInfo: "SubsistenceAnalysis",
       activeValue: "生存分析", // 显示名字
@@ -90,12 +96,21 @@ export default {
     };
   },
   mounted() {
+    this.loginFn()
     this.GetVariables();
     this.getHeight();
     // const data = leftDraggableListData;
     // this.$store.dispatch("setLeftDraggableList", leftDraggableListData);
   },
   methods: {
+    async loginFn() {
+      await login(this.loginForm).then(res => {
+        let userList = res.data.userList;
+        setToken("Token", userList.token);
+        // this.$router.push({ path: "/tj/index" });
+        this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
+      });
+    },
     // 控制每个展示echart图与table表格区域的高度
     getHeight() {
       this.clientHeight = `${document.documentElement.clientHeight}` - 337; //获取浏览器可视区域高度

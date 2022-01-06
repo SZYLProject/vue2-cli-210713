@@ -24,7 +24,8 @@ router.beforeEach((to, from, next) => {
   // 点击登录时，拿到了token并存入了cookie,保证页面刷新时,始终可以拿到token
   if (getToken("Token")) {
     if (to.path === "/login") {
-      next({ path: "/" });
+      // 如果登录了，不需要登录页面直接进入统计页面
+      next({ path: "/tj" });
       NProgress.done();
     } else {
       // 用户登录成功之后，每次点击路由都进行了角色的判断;
@@ -66,7 +67,9 @@ router.beforeEach((to, from, next) => {
       // 点击退出时,会定位到这里
       next();
     } else {
-      next("/login");
+      // next("/login");
+      next();
+
       NProgress.done();
     }
   }
