@@ -64,10 +64,10 @@ export default {
         }
 
         const dataValue = {
-          fenxiCode: startAnalysis[0][0].variableCode,
+          jiejuCode : startAnalysis[0][0].variableCode,
           shengCunShiJianCode: startAnalysis[1][0].variableCode,
-          jiejuCode: element.variableCode,
-          codeType_x: element.variableType
+          fenxiCode: element.variableCode,
+          // codeType_x: element.variableType
         };
         this.shenCunFenXi(dataValue).then(res => {
           // 如果没有数据则提示
