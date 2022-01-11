@@ -1,4 +1,4 @@
-import request from "@/utils/axios";
+import request from "@/request/tjAxios";
 import { get, post } from "@/utils/axios";
 import { getProjectIdSession } from "@/utils/auth";
 const porjectId = getProjectIdSession();

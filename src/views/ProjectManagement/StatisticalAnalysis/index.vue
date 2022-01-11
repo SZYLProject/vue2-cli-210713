@@ -128,6 +128,7 @@ export default {
         return;
       }
       statisticalAnalysis.GetVariables(data).then(res => {
+
         const data = res.data.map(item => {
           return {
             ...item,

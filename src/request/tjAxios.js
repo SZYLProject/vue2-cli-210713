@@ -10,6 +10,7 @@ let service = axios.create({
   // baseURL: window.BASE_URL,
   baseURL: process.env.VUE_APP_BASE_API,
 
+
   timeout: 5000 // 请求超时时间
 });
 // request拦截器
@@ -42,7 +43,7 @@ service.interceptors.response.use(
      * code:200,接口正常返回;
      */
     const res = response.data;
-    if (res.code !== 0 && res.code !== 200) {
+    if (res.code !== 200) {
       Message({
         message: res.msg,
         type: "error",
@@ -92,7 +93,7 @@ export default service;
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
-export const get = obj => {
+ export const get = obj => {
   return new Promise((resolve, reject) => {
     service({
       url: obj.url,
