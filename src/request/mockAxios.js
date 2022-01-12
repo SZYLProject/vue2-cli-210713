@@ -42,7 +42,9 @@ service.interceptors.response.use(
      * code:200,接口正常返回;
      */
     const res = response.data;
-    if (res.code !== 0 && res.code !== 200) {
+    debugger
+
+    if ( res.code !== 200) {
       Message({
         message: res.msg,
         type: "error",
@@ -53,7 +55,7 @@ service.interceptors.response.use(
         MessageBox.confirm(
           "你已被登出，可以取消继续留在该页面，或者重新登录",
           "确定登出",
-          {
+          { 
             confirmButtonText: "重新登录",
             cancelButtonText: "取消",
             type: "warning"
@@ -67,7 +69,7 @@ service.interceptors.response.use(
       return Promise.reject("error");
     } else {
       // res.code === 200,正常返回数据
-      return response;
+      return response.data;
     }
   },
   error => {

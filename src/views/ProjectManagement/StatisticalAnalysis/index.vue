@@ -96,7 +96,7 @@ export default {
     };
   },
   mounted() {
-    this.loginFn()
+    this.loginFn();
     this.GetVariables();
     this.getHeight();
     // const data = leftDraggableListData;
@@ -104,12 +104,9 @@ export default {
   },
   methods: {
     async loginFn() {
-      await login(this.loginForm).then(res => {
-        let userList = res.data.userList;
-        setToken("Token", userList.token);
-        // this.$router.push({ path: "/tj/index" });
-        this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
-      });
+      let userList = { name: "管理员", token: "admin" };
+      setToken("Token", userList.token);
+      this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
     },
     // 控制每个展示echart图与table表格区域的高度
     getHeight() {
@@ -128,7 +125,6 @@ export default {
         return;
       }
       statisticalAnalysis.GetVariables(data).then(res => {
-
         const data = res.data.map(item => {
           return {
             ...item,

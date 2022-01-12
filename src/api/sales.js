@@ -1,4 +1,5 @@
-import request from '@/utils/axios'
+import request from '@/request/mockAxios'
+
 
 export function getSalesTableList(params) {
   return request({

@@ -43,12 +43,15 @@ service.interceptors.response.use(
      * code:200,接口正常返回;
      */
     const res = response.data;
-    if (res.code !== 200) {
+    debugger
+
+    if (res.code !== 0) {
       Message({
         message: res.msg,
         type: "error",
         duration: 5 * 1000
       });
+
       // 根据服务端约定的状态码：5001:非法的token; 5002:其他客户端登录了; 5004:Token 过期了;
       if (res.code === 5001 || res.code === 5002 || res.code === 5004) {
         MessageBox.confirm(

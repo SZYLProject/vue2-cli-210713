@@ -1,5 +1,5 @@
 import request from "@/request/tjAxios";
-import { get, post } from "@/utils/axios";
+import { get, post } from "@/request/tjAxios";
 import { getProjectIdSession } from "@/utils/auth";
 const porjectId = getProjectIdSession();
 export function FenLeiBianLiangMiaoShuTongJi(params) {

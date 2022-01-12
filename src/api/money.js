@@ -1,4 +1,4 @@
-import request from '@/utils/axios'
+import request from '@/request/mockAxios'
 
 export function getMoneyIncomePay(params) {
   return request({
