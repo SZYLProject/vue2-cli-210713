@@ -24,12 +24,12 @@
             @click="tableRadio = '0'"
             >{{ item.name }}</el-button
           >
-          <el-button
+          <!-- <el-button
             type="text"
             style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
             @click="tableRadio = '1'"
             >{{ item.data.name2 }}</el-button
-          >
+          > -->
           <!-- <h1
             style="margin:0 15px 15px 0;font-size:15px ; cursor: pointer; "
             @click="tableRadio = '1'"
@@ -92,7 +92,7 @@
             <div>{{ itemStatistical }}</div>
           </div>
         </div>
-        <div class="describe-chart">
+        <div class="describe-chart" v-if="item.data.echartsTrue">
           <el-row>
             <el-col :span="12">
               <div class="chartsBar">

@@ -57,7 +57,7 @@ const descriptiveStatisticsData = [
         },
         {
           slot: "MultiLevelHeader"
-        },
+        }
         // {
         //   prop: "col8",
         //   label: "Q3",
@@ -149,6 +149,7 @@ const descriptiveStatisticsData = [
       ],
       barDataY: [40, 60, 30, 85, 35, 70, 18],
       barDataX: [17, 23, 29, 35, 41, 47, 53, 59],
+      echartsTrue: false, // 是否展示echarts图
       statisticalResultsData: {
         name: "统计结果说明:",
         data: [

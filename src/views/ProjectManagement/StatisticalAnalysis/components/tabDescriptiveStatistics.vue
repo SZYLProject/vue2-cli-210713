@@ -58,17 +58,25 @@ export default {
         }
 
         this.yiBanXingMiaoShu(element.variableCode).then(list => {
-          console.log(list, "list");
-          data[i].data.tableData = list;
-          data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
-            return {
-              prop: item,
-              label: item ? dataInterpretation[item] : item,
-              "min-width": 40,
-              sort: false,
-              align: "center"
-            };
-          });
+          if (list.length === 0) {
+            data[i] = null;
+            data.splice(i, 1);
+          } else {
+            if (data[i]) {
+              data[i].data.tableData = list;
+              data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
+                return {
+                  prop: item,
+                  label: item ? dataInterpretation[item] : item,
+                  "min-width": 40,
+                  sort: false,
+                  align: "center"
+                };
+              });
+            }
+          }
+          // console.log(list, "list");
+
           this.$store.dispatch("setDescriptiveStatisticsData", data);
         });
 
@@ -100,24 +108,27 @@ export default {
       };
       let value = await statisticalAnalysis.yiBanXingMiaoShu(data).then(res => {
         // console.log(JSON.parse(res.data), "yiBanXingMiaoShu");
+        if (res.code !== 1000) {
+          return [];
+        }
         const data = res.data;
         return data;
       });
       return value;
     },
 
-    zhengTaiJianYan(variableCode) {
-      const data = {
-        lianXuCode: variableCode,
-        fenZuCode: ""
-      };
-      let value = statisticalAnalysis.zhengTaiJianYan(data).then(res => {
-        console.log(res.data, "zhengTaiJianYan");
-        // const data = res.data;
-        return res.data;
-      });
-      return value;
-    },
+    // zhengTaiJianYan(variableCode) {
+    //   const data = {
+    //     lianXuCode: variableCode,
+    //     fenZuCode: ""
+    //   };
+    //   let value = statisticalAnalysis.zhengTaiJianYan(data).then(res => {
+    //     console.log(res.data, "zhengTaiJianYan");
+    //     // const data = res.data;
+    //     return res.data;
+    //   });
+    //   return value;
+    // },
 
     // ---------------------------------废弃-------------------
     async fenZuTongJiFun() {
