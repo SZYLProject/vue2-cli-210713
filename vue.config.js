@@ -1,7 +1,7 @@
 const TerserPlugin = require("terser-webpack-plugin"); // 用于在生成环境剔除debuger和console
 const CompressionPlugin = require("compression-webpack-plugin"); // gzip压缩,优化http请求,提高加载速度
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin; // 代码分析工具
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin; // 代码分析工具
 const path = require("path");
 const resolve = dir => {
   return path.join(__dirname, dir);
@@ -9,6 +9,7 @@ const resolve = dir => {
 
 // const env = process.env.NODE_ENV
 let target = process.env.VUE_APP_BASE_URL; // development和production环境是不同的
+
 
 const cdn = {
   // 开发环境
@@ -23,18 +24,27 @@ const cdn = {
       "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
     ],
+    js: ["/static/js/vue/2.6.11/vue.min.js"]
+  },
+  // 生产环境
+  buildCDN: {
+    css: [
+      // "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
+      "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
+      "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
+    ],
     js: [
-      "https://cdn.bootcss.com/vue/2.6.10/vue.min.js",
-      "https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.js",
-      "https://cdn.bootcss.com/vuex/2.3.1/vuex.min.js",
-      "https://cdn.bootcss.com/axios/0.19.0/axios.min.js",
-      "https://cdn.bootcss.com/vue-i18n/8.13.0/vue-i18n.min.js",
+      "https://cdn.bootcss.com/vue/2.6.11/vue.min.js",
+      "https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js",
+      "https://cdn.bootcdn.net/ajax/libs/vuex/3.6.2/vuex.min.js",
+      "https://cdn.bootcss.com/axios/0.21.1/axios.min.js",
+      "https://cdn.bootcss.com/vue-i18n/8.24.5/vue-i18n.min.js",
       // "https://cdn.bootcss.com/element-ui/2.11.1/index.js",
       "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/index.js",
-      "https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js",
+      "https://cdn.bootcss.com/echarts/4.8.0/echarts.min.js",
       "https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js",
-      "https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js"
+      "https://cdn.bootcss.com/js-cookie/2.2.1/js.cookie.min.js"
     ]
   }
 };
@@ -42,20 +52,20 @@ const cdn = {
 module.exports = {
   // publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
   publicPath: process.env.NODE_ENV === "prodection" ? "./" : "./",
-  outputDir: "./dist",
-  assetsDir: "static",
+  outputDir: "./dist", // 打包名称
+  assetsDir: "static", // 存放文件路径
   filenameHashing: true, // false 来关闭文件名哈希
-  lintOnSave: false, // 关闭eslint
+  lintOnSave: true, // 关闭eslint
   // 打包时不生成.map文件
   productionSourceMap: false,
   devServer: {
-    open: true,
+    open: true, // 自动打开浏览器
     // host: "0.0.0.0",
-    port: 9900,
-    // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
+    port: 9900, // 开发端口号
+    // 前端解决跨域问题，配置代理;
     proxy: {
       // [process.env.VUE_APP_BASE_API]: {
-      "/api": {
+        "/api": {
         // target: `${target}` ,
         // target: process.env.VUE_APP_BASE_URL,
         target: "http://152.136.182.96:8200",
@@ -103,19 +113,19 @@ module.exports = {
         speed: 4
       })
       .end();
-    // 项目文件大小分析
-    config.plugin("webpack-bundle-analyzer").use(
-      new BundleAnalyzerPlugin({
-        openAnalyzer: false, // 是否打开默认浏览器
-        analyzerPort: 9800 // 项目相同时候修改此端口
-      })
-    );
+    // // 项目文件大小分析
+    // config.plugin("webpack-bundle-analyzer").use(
+    //   new BundleAnalyzerPlugin({
+    //     openAnalyzer: false, // 是否打开默认浏览器
+    //     analyzerPort: 9801 // 项目相同时候修改此端口
+    //   })
+    // );
 
     // 对vue-cli内部的 webpack 配置进行更细粒度的修改。
     // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
     config.plugin("html").tap(args => {
       if (process.env.NODE_ENV === "production") {
-        args[0].cdn = cdn.build;
+        args[0].cdn = cdn.buildCDN;
       }
       if (process.env.NODE_ENV === "development") {
         args[0].cdn = cdn.dev;

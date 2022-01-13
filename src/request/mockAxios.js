@@ -42,7 +42,6 @@ service.interceptors.response.use(
      * code:200,接口正常返回;
      */
     const res = response.data;
-    debugger
 
     if ( res.code !== 200) {
       Message({
