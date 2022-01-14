@@ -64,58 +64,64 @@ export default {
         }
 
         const dataValue = {
-          jiejuCode : startAnalysis[0][0].variableCode,
+          jiejuCode: startAnalysis[0][0].variableCode,
           shengCunShiJianCode: startAnalysis[1][0].variableCode,
-          fenxiCode: element.variableCode,
+          fenxiCode: element.variableCode
           // codeType_x: element.variableType
         };
         this.shenCunFenXi(dataValue).then(res => {
-          // 如果没有数据则提示
-          if (!res) {
-            this.$store.dispatch("setSubsistenceAnalysisData", (data = []));
-            Message.error(res || "Verification failed, please login again");
-            return;
-          }
-          data[i].data.discountData = {};
+          // // 如果没有数据则提示
+          // if (!res) {
+          //   this.$store.dispatch("setSubsistenceAnalysisData", (data = []));
+          //   Message.error(res || "Verification failed, please login again");
+          //   return;
+          // }
 
-          let resDataValue = res; // 存储返回值数据
-          delete resDataValue["中位生存时间"];
-          const resDataEcarts = resDataValue["各时间点的生存率"];
-          delete resDataValue["各时间点的生存率"];
-          if (resDataEcarts) {
-            data[i].data.discountData.xAxisData = resDataEcarts.map(item => {
-              return item.time;
+          if (res.length === 0) {
+            // data[i] = null;
+            data.splice(i, 1);
+          } else {
+            data[i].data.discountData = {};
+
+            let resDataValue = res; // 存储返回值数据
+            delete resDataValue["中位生存时间"];
+            const resDataEcarts = resDataValue["各时间点的生存率"];
+            delete resDataValue["各时间点的生存率"];
+            if (resDataEcarts) {
+              data[i].data.discountData.xAxisData = resDataEcarts.map(item => {
+                return item.time;
+              });
+              data[i].data.discountData.seriesData = [{}];
+              data[i].data.discountData.seriesData[0].name = "分析结果";
+              data[i].data.discountData.seriesData[0].value = resDataEcarts.map(
+                item => {
+                  return item.estimate;
+                }
+              );
+            }
+            console.log(resDataEcarts);
+
+            // 存储表格title
+            const resDataConfigs = getObjectKeys(resDataValue).map(item => {
+              return {
+                prop: item,
+                label: item == "name" ? "变量的取值" : item,
+                "min-width": 40,
+                sort: false,
+                align: "center"
+              };
             });
-            data[i].data.discountData.seriesData = [{}];
-            data[i].data.discountData.seriesData[0].name = "分析结果";
-            data[i].data.discountData.seriesData[0].value = resDataEcarts.map(
-              item => {
-                return item.estimate;
-              }
-            );
+            data[i].data.colConfigs = resDataConfigs;
+
+            const resDataData = [{}];
+            Object.keys(resDataValue).forEach(key => {
+              resDataData[0][key] = resDataValue[key][0];
+              console.log(resDataData);
+            });
+
+            // 存储表格数据
+            data[i].data.tableData = resDataData;
           }
-          console.log(resDataEcarts);
-
-          // 存储表格title
-          const resDataConfigs = getObjectKeys(resDataValue).map(item => {
-            return {
-              prop: item,
-              label: item == "name" ? "变量的取值" : item,
-              "min-width": 40,
-              sort: false,
-              align: "center"
-            };
-          });
-          data[i].data.colConfigs = resDataConfigs;
-
-          const resDataData = [{}];
-          Object.keys(resDataValue).forEach(key => {
-            resDataData[0][key] = resDataValue[key][0];
-            console.log(resDataData);
-          });
-
-          // 存储表格数据
-          data[i].data.tableData = resDataData;
 
           // 存储数据显示table
           this.$store.dispatch("setSubsistenceAnalysisData", data);
@@ -128,6 +134,9 @@ export default {
         .then(res => {
           console.log(res.data, "shenCunFenXi");
           // const data = res.data;
+          if (res.code !== 1000) {
+            return [];
+          }
           return res.data;
         });
       return value;

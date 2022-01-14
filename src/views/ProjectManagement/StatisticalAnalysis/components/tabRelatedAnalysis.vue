@@ -67,43 +67,40 @@ export default {
           element.variableCode,
           startAnalysis[1][i].variableCode
         ).then(res => {
-          // 如果没有数据则提示
-          if (res["相关性分析"]) {
-            this.$store.dispatch("setRelatedAnalysisData", (data = []));
-
-            Message.error(
-              res["相关性分析"] || "Verification failed, please login again"
-            );
-            return;
-          }
-          const resDataValue = res; // 存储返回值数据
-          // 存储推荐名称
-          if (resDataValue["推荐"]) {
-            data[i].data.recommendValue = resDataValue["推荐"];
-            delete resDataValue["推荐"];
+          if (res.length === 0) {
+            // data[i] = null;
+            data.splice(i, 1);
           }
 
-          // 存储表格title
-          const resDataConfigs = getObjectKeys(
-            getObjectValues(resDataValue)[0][0]
-          ).map(item => {
-            return {
-              prop: item,
-              label: item == "name" ? "变量的取值" : item,
-              "min-width": 40,
-              sort: false,
-              align: "center"
-            };
-          });
-          data[i].data.colConfigs = resDataConfigs;
+          if (data[i]) {
+            const resDataValue = res; // 存储返回值数据
+            // 存储推荐名称
+            if (resDataValue["推荐"]) {
+              data[i].data.recommendValue = resDataValue["推荐"];
+              delete resDataValue["推荐"];
+            }
 
-          // 存储表格数据
-          const resDataTable = [];
-          for (const key in resDataValue) {
-            resDataTable.push(...resDataValue[key]);
+            // 存储表格title
+            const resDataConfigs = getObjectKeys(
+              getObjectValues(resDataValue)[0][0]
+            ).map(item => {
+              return {
+                prop: item,
+                label: item == "name" ? "变量的取值" : item,
+                "min-width": 40,
+                sort: false,
+                align: "center"
+              };
+            });
+            data[i].data.colConfigs = resDataConfigs;
+
+            // 存储表格数据
+            const resDataTable = [];
+            for (const key in resDataValue) {
+              resDataTable.push(...resDataValue[key]);
+            }
+            data[i].data.tableData = resDataTable;
           }
-          data[i].data.tableData = resDataTable;
-
           // 存储数据显示table
           this.$store.dispatch("setRelatedAnalysisData", data);
         });
@@ -115,7 +112,10 @@ export default {
         variableCode2: variableCode2
       };
       let value = statisticalAnalysis.XiangGuanXingFenxi(data).then(res => {
-        console.log(res.data, "XiangGuanXingFenxi");
+        // console.log(res.data, "XiangGuanXingFenxi");
+        if (res.code !== 1000) {
+          return [];
+        }
         // const data = res.data;
         return res.data;
       });

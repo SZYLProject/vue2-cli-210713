@@ -77,30 +77,34 @@ export default {
         return;
       }
       this.huiGuiFenxi(variableCode1, variableCode2).then(res => {
-        // 如果没有数据则提示
-        if ( typeof res === "string") {
-          this.$store.dispatch("setRelatedAnalysisData", (data = []));
-          Message.error(
-            res || "Verification failed, please login again"
-          );
-          return;
+        if (res.length === 0) {
+          data = [];
+          // data.splice(0, 1);
         }
-        const resDataValue = res; // 存储返回值数据
+        // // 如果没有数据则提示
+        // if (typeof res === "string") {
+        //   this.$store.dispatch("setRelatedAnalysisData", (data = []));
+        //   Message.error(res || "Verification failed, please login again");
+        //   return;
+        // }
+        if (data?.length > 0) {
+          const resDataValue = res; // 存储返回值数据
 
-        // 存储表格title
-        const resDataConfigs = getObjectKeys(resDataValue[0]).map(item => {
-          return {
-            prop: item,
-            label: item == "name" ? "变量的取值" : item,
-            "min-width": 40,
-            sort: false,
-            align: "center"
-          };
-        });
-        data[0].data.colConfigs = resDataConfigs;
+          // 存储表格title
+          const resDataConfigs = getObjectKeys(resDataValue[0]).map(item => {
+            return {
+              prop: item,
+              label: item == "name" ? "变量的取值" : item,
+              "min-width": 40,
+              sort: false,
+              align: "center"
+            };
+          });
+          data[0].data.colConfigs = resDataConfigs;
 
-        // 存储表格数据
-        data[0].data.tableData = resDataValue;
+          // 存储表格数据
+          data[0].data.tableData = resDataValue;
+        }
 
         // 存储数据显示table
         this.$store.dispatch("setMultivariateRegressionData", data);
@@ -114,6 +118,10 @@ export default {
       let value = statisticalAnalysis.huiGuiFenxi(data).then(res => {
         console.log(res.data, "huiGuiFenxi");
         // const data = res.data;
+
+        if (res.code !== 1000) {
+          return [];
+        }
         return res.data;
       });
       return value;
