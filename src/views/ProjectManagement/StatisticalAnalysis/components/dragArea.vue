@@ -181,10 +181,13 @@ export default {
         data.push(el.variableList);
       });
       console.log(this.draggableList, "draggableList");
-      if (data.length === 0) {
-        this.$message({ type: "warning", message: "请至少选择一个变量" });
-        return;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].length === 0) {
+          this.$message({ type: "warning", message: "请拖拽完变量" });
+          return;
+        }
       }
+
       return data;
     },
 
