@@ -99,6 +99,7 @@ const relatedAnalysisData = [
         [-0.236833, -1.0486582],
         [0.969788, 4.655492]
       ],
+      echartsTrue: false, // 是否展示echarts图
       statisticalResultsData: {
         name: "统计结果说明:",
         data: [

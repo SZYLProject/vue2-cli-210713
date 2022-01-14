@@ -99,6 +99,7 @@ const subsistenceAnalysisData = [
           }
         ]
       },
+      echartsTrue: false, // 是否展示echarts图
       statisticalResultsData: {
         name: "统计结果说明:",
         data: [

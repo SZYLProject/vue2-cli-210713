@@ -108,7 +108,7 @@
             <div>{{ itemStatistical }}</div>
           </div>
         </div>
-        <div class="describe-chart">
+        <div class="describe-chart" v-if="item.data.echartsTrue">
           <div class="chartsBar">
             <VerticalAxisBar
               v-if="radioRight == '堆积柱图'"

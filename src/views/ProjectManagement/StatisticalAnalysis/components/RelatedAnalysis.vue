@@ -32,7 +32,7 @@
             <div>{{ itemStatistical }}</div>
           </div>
         </div>
-        <div class="describe-chart">
+        <div class="describe-chart" v-if="item.data.echartsTrue">
           <div class="chartsBar">
             <LinearRegression
               v-if="radioRight == '残差图'"

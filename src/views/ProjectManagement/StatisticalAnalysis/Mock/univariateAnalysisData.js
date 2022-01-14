@@ -124,7 +124,7 @@ const univariateAnalysisData = [
           "min-width": 40,
           sort: false,
           align: "center"
-        } 
+        }
       ],
       tableData2: [
         {
@@ -258,7 +258,7 @@ const univariateAnalysisData = [
           "min-width": 40,
           sort: false,
           align: "center"
-        } 
+        }
       ],
       tableData4: [
         {
@@ -335,6 +335,7 @@ const univariateAnalysisData = [
         [-0.236833, -1.0486582],
         [0.969788, 4.655492]
       ],
+      echartsTrue: false, // 是否展示echarts图
       statisticalResultsData: {
         name: "统计结果说明:",
         data: ["1、由于样本量不足或变量类型设置错误，导致无法统计"]

@@ -31,7 +31,7 @@
           class="table_container"
         >
         </SzylElTable>
-        <div class="describe-chart">
+        <div class="describe-chart" v-if="item.data.echartsTrue"> 
           <div class="chartsBar">
             <StepLine
               height="400px"
