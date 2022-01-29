@@ -10,14 +10,7 @@
         v-for="(item, i) in univariateAnalysisData"
         :key="i"
       >
-        <div style="display: flex;">
-          <!-- <h1
-            style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
-            @click="tableRadio = '0'"
-          >
-            {{ item.name }}
-          </h1> -->
-
+        <!-- <div style="display: flex;">
           <el-button
             type="text"
             style="margin:0 15px 15px 0;font-size:15px;cursor: pointer;"
@@ -42,13 +35,13 @@
             @click="tableRadio = '3'"
             >{{ item.data.name4 }}</el-button
           >
-          <!-- <h1
-            style="margin:0 15px 15px 0;font-size:15px ; cursor: pointer; "
-            @click="tableRadio = '1'"
-          >
-            {{ item.data.name2 }}
-          </h1> -->
-        </div>
+        </div> -->
+        <el-tabs v-model="tableRadio" @tab-click="handleClick">
+          <el-tab-pane :label="item.data.name1" name="0"></el-tab-pane>
+          <el-tab-pane :label="item.data.name2" name="1"></el-tab-pane>
+          <el-tab-pane :label="item.data.name3" name="2"></el-tab-pane>
+          <el-tab-pane :label="item.data.name4" name="3"></el-tab-pane>
+        </el-tabs>
         <SzylElTable
           v-show="tableRadio === '0'"
           :colConfigs="item.data.colConfigs"
@@ -87,7 +80,7 @@
         >
         </SzylElTable>
         <SzylElTable
-          :tableRowClassName="tableRowClassName"
+          :tableRowClassName="tableRowClassName4"
           v-show="tableRadio === '3'"
           :colConfigs="item.data.colConfigs4"
           :tableList="item.data.tableData4"
@@ -171,13 +164,29 @@ export default {
   watch: {},
   mounted() {},
   methods: {
+    handleClick(tab, event) {},
     tableRowClassName({ row, rowIndex }) {
-      if (rowIndex % 2) {
-        return "warning-row";
-      } else {
-        return "success-row";
+      for (let i = 0; i < this.univariateAnalysisData.length; i++) {
+        if (
+          this.univariateAnalysisData[i].data.recommendList2[rowIndex] === 0
+        ) {
+          return "warning-row";
+        } else {
+          return "success-row";
+        }
       }
-      // return "";
+      // if (row.flag === 0) {
+      //   return "warning-row";
+      // } else {
+      //   return "success-row";
+      // }
+    },
+    tableRowClassName4({ row, rowIndex }) {
+      if (row.name === this.univariateAnalysisData[0].data.recommendList4) {
+        return "success-row";
+      } else {
+        return "warning-row";
+      }
     }
   }
 };

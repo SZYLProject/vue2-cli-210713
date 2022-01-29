@@ -61,9 +61,9 @@ export default {
         username: "admin",
         password: "123456"
       },
-      activeName: "tabSubsistenceAnalysis", // 切换组件
-      activeNameInfo: "SubsistenceAnalysis",
-      activeValue: "生存分析", // 显示名字
+      activeName: "tabDescriptiveStatistics", // 切换组件
+      activeNameInfo: "DescriptiveStatistics",
+      activeValue: "描述性统计", // 显示名字
       // 切换tab数据
       tabList: [
         {

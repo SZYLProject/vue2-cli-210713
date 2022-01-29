@@ -7,7 +7,7 @@ const univariateAnalysisData = [
       name1: "一般性描述",
       name2: "正态性检验",
       name3: "方差齐性检验",
-      name4: "组件比较",
+      name4: "组间比较",
       colConfigs: [
         {
           prop: "col1",
@@ -335,6 +335,8 @@ const univariateAnalysisData = [
         [-0.236833, -1.0486582],
         [0.969788, 4.655492]
       ],
+      recommendList2:[],// 正态性检验推荐数组
+      recommendList4:'',// 正态性检验推荐数组
       echartsTrue: false, // 是否展示echarts图
       statisticalResultsData: {
         name: "统计结果说明:",

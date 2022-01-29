@@ -36,13 +36,12 @@ export default {
     return {
       draggableObj: {
         draggableNum: 2,
-        prompt: "您可拖入1个分组变量，5个观察变量",
+        prompt: "您可拖入1个分组变量，1个观察变量",
         draggableList: [
           { explanation: "分组变量", draggableNum: 1 },
-          { explanation: "观察变量", draggableNum: 5 }
+          { explanation: "观察变量", draggableNum: 1 }
         ],
         returnGroup: true, // 按照分组返回分组变量和观察变量
-        groupRecommend: null, // 组间比较推荐字段
         groupTableData: [],
         groupColConfigs: []
       }
@@ -51,7 +50,6 @@ export default {
   methods: {
     // 开始分析
     startAnalysis(startAnalysis) {
-      console.log(startAnalysis, "startAnalysis");
       let data = [];
       // 当前选择的分组为第一个
       const lianxuCode = startAnalysis[0][0].variableCode;
@@ -63,15 +61,11 @@ export default {
         });
 
         if (getSessionStore("isMock") === 0) {
-          console.log(lianxuCode, "lianxuCode");
-
           this.$store.dispatch("setUnivariateAnalysisData", data);
           return;
         }
         // 一般性描述已经出来
         this.yiBanXingMiaoShu(element.variableCode).then(list => {
-          console.log(list, "list");
-
           data[i].data.tableData = list;
           data[i].data.colConfigs = getObjectKeys(list[0]).map(item => {
             return {
@@ -86,10 +80,12 @@ export default {
         });
 
         this.zhengTaiJianYan(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
-
           let resTable = getObjectKeysValues(res);
           data[i].data.tableData2 = resTable;
+          // 设置推荐数组
+          data[i].data.recommendList2 = resTable.map(item => {
+            return item.flag;
+          });
           data[i].data.colConfigs2 = getObjectKeys(resTable[0]).map(item => {
             return {
               prop: item,
@@ -98,6 +94,12 @@ export default {
               sort: false,
               align: "center"
             };
+          });
+          // 去除flag项
+          data[i].data.colConfigs2.map((item, i) => {
+            if (item.prop === "flag") {
+              data[i].data.colConfigs2.splice(i, 1);
+            }
           });
           // 最后一位移动到第一位
           const last = data[i].data.colConfigs2.pop(); //取数组最后一项
@@ -109,7 +111,6 @@ export default {
         // 方差齐性已经出来
         this.fangChaQiXingJianYan(element.variableCode, lianxuCode).then(
           res => {
-            console.log(res, "res");
             data[i].data.tableData3 = res;
             data[i].data.colConfigs3 = getObjectKeys(res[0]).map(item => {
               return {
@@ -120,62 +121,69 @@ export default {
                 align: "center"
               };
             });
-            console.log(data[i].data.tableData3, "dest");
-            console.log(data[i].data.colConfigs3, "dest");
             this.$store.dispatch("setUnivariateAnalysisData", data);
           }
         );
 
         // 组间比较：
-        this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
-          this.groupTableData = [];
-          this.groupColConfigs = [];
-          this.groupTableData = res;
-          console.log(res, "reszhiHeJianYan");
-        });
+        // this.zhiHeJianYan(element.variableCode, lianxuCode).then(res => {
+        //   this.groupTableData = [];
+        //   this.groupColConfigs = [];
+        //   this.groupTableData = res;
+        // });
 
-        this.TJianYan(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
+        // this.TJianYan(element.variableCode, lianxuCode).then(res => {
+        //   let resTable = getObjectParseValues(res);
 
-          let resTable = getObjectParseValues(res);
+        //   // resTable = [].concat.apply([], resTable);
+        //   resTable = resTable.map(res => {
+        //     return res[0];
+        //   });
+        //   // this.groupTableData.push();
+        //   resTable.map(res => {
+        //     this.groupTableData.push(res);
+        //   });
+        //   this.groupColConfigs = getObjectKeys(
+        //     this.groupTableData[this.groupTableData.length - 1]
+        //   ).map(item => {
+        //     return {
+        //       prop: item,
+        //       label: item,
+        //       "min-width": 40,
+        //       sort: false,
+        //       align: "center"
+        //     };
+        //   });
+        //   data[i].data.tableData4 = this.groupTableData;
+        //   data[i].data.colConfigs4 = this.groupColConfigs;
+        //   this.$store.dispatch("setUnivariateAnalysisData", data);
+        // });
 
-          // resTable = [].concat.apply([], resTable);
-          resTable = resTable.map(res => {
-            return res[0];
-          });
-          console.log(resTable, "resTableTJianYan");
-          // this.groupTableData.push();
-          resTable.map(res => {
-            this.groupTableData.push(res);
+        this.getCompareWay(element.variableCode, lianxuCode).then(res => {
+          const resData = res;
+          data[i].data.recommendList4 = resData["推荐"];
+          delete resData["推荐"];
+
+          let resTable = getObjectParseValues(resData);
+          const a = getObjectKeys(resData);
+          resTable = resTable.map((res, i) => {
+            return { name: a[i], ...res[0] };
           });
           this.groupColConfigs = getObjectKeys(
-            this.groupTableData[this.groupTableData.length - 1]
+            resTable[resTable.length - 1]
           ).map(item => {
             return {
               prop: item,
-              label: item,
+              label: item == "name" ? "变量的取值" : item,
               "min-width": 40,
               sort: false,
               align: "center"
             };
           });
-          data[i].data.tableData4 = this.groupTableData;
+          data[i].data.tableData4 = resTable;
           data[i].data.colConfigs4 = this.groupColConfigs;
-          console.log(this.groupTableData, " this.groupTableData;");
-          console.log(this.groupColConfigs, " this.groupColConfigs;");
           this.$store.dispatch("setUnivariateAnalysisData", data);
         });
-
-        this.getCompareWay(element.variableCode, lianxuCode).then(res => {
-          console.log(res, "res");
-          this.groupRecommend = res.data;
-        });
-
-        // // 暂无用处
-        // this.fangChaFenXi(element.variableCode, lianxuCode).then(res => {
-        //   console.log(res, "res");
-        // });
-        // // this.$store.dispatch("setUnivariateAnalysisData", data);
       });
     },
     yiBanXingMiaoShu(variableCode) {
@@ -207,7 +215,6 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = statisticalAnalysis.fangChaQiXingJianYan(data).then(res => {
-        console.log(res.data, "fangChaQiXingJianYan");
         return res.data;
       });
       return value;
@@ -218,7 +225,6 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.zhiHeJianYan(data).then(res => {
-        console.log(res.data, "zhiHeJianYan");
         const data = res.data;
         return data;
       });
@@ -230,21 +236,8 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.TJianYan(data).then(res => {
-        console.log(res.data, "yiBanXingMiaoShu");
         // const data = res.data;
         return res.data;
-      });
-      return value;
-    },
-    async fangChaFenXi(variableCode, fenZuCode) {
-      const data = {
-        lianXuCode: variableCode,
-        fenZuCode: fenZuCode
-      };
-      let value = await statisticalAnalysis.fangChaFenXi(data).then(res => {
-        console.log(res.data, "fangChaFenXi");
-        const data = res.data;
-        return data;
       });
       return value;
     },
@@ -254,12 +247,23 @@ export default {
         fenZuCode: fenZuCode
       };
       let value = await statisticalAnalysis.getCompareWay(data).then(res => {
-        // console.log(res.data, "getCompareWay");
         // const data = res.data;
         return res.data;
       });
       return value;
     }
+    // async fangChaFenXi(variableCode, fenZuCode) {
+    //   const data = {
+    //     lianXuCode: variableCode,
+    //     fenZuCode: fenZuCode
+    //   };
+    //   let value = await statisticalAnalysis.fangChaFenXi(data).then(res => {
+    //     console.log(res.data, "fangChaFenXi");
+    //     const data = res.data;
+    //     return data;
+    //   });
+    //   return value;
+    // },
   }
 };
 </script>
