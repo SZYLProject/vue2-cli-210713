@@ -52,7 +52,7 @@ const cdn = {
 module.exports = {
   // publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
   publicPath: process.env.NODE_ENV === "prodection" ? "./" : "./",
-  outputDir: "./dist", // 打包名称
+  outputDir: "./statistic", // 打包名称
   assetsDir: "static", // 存放文件路径
   filenameHashing: true, // false 来关闭文件名哈希
   lintOnSave: true, // 关闭eslint
