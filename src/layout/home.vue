@@ -4,7 +4,7 @@
     <div
       class="menu_right wflex el-scrollbar"
       ref="menu_right"
-      :style="{ left: sidebar.width + 'px' }"
+      :style="{ left: sidebar.width + 'px', height: homeeight }"
     >
       <!-- <head-nav></head-nav> -->
       <div class="menu_content" ref="menu_content">
@@ -29,10 +29,12 @@ import backTop from "@/components/backTop";
 export default {
   name: "home",
   data() {
-    return {};
+    return {
+      homeeight: 0
+    };
   },
   computed: {
-    ...mapGetters(["sidebar",'menuIsTrue']),
+    ...mapGetters(["sidebar", "menuIsTrue"])
   },
   components: {
     // HeadNav,
@@ -41,8 +43,20 @@ export default {
     // FooterNav,
     backTop
   },
-  created() {},
+  created() {
+    this.bodyHeight();
+  },
   mounted() {},
+  methods: {
+    // 获取页面高度
+    bodyHeight() {
+      const height =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+      this.homeeight = height;
+    }
+  },
   watch: {}
 };
 </script>
