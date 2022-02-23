@@ -23,7 +23,7 @@ import { mapGetters } from "vuex";
 // import HeadNav from "./headNav.vue";
 import LeftMenu from "./leftMenu.vue";
 import Bread from "./bread.vue";
-import FooterNav from "./footerNav.vue";
+// import FooterNav from "./footerNav.vue";
 import backTop from "@/components/backTop";
 
 export default {
@@ -38,7 +38,7 @@ export default {
     // HeadNav,
     LeftMenu,
     Bread,
-    FooterNav,
+    // FooterNav,
     backTop
   },
   created() {},
@@ -54,7 +54,7 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    background: #f6f7fc;
+    background: #ffffff;
     .menu_content {
       position: relative;
       margin-top: 0px;
