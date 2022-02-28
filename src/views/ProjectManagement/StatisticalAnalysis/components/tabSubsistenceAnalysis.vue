@@ -14,12 +14,12 @@ import subsistenceAnalysisData from "../Mock/subsistenceAnalysis.js";
 import dragArea from "./dragArea.vue";
 import { getSessionStore } from "@/utils/mUtils";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
-import { Message } from "element-ui";
+// import { Message } from "element-ui";
 
 import {
   // unid,
   getObjectKeys,
-  getObjectValues
+  // getObjectValues
   // getObjectParseValues,
   // getObjectKeysValues
 } from "@/utils/objectArray";

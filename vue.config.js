@@ -69,7 +69,7 @@ module.exports = {
         // target: `${target}` ,
         // target: process.env.VUE_APP_BASE_URL,
         // target: "http://152.136.182.96:8200",
-        target: "http://172.16.118.173:8200",
+        target: "http://10.131.101.69:8200",
         logLevel: "debug", // 请求打印真实ip
         changeOrigin: true,
         pathRewrite: {
