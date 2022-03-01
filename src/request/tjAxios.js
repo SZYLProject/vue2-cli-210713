@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Message, MessageBox } from "element-ui";
-import store from "../store";
+import { Message } from "element-ui";
+// import store from "../store";
 import { getToken } from "@/utils/auth";
 
 // 创建axios实例
@@ -8,30 +8,26 @@ let service = axios.create({
   // baseURL: process.env.VUE_APP_URL, // api的base_url
   // baseURL:'http://172.16.117.174:5689',
   // baseURL: window.BASE_URL,
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_URL,
 
   timeout: 5000 // 请求超时时间
 });
-// request拦截器
+
+// request interceptor
 service.interceptors.request.use(
   config => {
-    if (store.getters.token) {
-      config.headers = {
-        //请求接口返回中文都是？，需要在请求头设置即可
-        // "X-Requested-With": "XMLHttpRequest",
-        // Accept: "application/x-www-form-urlencoded",
-        // Accept: "application/x-www-form-urlencoded",
-        // Accept: 'application/x-www-form-urlencoded；charset=UTF-8',
-        Authorization: "Token " + getToken("Token") //携带权限参数
-      };
+    console.log(config, "config");
+    if (getToken()) {
+      // let each request carry token
+      config.headers.token = getToken();
     }
-    if (config.methods === "post") {
-      config.data = {};
-    }
+
     return config;
   },
   error => {
-    Promise.reject(error);
+    // do something with request error
+    console.log(error); // for debug
+    return Promise.reject(error);
   }
 );
 
@@ -60,10 +56,10 @@ service.interceptors.response.use(
           });
           break;
       }
-      return response;
+      return response.data;
     } else {
       // res.code === 200,正常返回数据
-      return response;
+      return response.data;
     }
   },
   error => {
@@ -90,13 +86,15 @@ export default service;
  */
 export const get = obj => {
   return new Promise((resolve, reject) => {
+    console.log(obj, "obj");
+    console.log(process.env.VUE_APP_BASE_URL, "VUE_APP_BASE_URL");
     service({
       url: obj.url,
       method: "get",
       params: obj.params
     })
       .then(res => {
-        resolve(res.data);
+        resolve(res.data.data);
       })
       .catch(err => {
         reject(err.data);

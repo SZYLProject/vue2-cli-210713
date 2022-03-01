@@ -8,7 +8,6 @@ const resolve = dir => {
 };
 
 // const env = process.env.NODE_ENV
-let target = process.env.VUE_APP_BASE_URL; // development和production环境是不同的
 
 
 const cdn = {
@@ -59,21 +58,22 @@ module.exports = {
   // 打包时不生成.map文件
   productionSourceMap: false,
   devServer: {
-    open: true, // 自动打开浏览器
+    open: false, // 自动打开浏览器
     // host: "0.0.0.0",
     port: 9900, // 开发端口号
     // 前端解决跨域问题，配置代理;
     proxy: {
-      // [process.env.VUE_APP_BASE_API]: {
-        "/api": {
+      [process.env.VUE_APP_BASE_API]: {
+        // "/api": {
         // target: `${target}` ,
-        // target: process.env.VUE_APP_BASE_URL,
+        target: process.env.VUE_APP_BASE_URL,
         // target: "http://152.136.182.96:8200",
-        target: "http://10.131.101.69:8200",
+        // target: "http://10.131.101.69:8200",
+        // target: "http://172.16.118.173:8200",
         logLevel: "debug", // 请求打印真实ip
         changeOrigin: true,
         pathRewrite: {
-          ["^" + process.env.VUE_APP_BASE_API]: process.env.VUE_APP_BASE_API
+          ["^" + process.env.VUE_APP_BASE_API]: ''
         }
       }
     }
