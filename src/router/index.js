@@ -5,13 +5,6 @@ import { Layout } from "../layout"; // 页面整体布局
 
 process.env.NODE_ENV === "development" ? Vue.use(Router) : null;
 
-// function filterTopRouterMap(name) {
-//   let router = topRouterMap.find(item => {
-//     return item.parentName === name;
-//   });
-//   return router.data; // arr
-// }
-
 /**
  * 1、roles:后台返回的权限结构;
  *
@@ -29,25 +22,13 @@ export const constantRouterMap = [
   {
     path: "",
     component: Layout,
-    redirect: "/tj/index",
+    redirect: "/projectManagement/statisticalAnalysis",
     hidden: true
   },
   {
     path: "/echarts",
     name: "echarts",
     component: () => import("@/components/echarts/index"),
-    hidden: true
-  },
-  // {
-  //   path: "/tj",
-  //   name: "tj",
-  //   component: () => import("@/views/ProjectManagement/StatisticalAnalysis"),
-  //   hidden: true
-  // },
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("@/views/login"),
     hidden: true
   },
   {
@@ -61,44 +42,23 @@ export const constantRouterMap = [
     hidden: true
   },
   {
-    path: "/tj",
-    name: "tj",
+    path: "/projectManagement",
+    name: "ProjectManagement",
     meta: {
       title: "项目管理",
       icon: "iconpay3"
     },
     component: Layout,
-    redirect: '/tj/index',
+    redirect: "/projectManagement/statisticalAnalysis",
     children: [
       {
-        path: "index",
-        name: "index",
+        path: "statisticalAnalysis",
+        name: "StatisticalAnalysis",
         meta: {
           title: "统计分析",
           routerType: "leftmenu"
         },
         component: () => import("@/views/ProjectManagement/StatisticalAnalysis")
-      }
-    ]
-  },
-  {
-    path: "/index",
-    name: "index",
-    component: Layout,
-    meta: {
-      title: "首页",
-      icon: "icondashboard"
-    },
-    noDropdown: true,
-    children: [
-      {
-        path: "index",
-        meta: {
-          title: "首页",
-          icon: "icondashboard",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/index/index")
       }
     ]
   }
@@ -110,139 +70,6 @@ export default new Router({
   base: "/permission/", // 添加跟目录,对应服务器部署子目录
   routes: constantRouterMap
 });
-
-//异步路由（需要权限的页面）
-export const asyncRouterMap = [
-  {
-    path: "/projectManagement",
-    name: "projectManagement",
-    meta: {
-      title: "项目管理",
-      icon: "iconpay3"
-    },
-    component: Layout,
-    children: [
-      {
-        path: "statisticalAnalysis",
-        name: "statisticalAnalysis",
-        meta: {
-          title: "统计分析",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/ProjectManagement/StatisticalAnalysis")
-      }
-    ]
-  },
-  {
-    path: "/userManager",
-    name: "userManage",
-    component: Layout,
-    meta: {
-      title: "表格数据",
-      icon: "iconuser"
-    },
-    noDropdown: true,
-    children: [
-      {
-        path: "userList",
-        meta: {
-          title: "表格数据",
-          icon: "iconuser",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/userList/userList")
-      }
-    ]
-  },
-  {
-    path: "/fundManage",
-    name: "fundManage",
-    meta: {
-      title: "表格管理",
-      icon: "iconpay3"
-    },
-    component: Layout,
-    children: [
-      {
-        path: "tableCom",
-        name: "tableCom",
-        meta: {
-          title: "表格组件",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/fundList/tableComs")
-      },
-      {
-        path: "fundList",
-        name: "fundList",
-        meta: {
-          title: "表格编辑",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/fundList/fundList")
-      },
-      {
-        path: "chinaTabsList",
-        name: "chinaTabsList",
-        meta: {
-          title: "TAB管理",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/fundList/chinaTabsList")
-      }
-    ]
-  },
-  {
-    path: "/formList",
-    name: "formList",
-    meta: {
-      title: "表单管理",
-      icon: "iconpay3"
-    },
-    component: Layout,
-    children: [
-      {
-        path: "form1",
-        name: "form1",
-        meta: {
-          title: "表单1",
-          routerType: "leftmenu"
-        },
-        component: () => import("@/views/formList/form1")
-      }
-    ]
-  },
-  {
-    path: "/error",
-    component: Layout,
-    name: "errorPage",
-    meta: {
-      title: "错误页面",
-      icon: "iconError"
-    },
-    children: [
-      {
-        path: "401",
-        name: "page401",
-        component: () => import("@/views/errorPage/401"),
-        meta: {
-          title: "401",
-          noCache: true
-        }
-      },
-      {
-        path: "404",
-        name: "page404",
-        component: () => import("@/views/errorPage/404"),
-        meta: {
-          title: "404",
-          noCache: true
-        }
-      }
-    ]
-  },
-  { path: "*", redirect: "/404", hidden: true }
-];
 
 /**
  *  路由设置要求：

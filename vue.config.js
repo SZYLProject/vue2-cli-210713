@@ -16,19 +16,18 @@ const cdn = {
     css: [],
     js: []
   },
-  // 生产环境
-  build: {
-    css: [
-      // "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
-      "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
-      "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
-    ],
-    js: ["/static/js/vue/2.6.11/vue.min.js"]
-  },
+  // // 生产环境
+  // build: {
+  //   css: [
+  //     // "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
+  //     "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
+  //     "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
+  //   ],
+  //   js: ["/static/js/vue/2.6.11/vue.min.js"]
+  // },
   // 生产环境
   buildCDN: {
     css: [
-      // "https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css",
       "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
     ],
@@ -37,11 +36,8 @@ const cdn = {
       "https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js",
       "https://cdn.bootcdn.net/ajax/libs/vuex/3.6.2/vuex.min.js",
       "https://cdn.bootcss.com/axios/0.21.1/axios.min.js",
-      "https://cdn.bootcss.com/vue-i18n/8.24.5/vue-i18n.min.js",
-      // "https://cdn.bootcss.com/element-ui/2.11.1/index.js",
       "https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/index.js",
       "https://cdn.bootcss.com/echarts/4.8.0/echarts.min.js",
-      "https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js",
       "https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js",
       "https://cdn.bootcss.com/js-cookie/2.2.1/js.cookie.min.js"
     ]
@@ -64,12 +60,7 @@ module.exports = {
     // 前端解决跨域问题，配置代理;
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        // "/api": {
-        // target: `${target}` ,
         target: process.env.VUE_APP_BASE_URL,
-        // target: "http://152.136.182.96:8200",
-        // target: "http://10.131.101.69:8200",
-        // target: "http://172.16.118.173:8200",
         logLevel: "debug", // 请求打印真实ip
         changeOrigin: true,
         pathRewrite: {
@@ -114,13 +105,6 @@ module.exports = {
         speed: 4
       })
       .end();
-    // // 项目文件大小分析
-    // config.plugin("webpack-bundle-analyzer").use(
-    //   new BundleAnalyzerPlugin({
-    //     openAnalyzer: false, // 是否打开默认浏览器
-    //     analyzerPort: 9801 // 项目相同时候修改此端口
-    //   })
-    // );
 
     // 对vue-cli内部的 webpack 配置进行更细粒度的修改。
     // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改

@@ -1,43 +1,22 @@
-import request from "@/request/tjAxios";
-import { get, post } from "@/request/tjAxios";
+import request from "@/request/statisticalService";
 import { getProjectIdSession } from "@/utils/auth";
 const porjectId = getProjectIdSession();
-// export function FenLeiBianLiangMiaoShuTongJi(params) {
-//   return request({
-//     url: "/FenLeiBianLiangMiaoShuTongJi",
-//     method: "get",
-//     params: params
-//   });
-// }
-// export function fenZuTongJi(data) {
-//   return request({
-//     url: "/fenZuTongJi?name=trt",
-//     method: "post",
-//     params: data
-//   });
-// }
-const statisticalAnalysis = {
-  // FenLeiBianLiangMiaoShuTongJi(params) {
-  //   return get({ url: "/FenLeiBianLiangMiaoShuTongJi", params: params });
-  // },
-  // fenZuTongJi(data) {
-  //   return post({ url: `/fenZuTongJi?name=${data.name}`, data: data.data });
-  // },
 
+const statisticalAnalysis = {
   /*************************************一般描述接口*********************************/
 
   GetVariables(parmas) {
     return request({
       url: `/api/GetVariables?projectId=${porjectId}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   yiBanXingMiaoShu(parmas) {
     return request({
       url: `/api/yiBanXingMiaoShu?projectId=${porjectId}&variableCode=${parmas.variableCode}`,
       parmas: parmas,
-      method:"GET"
+      method: "GET"
     });
   },
   // yiBanXingMiaoShu1(params){
@@ -54,7 +33,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/zhengTaiJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   // 方差齐性检验
@@ -62,7 +41,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/fangChaQiXingJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   // 秩和检验   （二分类下有问题）
@@ -70,7 +49,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/zhiHeJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   // T检验
@@ -78,7 +57,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/TJianYan?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   // 方差分析
@@ -86,7 +65,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/fangChaFenXi?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
   // 返回推荐的算法
@@ -94,7 +73,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/getCompareWay?projectId=${porjectId}&fenZuCode=${parmas.fenZuCode}&lianXuCode=${parmas.lianXuCode}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
 
@@ -118,7 +97,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/XiangGuanXingFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
 
@@ -128,7 +107,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/huiGuiFenxi?projectId=${porjectId}&variableCode1=${parmas.variableCode1}&variableCode2=${parmas.variableCode2}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   },
 
@@ -138,7 +117,7 @@ const statisticalAnalysis = {
     return request({
       url: `/api/shenCunFenXi?projectId=${porjectId}&shengCunShiJianCode=${parmas.shengCunShiJianCode}&fenxiCode=${parmas.fenxiCode}&jiejuCode=${parmas.jiejuCode}&codeType_x=${parmas.codeType_x}`,
       parmas: parmas,
-      method:'GET'
+      method: "GET"
     });
   }
 };

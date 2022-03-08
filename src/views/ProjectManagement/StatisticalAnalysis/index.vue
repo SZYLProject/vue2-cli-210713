@@ -37,7 +37,6 @@ import MultivariateRegression from "./components/MultivariateRegression";
 import leftDraggableListData from "./Mock/leftDraggableListData";
 import statisticalAnalysis from "@/api/statisticalAnalysis";
 import { getSessionStore } from "@/utils/mUtils";
-import { login } from "@/api/user";
 import { setToken } from "@/utils/auth";
 
 export default {
@@ -106,15 +105,11 @@ export default {
     async loginFn() {
       let userList = { name: "管理员", token: "admin" };
       setToken("Token", userList.token);
-      this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
+      // this.$store.dispatch("initLeftMenu"); //设置左边菜单始终为展开状态
     },
     // 控制每个展示echart图与table表格区域的高度
     getHeight() {
       this.clientHeight = `${document.documentElement.clientHeight}` - 337; //获取浏览器可视区域高度
-      // window.onresize = function() {
-      //   this.clientHeight = `${document.documentElement.clientHeight}`;
-      //   this.clientHeight = this.clientHeight - 1080 ;
-      // };
     },
     // 左侧栏变量数据
     GetVariables() {
@@ -156,7 +151,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .statisticAnalysis-com {
-  margin-top: 10px;
+  // margin-top: 10px;
   height: 30%;
   .left {
     width: 200px;

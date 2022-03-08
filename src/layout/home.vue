@@ -1,31 +1,17 @@
 <template>
   <div class="home rflex">
-    <left-menu v-if="menuIsTrue"></left-menu>
     <div
       class="menu_right wflex el-scrollbar"
       ref="menu_right"
-      :style="{ left: sidebar.width + 'px', height: homeeight }"
+      :style="{ left: 0 + 'px', height: homeeight }"
     >
-      <!-- <head-nav></head-nav> -->
       <div class="menu_content" ref="menu_content">
-        <bread v-if="menuIsTrue"></bread>
-        <router-view></router-view
-        ><!--页面渲染入口-->
+        <router-view></router-view>
       </div>
-      <!-- <footerNav></footerNav> -->
-      <backTop v-if="menuIsTrue" :ele="$refs.menu_right"></backTop>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-
-// import HeadNav from "./headNav.vue";
-import LeftMenu from "./leftMenu.vue";
-import Bread from "./bread.vue";
-// import FooterNav from "./footerNav.vue";
-import backTop from "@/components/backTop";
-
 export default {
   name: "home",
   data() {
@@ -33,16 +19,8 @@ export default {
       homeeight: 0
     };
   },
-  computed: {
-    ...mapGetters(["sidebar", "menuIsTrue"])
-  },
-  components: {
-    // HeadNav,
-    LeftMenu,
-    Bread,
-    // FooterNav,
-    backTop
-  },
+  computed: {},
+
   created() {
     this.bodyHeight();
   },
